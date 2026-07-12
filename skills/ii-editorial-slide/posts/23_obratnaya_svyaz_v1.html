@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Обратная связь как данные — editorial v1</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#EFEBE7; --ink:#1A1714; --red:#D62219; --muted:#B8B3AD; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body { background: var(--paper); font-family: 'Inter Tight', system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .slide { width: 1600px; height: 1200px; position: relative; overflow: hidden; background: var(--paper); }
+  .bg { position: absolute; inset: 0; z-index: 0; }
+  .bg .marks { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; }
+  .layer { position: absolute; inset: 0; z-index: 2; padding: 58px 80px 0 80px; display: grid; grid-template-rows: auto 1fr auto; row-gap: 16px; }
+  .header { display: block; margin-bottom: 2px; }
+  .title-block { position: relative; padding-left: 26px; }
+  .title-block::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 12px; width: 6px; background: var(--red); }
+  .topline { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--red); margin-bottom: 10px; }
+  h1 { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 78px; line-height: 1.0; letter-spacing: -0.02em; text-transform: uppercase; color: var(--ink); }
+  h1 .dot { color: var(--red); }
+  .scheme { position: relative; display: flex; align-items: center; justify-content: center; }
+  .scheme svg { width: 100%; max-width: 1440px; height: auto; }
+  .rule { margin: 0 0 80px 0; border: 1.5px solid var(--ink); padding: 22px 28px; display: grid; grid-template-columns: 60px auto 1fr; gap: 28px; align-items: center; background: var(--paper); box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
+  .rule .mark { width: 56px; height: 56px; border: 2px solid var(--red); border-radius: 50%; display: grid; place-items: center; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 32px; color: var(--red); }
+  .rule .label { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; position: relative; padding-left: 16px; white-space: nowrap; }
+  .rule .label::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background: var(--red); }
+  .rule .body { font-size: 17px; line-height: 1.5; }
+  .rule .body strong { font-weight: 700; color: var(--red); }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="bg">
+    <img class="marks" src="../backgrounds/01_grid_blocks.png" alt="">
+  </div>
+
+  <div class="layer">
+
+    <div class="header">
+      <div class="title-block">
+        <div class="topline">PP.MEDIA · И_И_ · кадровый контур</div>
+        <h1>Обратная связь<br>как данные<span class="dot">.</span></h1>
+      </div>
+    </div>
+
+    <div class="scheme">
+      <svg viewBox="0 0 1440 580" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- ============ ЛЕВО: УСТНАЯ ОБРАТНАЯ СВЯЗЬ (компактнее) ============ -->
+        <text x="20" y="14" font-family="Unbounded" font-weight="700" font-size="13" fill="#9A958E" letter-spacing="1">УСТНАЯ ОБРАТНАЯ СВЯЗЬ</text>
+        <rect x="20" y="24" width="500" height="356" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2" stroke-dasharray="5 4"/>
+
+        <!-- реплика-облако -->
+        <g>
+          <rect x="48" y="52" width="424" height="58" rx="6" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.4"/>
+          <path d="M88 110 l0 20 l20 -20 Z" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.4"/>
+          <text x="66" y="78" font-size="15" fill="#6E6963">«Влад впервые сам провёл</text>
+          <text x="66" y="100" font-size="15" fill="#6E6963">презентацию клиенту»</text>
+        </g>
+
+        <!-- стикеры разлетаются -->
+        <g font-family="Inter Tight" font-size="12" fill="#9A958E">
+          <g transform="translate(50,160) rotate(-5)"><rect width="120" height="70" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.3"/><text x="14" y="30">стикер</text><text x="14" y="50" font-size="11" opacity="0.6">четверг</text></g>
+          <g transform="translate(196,172) rotate(4)"><rect width="120" height="70" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.3"/><text x="14" y="30">стикер</text><text x="14" y="50" font-size="11" opacity="0.6">прошлый</text></g>
+          <g transform="translate(342,158) rotate(-3)"><rect width="120" height="70" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.3"/><text x="14" y="30">стикер</text><text x="14" y="50" font-size="11" opacity="0.6">забыли</text></g>
+        </g>
+
+        <!-- через 5 недель — выцветает, знак вопроса -->
+        <g transform="translate(212,262)">
+          <circle cx="58" cy="34" r="34" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <text x="58" y="48" font-family="Unbounded" font-weight="800" font-size="34" fill="#B8B3AD" text-anchor="middle">?</text>
+        </g>
+        <text x="48" y="300" font-family="JetBrains Mono" font-size="12" fill="#9A958E">через 5 недель</text>
+
+        <!-- подпись-статус с подложкой, у нижней кромки -->
+        <rect x="60" y="350" width="420" height="22" fill="#EFEBE7"/>
+        <text x="270" y="366" font-family="Unbounded" font-weight="800" font-size="13" fill="#9A958E" text-anchor="middle" letter-spacing="0.5">ОСТАЛОСЬ ОЩУЩЕНИЕ, ДАННЫХ НЕТ</text>
+
+        <!-- ============ РАЗДЕЛИТЕЛЬ-СТРЕЛКА ============ -->
+        <g stroke="#D62219" stroke-width="2.6" fill="#D62219">
+          <line x1="536" y1="200" x2="582" y2="200"/>
+          <polygon points="582,193 596,200 582,207"/>
+        </g>
+
+        <!-- ============ ПРАВО: МАШИНОЧИТАЕМАЯ ЗАПИСЬ (доминанта, крупно) ============ -->
+        <text x="620" y="14" font-family="Unbounded" font-weight="700" font-size="15" fill="#D62219" letter-spacing="1">МАШИНОЧИТАЕМАЯ ЗАПИСЬ</text>
+        <rect x="620" y="24" width="800" height="356" fill="#EFEBE7" stroke="#1A1714" stroke-width="2"/>
+
+        <!-- структурированная карточка с полями (крупная) -->
+        <g font-family="Inter Tight">
+          <rect x="648" y="48" width="744" height="158" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.8"/>
+          <rect x="648" y="48" width="744" height="40" fill="#1A1714"/>
+          <text x="668" y="75" font-family="JetBrains Mono" font-size="16" fill="#EFEBE7">EVENT · Влад · первая презентация</text>
+          <!-- поля -->
+          <g font-family="JetBrains Mono" font-size="16" fill="#1A1714">
+            <text x="668" y="116"><tspan fill="#6E6963">тип сигнала:</tspan> ключ допуска</text>
+            <text x="668" y="146"><tspan fill="#6E6963">след. шаг:</tspan> разблокировать уровень</text>
+            <text x="668" y="176"><tspan fill="#6E6963">пометка:</tspan> в карточке сотрудника</text>
+          </g>
+        </g>
+
+        <!-- стрелка вниз в кадровый контур -->
+        <g stroke="#D62219" stroke-width="3" fill="#D62219">
+          <line x1="1020" y1="206" x2="1020" y2="240"/>
+          <polygon points="1013,240 1027,240 1020,254"/>
+        </g>
+
+        <!-- кадровое решение (крупное) -->
+        <g>
+          <rect x="700" y="258" width="640" height="94" fill="#EFEBE7" stroke="#D62219" stroke-width="2.4"/>
+          <text x="1020" y="296" font-family="Unbounded" font-weight="800" font-size="21" fill="#D62219" text-anchor="middle">КАДРОВОЕ РЕШЕНИЕ</text>
+          <text x="1020" y="328" font-family="Inter Tight" font-size="18" fill="#1A1714" text-anchor="middle">«рассмотреть повышение через три месяца»</text>
+        </g>
+
+        <!-- ============ НИЗ: 4 ПОЛЯ ЗАПИСИ ============ -->
+        <text x="0" y="424" font-family="Unbounded" font-weight="700" font-size="11" fill="#D62219" letter-spacing="1.5">ЧТО ОБРАТНАЯ СВЯЗЬ СОДЕРЖИТ, КОГДА СТАНОВИТСЯ ДАННЫМИ</text>
+
+        <g transform="translate(0, 436)" font-family="Inter Tight">
+          <g transform="translate(0,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">01</text>
+            <text x="60" y="34" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.3">СОБЫТИЕ</text>
+            <text x="60" y="62" font-size="13" fill="#1A1714">что именно произошло,</text>
+            <text x="60" y="82" font-size="13" fill="#1A1714">привязано к человеку</text>
+            <text x="60" y="102" font-size="13" fill="#1A1714">и дате</text>
+          </g>
+          <g transform="translate(365,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">02</text>
+            <text x="60" y="34" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.3">ТИП СИГНАЛА</text>
+            <text x="60" y="62" font-size="13" fill="#1A1714">допуск, риск, прогресс,</text>
+            <text x="60" y="82" font-size="13" fill="#1A1714">нарушение — машина</text>
+            <text x="60" y="102" font-size="13" fill="#1A1714">различает по семантике</text>
+          </g>
+          <g transform="translate(730,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">03</text>
+            <text x="60" y="34" font-family="Unbounded" font-weight="800" font-size="13" fill="#D62219" letter-spacing="0.3">СЛЕДУЮЩИЙ ШАГ</text>
+            <text x="60" y="62" font-size="13" fill="#1A1714">куда сигнал отправляется:</text>
+            <text x="60" y="82" font-size="13" fill="#1A1714">карьерная карта,</text>
+            <text x="60" y="102" font-size="13" fill="#1A1714">кадровое решение</text>
+          </g>
+          <g transform="translate(1095,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">04</text>
+            <text x="60" y="34" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.3">СЛЕД</text>
+            <text x="60" y="62" font-size="13" fill="#1A1714">запись остаётся, через</text>
+            <text x="60" y="82" font-size="13" fill="#1A1714">5 недель видна вся</text>
+            <text x="60" y="102" font-size="13" fill="#1A1714">траектория, не обрывок</text>
+          </g>
+        </g>
+
+      </svg>
+    </div>
+
+    <!-- RULE: финал -->
+    <div class="rule">
+      <div class="mark">!</div>
+      <div class="label">Итог</div>
+      <div class="body">
+        Плато не бывает: сотрудник, команда, процесс либо растут, либо деградируют.
+        <strong>Машиночитаемая обратная связь ловит сползание раньше, чем оно стало проблемой.</strong>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  document.fonts.ready.then(() => { document.body.dataset.fontsReady = "1"; });
+</script>
+</body>
+</html>

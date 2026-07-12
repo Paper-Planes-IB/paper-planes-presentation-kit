@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Туннелирование сигнала — editorial</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EFEBE7;
+    --paper-dim: #E7E2DC;
+    --ink: #1A1714;
+    --red: #D62219;
+    --muted: #B8B3AD;
+    --grid-line: rgba(184, 179, 173, 0.35);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body {
+    background: var(--paper);
+    font-family: 'Inter Tight', system-ui, sans-serif;
+    color: var(--ink);
+    font-feature-settings: 'ss01' on, 'cv01' on;
+    -webkit-font-smoothing: antialiased;
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  }
+
+  .slide {
+    width: 1600px;
+    height: 1000px;
+    padding: 56px 72px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+      "header header"
+      "intro  steps"
+      "intro  diagram"
+      "rule   rule";
+    gap: 28px 52px;
+  }
+
+  /* HEADER */
+  .header { grid-area: header; display: flex; align-items: flex-start; gap: 24px; }
+  .red-bar { width: 64px; height: 4px; background: var(--red); margin-top: 18px; }
+  .title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: 76px;
+    line-height: 0.95;
+    letter-spacing: -1.5px;
+    text-transform: uppercase;
+  }
+  .title .accent { color: var(--red); }
+  .title-meta {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+    text-align: right;
+  }
+
+  /* INTRO */
+  .intro { grid-area: intro; padding-top: 8px; position: relative; }
+  .intro p {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .intro p .red-word { color: var(--red); font-weight: 600; }
+
+  .target {
+    position: absolute;
+    bottom: 16px;
+    left: 0;
+    width: 120px;
+    height: 120px;
+  }
+
+  /* STEPS strip */
+  .steps {
+    grid-area: steps;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 28px;
+    align-items: start;
+  }
+  .step { padding-top: 8px; border-top: 2px solid var(--ink); }
+  .step .num {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: 36px;
+    color: var(--red);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .step .label {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+  .step .desc {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: #4A4642;
+  }
+
+  /* DIAGRAM */
+  .diagram { grid-area: diagram; position: relative; }
+
+  /* RULE */
+  .rule {
+    grid-area: rule;
+    border: 1.5px solid var(--ink);
+    padding: 22px 28px;
+    display: grid;
+    grid-template-columns: 60px auto 1fr;
+    gap: 28px;
+    align-items: center;
+  }
+  .rule .mark {
+    width: 56px;
+    height: 56px;
+    border: 2px solid var(--red);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    color: var(--red);
+  }
+  .rule .label {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding-left: 16px;
+  }
+  .rule .label::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 50%; transform: translateY(-50%);
+    width: 6px; height: 6px; background: var(--red);
+  }
+  .rule .body {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .rule .body strong {
+    font-weight: 700;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 12.5px;
+  }
+
+  /* tiny crosses scattered as engineering markers */
+  .cross {
+    position: absolute;
+    width: 8px; height: 8px;
+    border-top: 1px solid var(--muted);
+    border-left: 1px solid var(--muted);
+    transform: rotate(45deg);
+    transform-origin: center;
+  }
+  .cross::after {
+    content: "";
+    position: absolute;
+    width: 8px; height: 8px;
+    border-top: 1px solid var(--muted);
+    border-left: 1px solid var(--muted);
+    transform: rotate(-90deg);
+    top: 0; left: 0;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="red-bar"></div>
+    <h1 class="title">Туннелирование<br>сигнала<span class="accent">.</span></h1>
+    <div class="title-meta">
+      PP.MEDIA. · И_И_<br>
+      Канал, выпуск 06<br>
+      24.05.2026
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro">
+    <p>Один из вопросов прошедшего вебинара — что система делает с новым входящим документом. Разбираю общую процедуру.</p>
+    <p>В систему заходит сильный сигнал. Внутреннее исследование, отчёт сотрудника, внешняя статья, расшифровка встречи, аналитический обзор рынка.</p>
+    <p>Раньше я бы такой документ прочитал, что-то выписал бы в заметки, что-то забыл. Половина смысла осталась бы в файле и больше никогда не всплыла.</p>
+    <p>Сейчас сигнал заходит в систему как точка входа. Дальше включается процедура, которую я для себя называю <span class="red-word">туннелированием</span>.</p>
+
+    <!-- Decorative target -->
+    <svg class="target" viewBox="0 0 120 120" fill="none">
+      <circle cx="60" cy="60" r="56" stroke="#B8B3AD" stroke-width="1" stroke-dasharray="3 4"/>
+      <circle cx="60" cy="60" r="42" stroke="#B8B3AD" stroke-width="1" stroke-dasharray="3 4"/>
+      <circle cx="60" cy="60" r="26" stroke="#B8B3AD" stroke-width="1" stroke-dasharray="3 4"/>
+      <line x1="0" y1="60" x2="120" y2="60" stroke="#B8B3AD" stroke-width="1"/>
+      <line x1="60" y1="0" x2="60" y2="120" stroke="#B8B3AD" stroke-width="1"/>
+      <circle cx="60" cy="60" r="5" fill="#D62219"/>
+      <line x1="60" y1="60" x2="200" y2="20" stroke="#D62219" stroke-width="1.5" stroke-dasharray="4 3"/>
+    </svg>
+  </div>
+
+  <!-- STEPS -->
+  <div class="steps">
+    <div class="step">
+      <div class="num">01</div>
+      <div class="label">Входящий<br>сигнал</div>
+      <div class="desc">В систему заходит сильный сигнал в виде документа.</div>
+    </div>
+    <div class="step">
+      <div class="num">02</div>
+      <div class="label">Codex ищет<br>места приземления</div>
+      <div class="desc">Codex ищет все возможные места приземления — конкретные места в Vault, куда сигнал может быть отнесён по правилам разнесения.</div>
+    </div>
+    <div class="step">
+      <div class="num">03</div>
+      <div class="label">Я подтверждаю<br>нужные направления</div>
+      <div class="desc">Для одного входящего документа Codex обычно находит несколько домов. Я прохожу по списку, подтверждаю нужные направления, отклоняю лишние.</div>
+    </div>
+    <div class="step">
+      <div class="num">04</div>
+      <div class="label">Codex смотрит<br>и сравнивает</div>
+      <div class="desc">По каждому подтверждённому дому Codex смотрит, что там уже лежит. Сравнивает с новым сигналом.</div>
+    </div>
+    <div class="step">
+      <div class="num">05</div>
+      <div class="label">Возвращает<br>сводку</div>
+      <div class="desc">Возвращает сводку: где добавляется гипотеза, где появляется аргумент, где обновляется тема.</div>
+    </div>
+  </div>
+
+  <!-- DIAGRAM (full editorial SVG) -->
+  <div class="diagram">
+    <svg viewBox="0 0 1140 380" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" fill="none">
+      <!-- background blueprint grid scattered -->
+      <g opacity="0.4">
+        <path d="M40 30 L40 38 M36 34 L44 34" stroke="#B8B3AD"/>
+        <path d="M880 20 L880 28 M876 24 L884 24" stroke="#B8B3AD"/>
+        <path d="M520 350 L520 358 M516 354 L524 354" stroke="#B8B3AD"/>
+        <path d="M260 360 L260 368 M256 364 L264 364" stroke="#B8B3AD"/>
+        <path d="M1080 340 L1080 348 M1076 344 L1084 344" stroke="#B8B3AD"/>
+      </g>
+
+      <!-- Document icon left -->
+      <g transform="translate(40, 130)">
+        <!-- red splash behind -->
+        <g opacity="0.7">
+          <circle cx="-10" cy="60" r="22" fill="#D62219" opacity="0.35"/>
+          <circle cx="-2" cy="72" r="10" fill="#D62219" opacity="0.5"/>
+          <circle cx="14" cy="48" r="6" fill="#D62219" opacity="0.6"/>
+        </g>
+        <!-- document body -->
+        <path d="M0 0 L70 0 L90 22 L90 120 L0 120 Z" fill="#FFFFFF" stroke="#1A1714" stroke-width="2"/>
+        <path d="M70 0 L70 22 L90 22" fill="none" stroke="#1A1714" stroke-width="2"/>
+        <line x1="14" y1="40" x2="76" y2="40" stroke="#1A1714" stroke-width="1.5"/>
+        <line x1="14" y1="56" x2="76" y2="56" stroke="#1A1714" stroke-width="1.5"/>
+        <line x1="14" y1="72" x2="76" y2="72" stroke="#1A1714" stroke-width="1.5"/>
+        <line x1="14" y1="88" x2="58" y2="88" stroke="#1A1714" stroke-width="1.5"/>
+        <text x="44" y="148" font-family="Inter Tight" font-size="13" font-weight="600" fill="#1A1714" text-anchor="middle" text-transform="uppercase">входящий</text>
+        <text x="44" y="164" font-family="Inter Tight" font-size="13" font-weight="600" fill="#1A1714" text-anchor="middle">сигнал</text>
+      </g>
+
+      <!-- Arrow document → Codex -->
+      <g transform="translate(150, 190)">
+        <line x1="0" y1="0" x2="60" y2="0" stroke="#1A1714" stroke-width="2"/>
+        <polygon points="60,-6 72,0 60,6" fill="#1A1714"/>
+      </g>
+
+      <!-- Codex box -->
+      <g transform="translate(240, 130)">
+        <rect x="0" y="0" width="180" height="120" fill="#FFFFFF" stroke="#1A1714" stroke-width="2"/>
+        <rect x="0" y="0" width="180" height="32" fill="#1A1714"/>
+        <text x="90" y="22" font-family="Unbounded" font-weight="700" font-size="18" fill="#EFEBE7" text-anchor="middle">CODEX</text>
+        <text x="90" y="64" font-family="Inter Tight" font-size="13" fill="#1A1714" text-anchor="middle">ищет места</text>
+        <text x="90" y="84" font-family="Inter Tight" font-size="13" fill="#1A1714" text-anchor="middle">приземления</text>
+        <!-- small icons -->
+        <g transform="translate(60, 96)">
+          <rect x="0" y="0" width="14" height="10" fill="none" stroke="#1A1714" stroke-width="1.2"/>
+          <rect x="20" y="0" width="14" height="10" fill="none" stroke="#1A1714" stroke-width="1.2"/>
+          <rect x="40" y="0" width="14" height="10" fill="none" stroke="#1A1714" stroke-width="1.2"/>
+        </g>
+      </g>
+
+      <!-- Pipeline fan from Codex to 4 folders -->
+      <g>
+        <!-- dots that mark the routing nodes -->
+        <circle cx="510" cy="50" r="5" fill="#D62219"/>
+        <circle cx="510" cy="150" r="5" fill="#D62219"/>
+        <circle cx="510" cy="250" r="5" fill="#D62219"/>
+        <circle cx="510" cy="340" r="5" fill="#B8B3AD"/>
+        <!-- curves from Codex (430, 190) to each dot -->
+        <path d="M430 175 C 460 175, 470 70, 510 50" stroke="#1A1714" stroke-width="1.4" fill="none"/>
+        <path d="M430 185 C 460 185, 470 155, 510 150" stroke="#1A1714" stroke-width="1.4" fill="none"/>
+        <path d="M430 195 C 460 195, 470 240, 510 250" stroke="#1A1714" stroke-width="1.4" fill="none"/>
+        <path d="M430 205 C 460 205, 470 330, 510 340" stroke="#B8B3AD" stroke-width="1.2" fill="none" stroke-dasharray="4 3"/>
+      </g>
+
+      <!-- Folder cards on right -->
+      <g font-family="Inter Tight" font-size="14" fill="#1A1714">
+        <!-- 1 -->
+        <g transform="translate(540, 28)">
+          <rect x="0" y="0" width="280" height="44" fill="#FFFFFF" stroke="#1A1714" stroke-width="1.5" rx="3"/>
+          <path d="M12 14 L24 14 L28 18 L40 18 L40 32 L12 32 Z" fill="none" stroke="#1A1714" stroke-width="1.5"/>
+          <text x="56" y="29" font-weight="600">Стратегия</text>
+          <circle cx="245" cy="22" r="12" fill="none" stroke="#D62219" stroke-width="1.5"/>
+          <path d="M239 22 L243 26 L251 18" stroke="#D62219" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <!-- 2 -->
+        <g transform="translate(540, 128)">
+          <rect x="0" y="0" width="280" height="44" fill="#FFFFFF" stroke="#1A1714" stroke-width="1.5" rx="3"/>
+          <path d="M12 14 L24 14 L28 18 L40 18 L40 32 L12 32 Z" fill="none" stroke="#1A1714" stroke-width="1.5"/>
+          <text x="56" y="29" font-weight="600">Витрина услуг</text>
+          <circle cx="245" cy="22" r="12" fill="none" stroke="#D62219" stroke-width="1.5"/>
+          <path d="M239 22 L243 26 L251 18" stroke="#D62219" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <!-- 3 -->
+        <g transform="translate(540, 228)">
+          <rect x="0" y="0" width="280" height="44" fill="#FFFFFF" stroke="#1A1714" stroke-width="1.5" rx="3"/>
+          <path d="M12 14 L24 14 L28 18 L40 18 L40 32 L12 32 Z" fill="none" stroke="#1A1714" stroke-width="1.5"/>
+          <text x="56" y="29" font-weight="600">Контент-план</text>
+          <circle cx="245" cy="22" r="12" fill="none" stroke="#D62219" stroke-width="1.5"/>
+          <path d="M239 22 L243 26 L251 18" stroke="#D62219" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <!-- 4 (declined) -->
+        <g transform="translate(540, 318)" opacity="0.55">
+          <rect x="0" y="0" width="280" height="44" fill="#FFFFFF" stroke="#B8B3AD" stroke-width="1.5" rx="3" stroke-dasharray="4 3"/>
+          <path d="M12 14 L24 14 L28 18 L40 18 L40 32 L12 32 Z" fill="none" stroke="#B8B3AD" stroke-width="1.5"/>
+          <text x="56" y="22" font-weight="600" fill="#8A857A">Реестр методических</text>
+          <text x="56" y="38" font-weight="600" fill="#8A857A">артефактов</text>
+          <circle cx="245" cy="22" r="12" fill="none" stroke="#8A857A" stroke-width="1.5"/>
+          <path d="M239 16 L251 28 M251 16 L239 28" stroke="#8A857A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        </g>
+      </g>
+
+      <!-- Aggregation arrows folders → summary -->
+      <g stroke="#D62219" stroke-width="1.5" fill="none">
+        <path d="M820 50 C 880 50, 900 130, 980 175" stroke-dasharray="5 3"/>
+        <path d="M820 150 C 880 150, 920 160, 980 178"/>
+        <path d="M820 250 C 880 250, 920 200, 980 184"/>
+      </g>
+
+      <!-- Summary node -->
+      <g transform="translate(990, 130)">
+        <circle cx="60" cy="60" r="58" fill="none" stroke="#D62219" stroke-width="2"/>
+        <circle cx="60" cy="60" r="42" fill="none" stroke="#D62219" stroke-width="1" stroke-dasharray="3 3"/>
+        <!-- mini list inside -->
+        <g transform="translate(38, 38)">
+          <line x1="0" y1="0" x2="44" y2="0" stroke="#1A1714" stroke-width="2"/>
+          <line x1="0" y1="8" x2="34" y2="8" stroke="#1A1714" stroke-width="2"/>
+          <line x1="0" y1="16" x2="40" y2="16" stroke="#1A1714" stroke-width="2"/>
+          <line x1="0" y1="24" x2="28" y2="24" stroke="#1A1714" stroke-width="2"/>
+          <rect x="-8" y="-3" width="3" height="3" fill="#D62219"/>
+          <rect x="-8" y="5" width="3" height="3" fill="#D62219"/>
+          <rect x="-8" y="13" width="3" height="3" fill="#D62219"/>
+          <rect x="-8" y="21" width="3" height="3" fill="#D62219"/>
+        </g>
+        <!-- mini emanating ticks -->
+        <g stroke="#D62219" stroke-width="1.5">
+          <line x1="120" y1="20" x2="130" y2="10"/>
+          <line x1="125" y1="60" x2="140" y2="60"/>
+          <line x1="120" y1="100" x2="130" y2="110"/>
+        </g>
+        <text x="60" y="148" font-family="Inter Tight" font-size="12.5" font-weight="600" fill="#1A1714" text-anchor="middle">сводка по</text>
+        <text x="60" y="164" font-family="Inter Tight" font-size="12.5" font-weight="600" fill="#1A1714" text-anchor="middle">всем домам</text>
+      </g>
+    </svg>
+  </div>
+
+  <!-- RULE block -->
+  <div class="rule">
+    <div class="mark">!</div>
+    <div class="label">Главное<br>правило</div>
+    <div class="body">
+      Машина ничего не разносит без явного «да» от человека. Я отвечаю за смысл, машина за скорость работы.
+      <strong>Это и есть human in the loop.</strong>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

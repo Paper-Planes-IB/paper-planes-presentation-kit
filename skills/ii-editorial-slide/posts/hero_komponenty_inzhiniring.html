@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#F8F5ED; --ink:#1A1714; --red:#E84A38; --muted:#9A958E; --grid:rgba(184,179,173,0.20); }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--paper); font-family:'Inter Tight',sans-serif; color:var(--ink); -webkit-font-smoothing:antialiased; }
+  .slide { width:1600px; height:900px; position:relative; overflow:hidden; padding:80px 90px;
+    background-color:var(--paper);
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:50px 50px; display:flex; flex-direction:column; }
+  .eyebrow { font-family:'JetBrains Mono',monospace; font-size:16px; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:22px; }
+  .title-block { position:relative; padding-left:34px; }
+  .title-block::before { content:""; position:absolute; left:0; top:10px; bottom:14px; width:8px; background:var(--red); }
+  h1 { font-family:'Oswald'; font-weight:700; font-size:96px; line-height:0.98; text-transform:uppercase; letter-spacing:-0.01em; }
+  h1 .r { color:var(--red); }
+  .sub { font-family:'Inter Tight'; font-weight:500; font-size:30px; color:#555049; margin-top:24px; padding-left:34px; max-width:1100px; }
+  .scheme { margin-top:auto; }
+  .footer { font-family:'JetBrains Mono',monospace; font-size:15px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-top:24px; padding-left:34px; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="eyebrow">ILYA BALAHNIN · экспертные продажи</div>
+  <div class="title-block">
+    <h1>От компонентов<br>к инжинирингу<span class="r">.</span></h1>
+  </div>
+  <div class="sub">Как продавать работающую систему и инженерный результат, а не отдельную позицию из прайса</div>
+
+  <div class="scheme">
+    <svg width="1420" height="240" viewBox="0 0 1420 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- слева: разрозненные компоненты (коробки) -->
+      <text x="0" y="28" font-family="Oswald" font-weight="700" font-size="22" fill="#9A958E" letter-spacing="1">КОМПОНЕНТЫ · ПОЗИЦИЯ ИЗ ПРАЙСА</text>
+      <g stroke="#9A958E" stroke-width="2.4" fill="#F8F5ED">
+        <rect x="6" y="64" width="92" height="64"/><rect x="120" y="64" width="92" height="64"/>
+        <rect x="63" y="150" width="92" height="64"/><rect x="177" y="150" width="92" height="64"/>
+        <rect x="234" y="64" width="92" height="64"/>
+      </g>
+
+      <!-- стрелка -->
+      <line x1="430" y1="140" x2="560" y2="140" stroke="#E84A38" stroke-width="3"/>
+      <polygon points="574,140 552,128 552,152" fill="#E84A38"/>
+
+      <!-- справа: собранная система (связанный граф) -->
+      <text x="690" y="28" font-family="Oswald" font-weight="700" font-size="22" fill="#E84A38" letter-spacing="1">СИСТЕМА · ИНЖЕНЕРНЫЙ РЕЗУЛЬТАТ</text>
+      <g>
+        <line x1="780" y1="110" x2="920" y2="76" stroke="#E84A38" stroke-width="3"/>
+        <line x1="920" y1="76" x2="1040" y2="150" stroke="#E84A38" stroke-width="3"/>
+        <line x1="1040" y1="150" x2="870" y2="190" stroke="#E84A38" stroke-width="3"/>
+        <line x1="870" y1="190" x2="780" y2="110" stroke="#E84A38" stroke-width="3"/>
+        <line x1="780" y1="110" x2="1040" y2="150" stroke="#E84A38" stroke-width="3"/>
+        <line x1="1040" y1="150" x2="1180" y2="100" stroke="#E84A38" stroke-width="3"/>
+        <circle cx="780" cy="110" r="17" fill="#E84A38"/>
+        <circle cx="920" cy="76" r="17" fill="#E84A38"/>
+        <circle cx="1040" cy="150" r="17" fill="#E84A38"/>
+        <circle cx="870" cy="190" r="17" fill="#E84A38"/>
+        <circle cx="1180" cy="100" r="17" fill="#E84A38"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="footer">media.paper-planes.ru · лонгрид</div>
+</div>
+<script>document.fonts.ready.then(()=>{document.body.dataset.fontsReady="1";});</script>
+</body>
+</html>

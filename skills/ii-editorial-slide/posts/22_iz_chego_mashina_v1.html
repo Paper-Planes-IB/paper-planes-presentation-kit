@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Из чего собрана машина — плакат</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#EFEBE7; --ink:#1A1714; --red:#D62219; --muted:#B8B3AD; --line:#C9C3BB; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background:#ddd; font-family:'Inter Tight',sans-serif; color:var(--ink); -webkit-font-smoothing:antialiased; }
+  .slide { width:920px; min-height:1560px; position:relative; overflow:hidden; background:var(--paper); padding:46px 46px 40px; }
+  /* лёгкая бумага-сетка */
+  .slide::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:46px 46px;opacity:.18;z-index:0;}
+  .wrap{position:relative;z-index:1;}
+
+  /* верхние теги-чипы */
+  .tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:22px;}
+  .tags span{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.5px;border:1.4px solid var(--ink);padding:4px 9px;background:var(--paper);}
+
+  h1{font-family:'Unbounded',sans-serif;font-weight:900;font-size:60px;line-height:.98;letter-spacing:-.02em;text-transform:uppercase;}
+  h1 .r{color:var(--red);}
+  .sub{font-family:'Unbounded',sans-serif;font-weight:700;font-size:18px;text-transform:uppercase;letter-spacing:.3px;margin-top:14px;color:var(--ink);}
+  .hr-thin{height:0;border-top:1.4px solid var(--ink);margin:18px 0 22px;}
+
+  /* callout */
+  .callout{border:2px solid var(--ink);padding:22px 24px 22px 30px;position:relative;margin-bottom:30px;background:var(--paper);}
+  .callout::before{content:"";position:absolute;left:0;top:0;bottom:0;width:8px;background:var(--red);}
+  .callout p{font-family:'Unbounded',sans-serif;font-weight:700;font-size:21px;line-height:1.32;text-transform:uppercase;letter-spacing:.2px;}
+  .callout p b{color:var(--red);}
+
+  /* секционный разделитель с засечками */
+  .sec{display:flex;align-items:center;gap:14px;margin:6px 0 18px;}
+  .sec::before,.sec::after{content:"";height:1.4px;background:var(--ink);flex:1;}
+  .sec span{font-family:'Unbounded',sans-serif;font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;}
+  .sec .tick{position:relative;}
+
+  /* карточки три опоры */
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:30px;}
+  .card{border:1.6px solid var(--ink);background:var(--paper);padding:16px;display:flex;flex-direction:column;min-height:240px;}
+  .num{width:26px;height:26px;background:var(--red);color:var(--paper);font-family:'Unbounded',sans-serif;font-weight:800;font-size:14px;display:grid;place-items:center;margin-bottom:12px;}
+  .card svg{width:54px;height:54px;margin:4px 0 14px;}
+  .card h3{font-family:'Unbounded',sans-serif;font-weight:800;font-size:16px;text-transform:uppercase;line-height:1.05;margin-bottom:10px;}
+  .card p{font-size:14.5px;line-height:1.4;color:var(--ink);}
+  .card .mono{font-family:'JetBrains Mono',monospace;font-size:11px;color:#6E6963;margin-top:auto;padding-top:12px;}
+
+  /* контраст память vs папка */
+  .vs{display:grid;grid-template-columns:1fr 56px 1fr;gap:0;align-items:stretch;margin-bottom:30px;}
+  .vs .col{border:1.6px solid var(--ink);padding:18px 20px;background:var(--paper);}
+  .vs .col.bad{border-color:var(--muted);}
+  .vs .mid{display:grid;place-items:center;font-family:'Unbounded',sans-serif;font-weight:800;font-size:15px;color:var(--red);}
+  .vs h4{font-family:'Unbounded',sans-serif;font-weight:800;font-size:15px;text-transform:uppercase;margin-bottom:6px;}
+  .vs .bad h4{color:#8A857E;}
+  .vs .tagline{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.4px;margin-bottom:12px;}
+  .vs .bad .tagline{color:#9A958E;}
+  .vs .good .tagline{color:var(--red);}
+  .vs ul{list-style:none;}
+  .vs li{font-size:14.5px;line-height:1.45;padding-left:18px;position:relative;margin-bottom:7px;}
+  .vs li::before{content:"";position:absolute;left:0;top:8px;width:7px;height:7px;}
+  .vs .bad li::before{background:var(--muted);}
+  .vs .good li::before{background:var(--red);}
+
+  /* жизненный цикл правила — поток */
+  .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-bottom:14px;}
+  .step{border:1.6px solid var(--ink);background:var(--paper);padding:14px 12px;position:relative;}
+  .step:not(:last-child){border-right:none;}
+  .step .sn{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--red);font-weight:600;margin-bottom:8px;}
+  .step h5{font-family:'Unbounded',sans-serif;font-weight:800;font-size:13px;text-transform:uppercase;line-height:1.1;margin-bottom:7px;}
+  .step p{font-size:13px;line-height:1.35;color:#4A4640;}
+  .step.alert{border-color:var(--red);border-right:1.6px solid var(--red);}
+  .step.alert h5{color:var(--red);}
+  .flow .arr{position:absolute;right:-9px;top:50%;transform:translateY(-50%);z-index:3;width:18px;height:18px;background:var(--paper);border:1.4px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-size:11px;font-family:'Unbounded';color:var(--ink);}
+
+  .quote{border:1.6px dashed var(--red);padding:14px 18px;margin:0 0 30px;font-size:15px;line-height:1.45;font-style:italic;color:var(--ink);background:var(--paper);}
+  .quote b{font-style:normal;color:var(--red);font-family:'JetBrains Mono';font-size:12px;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px;}
+
+  /* нижний итог */
+  .foot{border:2px solid var(--ink);background:var(--ink);color:var(--paper);padding:20px 24px;display:flex;gap:18px;align-items:center;}
+  .foot .ex{width:46px;height:46px;border:2px solid var(--red);border-radius:50%;display:grid;place-items:center;font-family:'Unbounded';font-weight:800;font-size:26px;color:var(--red);flex:none;}
+  .foot p{font-size:16px;line-height:1.4;}
+  .foot p b{color:#FF6A5C;}
+  .brand{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;color:#6E6963;text-align:right;margin-top:16px;text-transform:uppercase;}
+</style>
+</head>
+<body>
+<div class="slide"><div class="wrap">
+
+  <div class="tags">
+    <span>PP.MEDIA</span><span>И_И_</span><span>архитектура</span><span>папка</span><span>нулевой файл</span><span>правила</span>
+  </div>
+
+  <h1>Из&nbsp;чего собрана машина<span class="r">.</span></h1>
+  <div class="sub">Три опоры, на которых стоит ИИ-система</div>
+  <div class="hr-thin"></div>
+
+  <div class="callout">
+    <p>Работающую систему держит не модель. Её держат <b>папка, нулевой файл и картотека правил.</b> Модель меняется — система стоит.</p>
+  </div>
+
+  <div class="sec"><span>Три опоры</span></div>
+  <div class="cards3">
+    <div class="card">
+      <div class="num">1</div>
+      <svg viewBox="0 0 48 48" fill="none" stroke="#1A1714" stroke-width="2"><path d="M5 13 h13 l4 5 h21 v25 H5 Z"/><line x1="5" y1="24" x2="43" y2="24"/></svg>
+      <h3>Папка</h3>
+      <p>Мозг системы — обычный фолдер на диске. Все файлы открываются и читаются глазами.</p>
+      <div class="mono">не чат, а диск</div>
+    </div>
+    <div class="card">
+      <div class="num">2</div>
+      <svg viewBox="0 0 48 48" fill="none" stroke="#1A1714" stroke-width="2"><path d="M11 4 h18 l8 8 v32 H11 Z"/><path d="M29 4 v8 h8"/><line x1="16" y1="22" x2="32" y2="22"/><line x1="16" y1="29" x2="32" y2="29"/><line x1="16" y1="36" x2="26" y2="36"/></svg>
+      <h3>Нулевой файл</h3>
+      <p>Один текстовый файл задаёт поведение всей системы: кто ты, правила, куда писать, чего нельзя.</p>
+      <div class="mono">конституция машины</div>
+    </div>
+    <div class="card">
+      <div class="num">3</div>
+      <svg viewBox="0 0 48 48" fill="none" stroke="#1A1714" stroke-width="2"><rect x="7" y="9" width="34" height="8"/><rect x="7" y="20" width="34" height="8"/><rect x="7" y="31" width="34" height="8"/><line x1="12" y1="13" x2="16" y2="13" stroke="#D62219" stroke-width="2.4"/><line x1="12" y1="24" x2="16" y2="24" stroke="#D62219" stroke-width="2.4"/><line x1="12" y1="35" x2="16" y2="35" stroke="#D62219" stroke-width="2.4"/></svg>
+      <h3>Картотека правил</h3>
+      <p>Поверх файла нарастают правила. Машина их применяет и ловит противоречия между ними.</p>
+      <div class="mono">десятки строк, живой свод</div>
+    </div>
+  </div>
+
+  <div class="sec"><span>Память против папки</span></div>
+  <div class="vs">
+    <div class="col bad">
+      <h4>100 файлов в чате</h4>
+      <div class="tagline">память выдыхается</div>
+      <ul>
+        <li>модель держит всё «в голове» сессии</li>
+        <li>под объёмом путается и забывает</li>
+        <li>смешивает один документ с другим</li>
+        <li>чем больше залил — тем хуже ответ</li>
+      </ul>
+    </div>
+    <div class="mid">VS</div>
+    <div class="col good">
+      <h4>100 файлов в папке</h4>
+      <div class="tagline">свежее перечитывание</div>
+      <ul>
+        <li>каждый раз перечитывает нужный файл</li>
+        <li>не помнит — обращается к источнику</li>
+        <li>объём не топит, а наполняет</li>
+        <li>можно открыть и проверить глазами</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec"><span>Жизненный цикл правила</span></div>
+  <div class="flow">
+    <div class="step"><div class="sn">01</div><h5>Ошибка</h5><p>машина сделала не так</p><div class="arr">›</div></div>
+    <div class="step"><div class="sn">02</div><h5>Разбор</h5><p>объясняю, почему нельзя</p><div class="arr">›</div></div>
+    <div class="step"><div class="sn">03</div><h5>Правило</h5><p>закрепляется в картотеке</p><div class="arr">›</div></div>
+    <div class="step alert"><div class="sn">04</div><h5>Конфликт</h5><p>новое правило спорит со старым</p><div class="arr">›</div></div>
+    <div class="step"><div class="sn">05</div><h5>Развязка</h5><p>подсвечивает, я выбираю</p></div>
+  </div>
+
+  <div class="quote">
+    <b>машина ловит то, чего не скажет человек</b>
+    «Восемь тысяч лет назад ты дал одно правило, позавчера другое. Эта строчка ему противоречит, я не знаю, какое исполнять». Человек молча выберет одно. Машина останавливается.
+  </div>
+
+  <div class="foot">
+    <div class="ex">!</div>
+    <p>«У нас всё в одном умном чате» — это не система, а длинный разговор, который завтра начнётся заново. <b>Система — это папка, файл и правила, которые можно открыть, проверить и передать.</b></p>
+  </div>
+
+  <div class="brand">PP.MEDIA · канал И_И_ · день 1 интенсива</div>
+
+</div></div>
+</body>
+</html>

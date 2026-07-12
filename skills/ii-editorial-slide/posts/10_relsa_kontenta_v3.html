@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Рельса контента — editorial v3</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EFEBE7;
+    --ink: #1A1714;
+    --red: #D62219;
+    --muted: #B8B3AD;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body {
+    background: var(--paper);
+    font-family: 'Inter Tight', system-ui, sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .slide {
+    width: 1600px;
+    height: 1200px;
+    position: relative;
+    overflow: hidden;
+    background: var(--paper);
+  }
+
+  /* ФОН — лестница занимает левую половину как hero */
+  .bg { position: absolute; inset: 0; z-index: 0; }
+  .bg .marks {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: left center;
+  }
+  /* Лёгкая paper-вуаль слева снизу чтобы правило не контрастировало с лестницей */
+  .bg::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 65%, rgba(239, 235, 231, 0.78) 100%);
+    pointer-events: none;
+  }
+
+  .layer {
+    position: absolute; inset: 0;
+    z-index: 2;
+    padding: 72px 80px 0 80px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    row-gap: 32px;
+  }
+
+  /* Заголовок сдвинут вправо чтобы не сесть на лестницу */
+  .header { display: block; margin-bottom: 8px; padding-left: 580px; }
+  .title-block { position: relative; padding-left: 26px; }
+  .title-block::before {
+    content: "";
+    position: absolute; left: 0; top: 16px; bottom: 28px;
+    width: 6px; background: var(--red);
+  }
+  .topline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--red);
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: 96px;
+    line-height: 0.94;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  h1 .dot { color: var(--red); }
+
+  /* Схема смещена в правую часть */
+  .scheme {
+    position: relative; margin: 0;
+    padding-left: 580px;
+    display: flex; align-items: flex-start; justify-content: flex-start;
+  }
+  .scheme svg { width: 100%; max-width: 940px; height: auto; }
+
+  .rule {
+    margin: 0 0 110px 0;
+    border: 1.5px solid var(--ink);
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: 60px auto 1fr;
+    gap: 28px;
+    align-items: center;
+    background: var(--paper);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+  }
+  .rule .mark {
+    width: 56px; height: 56px;
+    border: 2px solid var(--red); border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800; font-size: 32px; color: var(--red);
+  }
+  .rule .label {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700; font-size: 14px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    position: relative; padding-left: 16px;
+    white-space: nowrap;
+  }
+  .rule .label::before {
+    content: ""; position: absolute;
+    left: 0; top: 50%; transform: translateY(-50%);
+    width: 6px; height: 6px; background: var(--red);
+  }
+  .rule .body { font-size: 17px; line-height: 1.55; }
+  .rule .body strong {
+    font-weight: 700; color: var(--red);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    font-family: 'Unbounded', sans-serif; font-size: 14px;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="bg">
+    <img class="marks" src="../backgrounds/02_concrete_stairs_red.png" alt="">
+  </div>
+
+  <div class="layer">
+
+    <div class="header">
+      <div class="title-block">
+        <div class="topline">PP.MEDIA · И_И_ · выпуск 10</div>
+        <h1>Рельса<br>контента<span class="dot">.</span></h1>
+      </div>
+    </div>
+
+    <!-- СХЕМА: вход (3 сигнала) → 3 этапа → 4 артефакта → петля -->
+    <div class="scheme">
+      <svg viewBox="0 0 940 620" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- ===== ВХОД: 3 типа сигналов слева ===== -->
+        <g font-family="Inter Tight" fill="#1A1714">
+          <text x="0" y="0" font-family="Unbounded" font-weight="700" font-size="11" fill="#D62219" letter-spacing="1.5">ВХОД · 3 СИГНАЛА</text>
+          <g transform="translate(0, 18)">
+            <rect x="0" y="0" width="220" height="48" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.2"/>
+            <text x="12" y="20" font-size="11" font-weight="700" fill="#D62219">01</text>
+            <text x="32" y="20" font-size="12" font-weight="600">управленческая мысль</text>
+            <text x="12" y="38" font-size="10.5" fill="#6E6963">появилась внутри агентства</text>
+          </g>
+          <g transform="translate(0, 76)">
+            <rect x="0" y="0" width="220" height="48" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.2"/>
+            <text x="12" y="20" font-size="11" font-weight="700" fill="#D62219">02</text>
+            <text x="32" y="20" font-size="12" font-weight="600">проектный опыт</text>
+            <text x="12" y="38" font-size="10.5" fill="#6E6963">с клиента, без раскрытия деталей</text>
+          </g>
+          <g transform="translate(0, 134)">
+            <rect x="0" y="0" width="220" height="48" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.2"/>
+            <text x="12" y="20" font-size="11" font-weight="700" fill="#D62219">03</text>
+            <text x="32" y="20" font-size="12" font-weight="600">внешний сигнал</text>
+            <text x="12" y="38" font-size="10.5" fill="#6E6963">статья, исследование, тренд</text>
+          </g>
+        </g>
+
+        <!-- Стрелки от 3 сигналов к этапу 1 -->
+        <g stroke="#1A1714" stroke-width="1.5" fill="none">
+          <path d="M220 42 C 250 42, 270 86, 290 100"/>
+          <path d="M220 100 L 290 100"/>
+          <path d="M220 158 C 250 158, 270 114, 290 100"/>
+        </g>
+        <polygon points="290,94 304,100 290,106" fill="#1A1714"/>
+
+        <!-- ===== 3 ЭТАПА: вертикальный конвейер ===== -->
+
+        <!-- ЭТАП 1: ЛОНГРИД -->
+        <g transform="translate(304, 30)">
+          <rect x="0" y="0" width="380" height="140" fill="#EFEBE7" stroke="#1A1714" stroke-width="2"/>
+          <rect x="0" y="0" width="60" height="140" fill="#1A1714"/>
+          <text x="30" y="76" font-family="Unbounded" font-weight="900" font-size="32" fill="#EFEBE7" text-anchor="middle">1</text>
+
+          <text x="76" y="24" font-family="Unbounded" font-weight="800" font-size="16" fill="#1A1714" letter-spacing="0.5">ЛОНГРИД</text>
+          <text x="76" y="44" font-family="Inter Tight" font-size="11.5" fill="#6E6963">фирменная структура «рычаг через цепь»</text>
+
+          <g font-family="Inter Tight" font-size="11.5" fill="#1A1714" transform="translate(76, 62)">
+            <rect x="0" y="0" width="3" height="3" fill="#D62219"/>
+            <text x="10" y="6">1500–3000 слов, 17 разделов</text>
+            <rect x="0" y="14" width="3" height="3" fill="#D62219"/>
+            <text x="10" y="20">executive box, цепь из 5 звеньев</text>
+            <rect x="0" y="28" width="3" height="3" fill="#D62219"/>
+            <text x="10" y="34">кейсы, два контр-аргумента, CTA</text>
+            <rect x="0" y="42" width="3" height="3" fill="#D62219"/>
+            <text x="10" y="48" font-weight="600">прогон через MEDDPICC (8 проверок)</text>
+          </g>
+
+          <text x="76" y="128" font-family="Unbounded" font-weight="700" font-size="10" fill="#D62219" letter-spacing="1">выход · media.paper-planes.ru</text>
+        </g>
+
+        <!-- Стрелка вниз -->
+        <g transform="translate(494, 180)">
+          <line x1="0" y1="0" x2="0" y2="24" stroke="#1A1714" stroke-width="2"/>
+          <polygon points="-6,24 0,38 6,24" fill="#1A1714"/>
+        </g>
+
+        <!-- ЭТАП 2: КЕЙС -->
+        <g transform="translate(304, 220)">
+          <rect x="0" y="0" width="380" height="140" fill="#EFEBE7" stroke="#1A1714" stroke-width="2"/>
+          <rect x="0" y="0" width="60" height="140" fill="#1A1714"/>
+          <text x="30" y="76" font-family="Unbounded" font-weight="900" font-size="32" fill="#EFEBE7" text-anchor="middle">2</text>
+
+          <text x="76" y="24" font-family="Unbounded" font-weight="800" font-size="16" fill="#1A1714" letter-spacing="0.5">КЕЙС</text>
+          <text x="76" y="44" font-family="Inter Tight" font-size="11.5" fill="#6E6963">клиентский, в реестр и на сайт</text>
+
+          <g font-family="Inter Tight" font-size="11.5" fill="#1A1714" transform="translate(76, 62)">
+            <rect x="0" y="0" width="3" height="3" fill="#D62219"/>
+            <text x="10" y="6">открывается проблемой клиента</text>
+            <rect x="0" y="14" width="3" height="3" fill="#D62219"/>
+            <text x="10" y="20">2–4 противоречия, контур решения</text>
+            <rect x="0" y="28" width="3" height="3" fill="#D62219"/>
+            <text x="10" y="34">фактура отделена от интерпретации</text>
+            <rect x="0" y="42" width="3" height="3" fill="#D62219"/>
+            <text x="10" y="48" font-weight="600">сдвиг в управленческой модели</text>
+          </g>
+
+          <text x="76" y="128" font-family="Unbounded" font-weight="700" font-size="10" fill="#D62219" letter-spacing="1">выход · реестр кейсов</text>
+        </g>
+
+        <!-- Стрелка вниз -->
+        <g transform="translate(494, 370)">
+          <line x1="0" y1="0" x2="0" y2="24" stroke="#1A1714" stroke-width="2"/>
+          <polygon points="-6,24 0,38 6,24" fill="#1A1714"/>
+        </g>
+
+        <!-- ЭТАП 3: АНОНС -->
+        <g transform="translate(304, 410)">
+          <rect x="0" y="0" width="380" height="140" fill="#EFEBE7" stroke="#1A1714" stroke-width="2"/>
+          <rect x="0" y="0" width="60" height="140" fill="#1A1714"/>
+          <text x="30" y="76" font-family="Unbounded" font-weight="900" font-size="32" fill="#EFEBE7" text-anchor="middle">3</text>
+
+          <text x="76" y="24" font-family="Unbounded" font-weight="800" font-size="16" fill="#1A1714" letter-spacing="0.5">АНОНС</text>
+          <text x="76" y="44" font-family="Inter Tight" font-size="11.5" fill="#6E6963">упаковка под собственные каналы</text>
+
+          <g font-family="Inter Tight" font-size="11.5" fill="#1A1714" transform="translate(76, 62)">
+            <rect x="0" y="0" width="3" height="3" fill="#D62219"/>
+            <text x="10" y="6">Telegram-пост 500–1200 знаков</text>
+            <rect x="0" y="14" width="3" height="3" fill="#D62219"/>
+            <text x="10" y="20">Instagram-карусель 7–9 слайдов</text>
+            <rect x="0" y="28" width="3" height="3" fill="#D62219"/>
+            <text x="10" y="34">хук, сцена, поворот цепи, число</text>
+            <rect x="0" y="42" width="3" height="3" fill="#D62219"/>
+            <text x="10" y="48" font-weight="600">UTM-метка к полной статье</text>
+          </g>
+
+          <text x="76" y="128" font-family="Unbounded" font-weight="700" font-size="10" fill="#D62219" letter-spacing="1">выход · TG, IG</text>
+        </g>
+
+        <!-- ===== ВЫХОД: 4 артефакта справа ===== -->
+        <g font-family="Inter Tight" fill="#1A1714">
+          <text x="730" y="0" font-family="Unbounded" font-weight="700" font-size="11" fill="#D62219" letter-spacing="1.5">ВЫХОД · 4 АРТЕФАКТА</text>
+
+          <g transform="translate(730, 18)">
+            <rect x="0" y="0" width="200" height="42" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.2"/>
+            <circle cx="14" cy="21" r="5" fill="#D62219"/>
+            <text x="28" y="19" font-size="12" font-weight="600">Лонгрид</text>
+            <text x="28" y="34" font-size="10.5" fill="#6E6963">media.paper-planes.ru</text>
+          </g>
+          <g transform="translate(730, 78)">
+            <rect x="0" y="0" width="200" height="42" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.2"/>
+            <circle cx="14" cy="21" r="5" fill="#D62219"/>
+            <text x="28" y="19" font-size="12" font-weight="600">Кейс</text>
+            <text x="28" y="34" font-size="10.5" fill="#6E6963">реестр кейсов</text>
+          </g>
+          <g transform="translate(730, 138)">
+            <rect x="0" y="0" width="200" height="42" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.2"/>
+            <circle cx="14" cy="21" r="5" fill="#D62219"/>
+            <text x="28" y="19" font-size="12" font-weight="600">Telegram-пост</text>
+            <text x="28" y="34" font-size="10.5" fill="#6E6963">t.me/IIbypaperplanes</text>
+          </g>
+          <g transform="translate(730, 198)">
+            <rect x="0" y="0" width="200" height="42" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.2"/>
+            <circle cx="14" cy="21" r="5" fill="#D62219"/>
+            <text x="28" y="19" font-size="12" font-weight="600">Instagram-карусель</text>
+            <text x="28" y="34" font-size="10.5" fill="#6E6963">7–9 слайдов с UTM</text>
+          </g>
+        </g>
+
+        <!-- Стрелки от этапов к артефактам -->
+        <g stroke="#D62219" stroke-width="1.4" fill="none">
+          <path d="M684 100 C 700 100, 715 39, 730 39"/>
+          <path d="M684 290 C 700 290, 715 99, 730 99"/>
+          <path d="M684 480 C 700 480, 715 159, 730 159"/>
+          <path d="M684 480 C 700 480, 715 219, 730 219"/>
+        </g>
+
+        <!-- ===== ПЕТЛЯ ОБРАТНОЙ СВЯЗИ ===== -->
+        <g>
+          <path d="M930 220 C 970 240, 970 580, 220 580 C 110 580, 110 580, 110 200" stroke="#1A1714" stroke-width="1.4" stroke-dasharray="6 4" fill="none"/>
+          <polygon points="104,200 110,186 116,200" fill="#1A1714"/>
+          <text x="500" y="596" font-family="Unbounded" font-weight="700" font-size="11" fill="#1A1714" text-anchor="middle" letter-spacing="1.5">ОБРАТНОЕ ВКЛЮЧЕНИЕ · сигналы возвращаются в VML-картотеку</text>
+        </g>
+
+      </svg>
+    </div>
+
+    <!-- RULE -->
+    <div class="rule">
+      <div class="mark">!</div>
+      <div class="label">Конструкция</div>
+      <div class="body">
+        Рельса держит фирменный метод внутри сквозного производственного потока. Скиллы внутри рельсы это её детали.
+        <strong>Деталь можно заменить без перепрошивки конвейера.</strong>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  document.fonts.ready.then(() => { document.body.dataset.fontsReady = "1"; });
+</script>
+</body>
+</html>

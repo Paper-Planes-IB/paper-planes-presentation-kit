@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Озеро данных и метафайлы — editorial v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#EFEBE7; --ink:#1A1714; --red:#D62219; --muted:#B8B3AD; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body { background: var(--paper); font-family: 'Inter Tight', system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .slide { width: 1600px; height: 1200px; position: relative; overflow: hidden; background: var(--paper); }
+  .bg { position: absolute; inset: 0; z-index: 0; }
+  .bg .marks { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; }
+  .layer { position: absolute; inset: 0; z-index: 2; padding: 60px 80px 0 80px; display: grid; grid-template-rows: auto 1fr auto; row-gap: 18px; }
+  .header { display: block; margin-bottom: 2px; }
+  .title-block { position: relative; padding-left: 26px; }
+  .title-block::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 12px; width: 6px; background: var(--red); }
+  .topline { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--red); margin-bottom: 10px; }
+  h1 { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 70px; line-height: 1.0; letter-spacing: -0.02em; text-transform: uppercase; color: var(--ink); }
+  h1 .dot { color: var(--red); }
+  .scheme { position: relative; display: flex; align-items: center; justify-content: center; }
+  .scheme svg { width: 100%; max-width: 1440px; height: auto; }
+  .rule { margin: 0 0 80px 0; border: 1.5px solid var(--ink); padding: 22px 28px; display: grid; grid-template-columns: 60px auto 1fr; gap: 28px; align-items: center; background: var(--paper); box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
+  .rule .mark { width: 56px; height: 56px; border: 2px solid var(--red); border-radius: 50%; display: grid; place-items: center; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 32px; color: var(--red); }
+  .rule .label { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; position: relative; padding-left: 16px; white-space: nowrap; }
+  .rule .label::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background: var(--red); }
+  .rule .body { font-size: 17px; line-height: 1.5; }
+  .rule .body strong { font-weight: 700; color: var(--red); }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="bg">
+    <img class="marks" src="../backgrounds/04_editorial_marks.png" alt="">
+  </div>
+
+  <div class="layer">
+
+    <div class="header">
+      <div class="title-block">
+        <div class="topline">PP.MEDIA · И_И_ · модель знаний</div>
+        <h1>Озеро данных<br>и метафайлы<span class="dot">.</span></h1>
+      </div>
+    </div>
+
+    <div class="scheme">
+      <svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- зона пластов: x 300..1320 (ширина 1020) -->
+
+        <!-- ===== ПЛАСТ 3 (верх): ЗНАНИЕ ===== -->
+        <text x="20" y="70" font-family="Unbounded" font-weight="800" font-size="26" fill="#D62219">ЗНАНИЕ</text>
+        <text x="20" y="100" font-family="Inter Tight" font-size="16" fill="#6E6963">что</text>
+        <text x="20" y="122" font-family="Inter Tight" font-size="16" fill="#6E6963">на выходе</text>
+        <rect x="300" y="24" width="1020" height="158" fill="#EFEBE7" stroke="#D62219" stroke-width="2.4"/>
+        <g font-family="Inter Tight" font-size="13">
+          <g transform="translate(308,62)"><rect width="174" height="78" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.4"/><text x="87" y="26" font-family="JetBrains Mono" font-size="11" fill="#D62219" text-anchor="middle">ВОПРОС</text><text x="87" y="54" fill="#1A1714" text-anchor="middle">оценка NPS</text></g>
+          <g transform="translate(484,97)"><line x1="0" y1="0" x2="16" y2="0" stroke="#1A1714" stroke-width="2"/><polygon points="16,-5 26,0 16,5" fill="#1A1714"/></g>
+          <g transform="translate(512,62)"><rect width="174" height="78" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.4"/><text x="87" y="26" font-family="JetBrains Mono" font-size="11" fill="#D62219" text-anchor="middle">ВИЗУАЛИЗАЦИЯ</text><text x="87" y="54" fill="#1A1714" text-anchor="middle">разрез по сегментам</text></g>
+          <g transform="translate(688,97)"><line x1="0" y1="0" x2="16" y2="0" stroke="#1A1714" stroke-width="2"/><polygon points="16,-5 26,0 16,5" fill="#1A1714"/></g>
+          <g transform="translate(716,62)"><rect width="174" height="78" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.4"/><text x="87" y="26" font-family="JetBrains Mono" font-size="11" fill="#D62219" text-anchor="middle">НАБЛЮДЕНИЕ</text><text x="87" y="50" fill="#1A1714" text-anchor="middle">низкая оценка</text><text x="87" y="68" fill="#1A1714" text-anchor="middle">в сегменте Б</text></g>
+          <g transform="translate(892,97)"><line x1="0" y1="0" x2="16" y2="0" stroke="#1A1714" stroke-width="2"/><polygon points="16,-5 26,0 16,5" fill="#1A1714"/></g>
+          <g transform="translate(920,62)"><rect width="174" height="78" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.4"/><text x="87" y="26" font-family="JetBrains Mono" font-size="11" fill="#D62219" text-anchor="middle">ВЫВОД</text><text x="87" y="50" fill="#1A1714" text-anchor="middle">проседает только</text><text x="87" y="68" fill="#1A1714" text-anchor="middle">один сегмент</text></g>
+          <g transform="translate(1096,97)"><line x1="0" y1="0" x2="16" y2="0" stroke="#D62219" stroke-width="2.4"/><polygon points="16,-6 28,0 16,6" fill="#D62219"/></g>
+          <g transform="translate(1124,62)"><rect width="174" height="78" fill="#EFEBE7" stroke="#D62219" stroke-width="2.2"/><text x="87" y="26" font-family="JetBrains Mono" font-size="11" fill="#D62219" text-anchor="middle">РЕШЕНИЕ</text><text x="87" y="50" font-weight="600" fill="#1A1714" text-anchor="middle">частная практика</text><text x="87" y="68" font-weight="600" fill="#1A1714" text-anchor="middle">или системная?</text></g>
+        </g>
+
+        <!-- связи пласт2→пласт3 -->
+        <g stroke="#D62219" stroke-width="2" fill="#D62219" stroke-dasharray="5 4">
+          <line x1="418" y1="232" x2="418" y2="182"/>
+          <line x1="672" y1="232" x2="672" y2="182"/>
+          <line x1="966" y1="232" x2="966" y2="182"/>
+        </g>
+
+        <!-- ===== ПЛАСТ 2 (середина): МЕТАФАЙЛ ===== -->
+        <text x="20" y="280" font-family="Unbounded" font-weight="800" font-size="26" fill="#1A1714">МЕТА-</text>
+        <text x="20" y="310" font-family="Unbounded" font-weight="800" font-size="26" fill="#1A1714">ФАЙЛ</text>
+        <text x="20" y="340" font-family="Inter Tight" font-size="15" fill="#6E6963">.txt со</text>
+        <text x="20" y="360" font-family="Inter Tight" font-size="15" fill="#6E6963">связями</text>
+        <rect x="300" y="232" width="1020" height="118" fill="#1A1714"/>
+        <g font-family="JetBrains Mono" font-size="14">
+          <circle cx="418" cy="286" r="11" fill="#D62219"/>
+          <circle cx="672" cy="286" r="11" fill="#D62219"/>
+          <circle cx="966" cy="286" r="11" fill="#D62219"/>
+          <circle cx="1222" cy="286" r="11" fill="#D62219"/>
+          <g stroke="#EFEBE7" stroke-width="2">
+            <line x1="429" y1="286" x2="661" y2="286"/>
+            <line x1="683" y1="286" x2="955" y2="286"/>
+            <line x1="977" y1="286" x2="1211" y2="286"/>
+          </g>
+          <text x="545" y="270" fill="#B8B3AD" text-anchor="middle">ведёт к</text>
+          <text x="819" y="270" fill="#B8B3AD" text-anchor="middle">ведёт к</text>
+          <text x="1094" y="270" fill="#B8B3AD" text-anchor="middle">ведёт к</text>
+        </g>
+        <text x="810" y="332" font-family="Inter Tight" font-size="15" fill="#B8B3AD" text-anchor="middle">машина предлагает новую связь, в файл она попадает после твоего «да»</text>
+
+        <!-- связи пласт1→пласт2 -->
+        <g stroke="#9A958E" stroke-width="1.8" fill="#9A958E" stroke-dasharray="4 3">
+          <line x1="418" y1="418" x2="418" y2="350"/>
+          <line x1="672" y1="418" x2="672" y2="350"/>
+          <line x1="966" y1="418" x2="966" y2="350"/>
+          <line x1="1222" y1="418" x2="1222" y2="350"/>
+        </g>
+
+        <!-- ===== ПЛАСТ 1 (низ): ДАННЫЕ ===== -->
+        <text x="20" y="476" font-family="Unbounded" font-weight="800" font-size="26" fill="#9A958E">ДАННЫЕ</text>
+        <text x="20" y="506" font-family="Inter Tight" font-size="15" fill="#9A958E">озеро:</text>
+        <text x="20" y="526" font-family="Inter Tight" font-size="15" fill="#9A958E">сотни опросов</text>
+        <rect x="300" y="418" width="1020" height="150" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.8"/>
+        <g font-family="JetBrains Mono" font-size="13" text-anchor="middle">
+          <g transform="translate(336,444)"><rect width="150" height="34" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2"/><text x="75" y="22" fill="#9A958E">опрос #142</text></g>
+          <g transform="translate(516,490)"><rect width="150" height="34" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2"/><text x="75" y="22" fill="#9A958E">анкета Q3</text></g>
+          <g transform="translate(700,444)"><rect width="140" height="34" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2"/><text x="70" y="22" fill="#9A958E">волна 3</text></g>
+          <g transform="translate(880,494)"><rect width="150" height="34" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2"/><text x="75" y="22" fill="#9A958E">сегмент Б</text></g>
+          <g transform="translate(1070,446)"><rect width="160" height="34" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2"/><text x="80" y="22" fill="#9A958E">гистограмма</text></g>
+          <g transform="translate(1150,498)"><rect width="150" height="34" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2"/><text x="75" y="22" fill="#9A958E">ответы NPS</text></g>
+        </g>
+        <text x="700" y="556" font-family="Inter Tight" font-size="14" fill="#9A958E" text-anchor="middle">сами по себе факты лежат без связи</text>
+
+      </svg>
+    </div>
+
+    <!-- RULE: финал -->
+    <div class="rule">
+      <div class="mark">!</div>
+      <div class="label">Итог</div>
+      <div class="body">
+        Озеро без метафайлов это склад фактов. Метафайл поверх него превращает факты в цепочку к решению.
+        <strong>Для работы в логике И_И_ нужны и данные, и связи между ними.</strong>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  document.fonts.ready.then(() => { document.body.dataset.fontsReady = "1"; });
+</script>
+</body>
+</html>

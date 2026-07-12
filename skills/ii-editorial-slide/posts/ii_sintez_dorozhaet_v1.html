@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Синтетическое мышление дорожает — editorial</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#EFEBE7; --ink:#1A1714; --red:#D62219; --muted:#B8B3AD; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body { background: var(--paper); font-family: 'Inter Tight', system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .slide { width: 1600px; height: 1200px; position: relative; overflow: hidden; background: var(--paper); }
+  .bg { position: absolute; inset: 0; z-index: 0; }
+  .bg .marks { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; opacity: 0.85; }
+  .layer { position: absolute; inset: 0; z-index: 2; padding: 58px 80px 60px 80px; display: grid; grid-template-rows: auto 1fr auto; row-gap: 18px; }
+  .header { display: block; }
+  .title-block { position: relative; padding-left: 26px; }
+  .title-block::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 12px; width: 6px; background: var(--red); }
+  .topline { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--red); margin-bottom: 10px; }
+  h1 { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 64px; line-height: 1.04; letter-spacing: -0.02em; text-transform: uppercase; color: var(--ink); }
+  h1 .dot { color: var(--red); }
+  .scheme { position: relative; display: flex; align-items: center; justify-content: center; }
+  .scheme svg { width: 100%; max-width: 1440px; height: auto; }
+  .rule { border: 1.5px solid var(--ink); padding: 22px 30px; display: grid; grid-template-columns: 60px auto; gap: 26px; align-items: center; background: var(--paper); }
+  .rule .mark { width: 54px; height: 54px; border: 2px solid var(--red); border-radius: 50%; display: grid; place-items: center; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 24px; color: var(--red); }
+  .rule .body { font-size: 19px; line-height: 1.45; }
+  .rule .body strong { font-weight: 700; color: var(--red); }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="bg">
+    <img class="marks" src="../backgrounds/10_radar_red.png" alt="">
+  </div>
+
+  <div class="layer">
+
+    <div class="header">
+      <div class="title-block">
+        <div class="topline">PAPER PLANES · И_И_ · сдвиг компетенций</div>
+        <h1>Синтетическое<br>мышление дорожает<span class="dot">.</span></h1>
+      </div>
+    </div>
+
+    <div class="scheme">
+      <svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- ЛЕВО: ВЕК МАШИН — анализ дробит целое на части -->
+        <text x="20" y="24" font-family="Unbounded" font-weight="700" font-size="15" fill="#9A958E" letter-spacing="1">ВЕК МАШИН · АНАЛИЗ</text>
+        <text x="20" y="52" font-family="Inter Tight" font-size="17" fill="#1A1714" font-weight="500">Чтобы понять целое, его дробят на части</text>
+
+        <rect x="120" y="92" width="320" height="74" fill="#EFEBE7" stroke="#1A1714" stroke-width="2"/>
+        <text x="280" y="137" font-family="Unbounded" font-weight="800" font-size="22" fill="#1A1714" text-anchor="middle">ЗАДАЧА ЦЕЛИКОМ</text>
+
+        <line x1="280" y1="166" x2="280" y2="224" stroke="#1A1714" stroke-width="2"/>
+        <polygon points="280,232 271,218 289,218" fill="#1A1714"/>
+
+        <g>
+          <rect x="60" y="248" width="86" height="56" fill="#EFEBE7" stroke="#9A958E" stroke-width="2"/>
+          <rect x="164" y="248" width="86" height="56" fill="#EFEBE7" stroke="#9A958E" stroke-width="2"/>
+          <rect x="268" y="248" width="86" height="56" fill="#EFEBE7" stroke="#9A958E" stroke-width="2"/>
+          <rect x="372" y="248" width="86" height="56" fill="#EFEBE7" stroke="#9A958E" stroke-width="2"/>
+          <rect x="112" y="324" width="86" height="56" fill="#EFEBE7" stroke="#9A958E" stroke-width="2"/>
+          <rect x="216" y="324" width="86" height="56" fill="#EFEBE7" stroke="#9A958E" stroke-width="2"/>
+          <rect x="320" y="324" width="86" height="56" fill="#EFEBE7" stroke="#9A958E" stroke-width="2"/>
+        </g>
+        <text x="259" y="420" font-family="JetBrains Mono" font-size="14" fill="#9A958E" text-anchor="middle">элементарные операции</text>
+
+        <rect x="60" y="452" width="398" height="96" fill="none" stroke="#D62219" stroke-width="2" stroke-dasharray="4 5"/>
+        <text x="80" y="486" font-family="Unbounded" font-weight="700" font-size="15" fill="#D62219">ИИ забирает эти операции</text>
+        <text x="80" y="516" font-family="Inter Tight" font-size="16" fill="#1A1714">собрать данные, разложить на факторы,</text>
+        <text x="80" y="538" font-family="Inter Tight" font-size="16" fill="#1A1714">посчитать, свести, сверить</text>
+
+        <!-- разделитель -->
+        <line x1="720" y1="20" x2="720" y2="560" stroke="#1A1714" stroke-width="1.2" stroke-dasharray="4 5"/>
+
+        <!-- ПРАВО: ВЕК СИСТЕМ — синтез собирает части в целое -->
+        <text x="770" y="24" font-family="Unbounded" font-weight="700" font-size="15" fill="#D62219" letter-spacing="1">ВЕК СИСТЕМ · СИНТЕЗ</text>
+        <text x="770" y="52" font-family="Inter Tight" font-size="17" fill="#1A1714" font-weight="500">Из частей собирают работающее целое</text>
+
+        <!-- разрозненные узлы внизу -->
+        <g fill="#9A958E">
+          <circle cx="820" cy="430" r="11"/>
+          <circle cx="960" cy="470" r="11"/>
+          <circle cx="1100" cy="430" r="11"/>
+          <circle cx="1250" cy="460" r="11"/>
+          <circle cx="900" cy="380" r="11"/>
+          <circle cx="1180" cy="380" r="11"/>
+        </g>
+        <text x="1030" y="540" font-family="JetBrains Mono" font-size="14" fill="#9A958E" text-anchor="middle">разрозненные части</text>
+
+        <!-- стрелки сборки вверх -->
+        <g stroke="#D62219" stroke-width="2" fill="none" opacity="0.85">
+          <path d="M840 418 C 900 340, 980 300, 1040 250"/>
+          <path d="M1090 418 C 1060 340, 1050 300, 1050 252"/>
+          <path d="M1190 372 C 1130 320, 1090 290, 1055 252"/>
+          <path d="M915 372 C 980 320, 1010 300, 1045 252"/>
+        </g>
+
+        <!-- собранная система вверху: связанный граф -->
+        <g>
+          <line x1="1000" y1="150" x2="1100" y2="130" stroke="#D62219" stroke-width="2.4"/>
+          <line x1="1100" y1="130" x2="1170" y2="185" stroke="#D62219" stroke-width="2.4"/>
+          <line x1="1170" y1="185" x2="1050" y2="220" stroke="#D62219" stroke-width="2.4"/>
+          <line x1="1050" y1="220" x2="1000" y2="150" stroke="#D62219" stroke-width="2.4"/>
+          <line x1="1000" y1="150" x2="1170" y2="185" stroke="#D62219" stroke-width="2.4"/>
+          <circle cx="1000" cy="150" r="13" fill="#D62219"/>
+          <circle cx="1100" cy="130" r="13" fill="#D62219"/>
+          <circle cx="1170" cy="185" r="13" fill="#D62219"/>
+          <circle cx="1050" cy="220" r="13" fill="#D62219"/>
+        </g>
+        <text x="1085" y="100" font-family="Unbounded" font-weight="800" font-size="20" fill="#1A1714" text-anchor="middle">СИСТЕМА</text>
+
+      </svg>
+    </div>
+
+    <div class="rule">
+      <div class="mark">!</div>
+      <div class="body">Чем лучше машина делает аналитическую работу, тем дороже человеческий синтез. <strong>Контент-заводы, ИИ-аватары и агенты не система сами по себе.</strong> Чтобы они работали, синтетическое мышление развивают по всей организации.</div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  document.fonts.ready.then(() => { document.body.dataset.fontsReady = "1"; });
+</script>
+</body>
+</html>

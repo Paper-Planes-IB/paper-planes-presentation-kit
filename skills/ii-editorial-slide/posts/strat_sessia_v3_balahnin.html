@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#F8F5ED; --ink:#1A1714; --red:#E84A38; --muted:#9A958E; --grid:rgba(184,179,173,0.20); }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--paper); font-family:'Inter Tight',sans-serif; color:var(--ink); -webkit-font-smoothing:antialiased; }
+  .slide { width:1720px; height:1020px; position:relative; overflow:hidden; padding:52px 60px 52px;
+    background-color:var(--paper);
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:48px 48px; }
+  .eyebrow { font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--red); margin-bottom:8px; }
+  h1 { font-family:'Oswald'; font-weight:700; font-size:56px; line-height:1.0; text-transform:uppercase; letter-spacing:-0.01em; }
+  h1 .r { color:var(--red); }
+  .sub { font-family:'Inter Tight'; font-weight:500; font-size:21px; color:#555049; margin-top:8px; }
+  .cols { display:grid; grid-template-columns:500px 1fr; gap:30px; margin-top:30px; height:790px; }
+  .panel { border:1.5px solid var(--ink); border-radius:3px; padding:28px 30px; display:flex; flex-direction:column; }
+  .pnum { display:flex; align-items:center; gap:16px; margin-bottom:20px; }
+  .pnum .n { width:52px; height:52px; background:var(--ink); color:var(--paper); font-family:'Oswald'; font-weight:700; font-size:26px; display:grid; place-items:center; }
+  .pnum .t { font-family:'Oswald'; font-weight:700; font-size:27px; text-transform:uppercase; line-height:1.05; }
+  .people { display:flex; justify-content:center; margin:8px 0 14px; }
+  .vector { text-align:center; font-family:'Oswald'; font-weight:600; font-size:20px; text-transform:uppercase; margin-bottom:20px; }
+  .vector .r { color:var(--red); }
+  .check { list-style:none; }
+  .check li { display:flex; align-items:center; gap:14px; padding:14px 2px; border-bottom:1px solid rgba(154,149,142,0.3); font-size:19px; }
+  .check li:last-child { border-bottom:none; }
+  .check .box { width:18px; height:18px; border:2px solid var(--ink); flex:0 0 auto; }
+  .check li.acc .box { border-color:var(--red); background:var(--red); }
+  .check li.acc { font-weight:600; }
+  .rule { margin-top:auto; border:1.5px solid var(--ink); padding:16px 20px; display:flex; align-items:center; gap:16px; }
+  .rule .m { width:42px; height:42px; flex:0 0 auto; border:2px solid var(--red); border-radius:50%; display:grid; place-items:center; font-family:'Oswald'; font-weight:700; font-size:25px; color:var(--red); }
+  .rule .b { font-size:17.5px; line-height:1.34; }
+  .rule .b strong { color:var(--red); font-weight:600; }
+  .schemeSvg { width:100%; height:auto; }
+  .lane { display:grid; grid-template-columns:repeat(6,1fr); gap:0; margin-top:6px; }
+  .lcap { text-align:center; font-family:'Inter Tight'; font-weight:600; font-size:16px; margin-bottom:12px; }
+  .lcap .r { color:var(--red); }
+  .step { padding:0 11px; text-align:center; }
+  .step .dot { width:12px; height:12px; border:2px solid var(--red); border-radius:50%; margin:0 auto 10px; }
+  .step .tx { font-size:13px; line-height:1.28; color:#3a352f; }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="eyebrow">ILYA BALAHNIN · стратегическая сессия</div>
+  <h1>Кого позвать на стратегическую сессию<span class="r">,</span></h1>
+  <div class="sub">чтобы стратегия потом не затормозила на внедрении</div>
+
+  <div class="cols">
+
+    <!-- 01 -->
+    <div class="panel">
+      <div class="pnum"><div class="n">01</div><div class="t">Кто выбирает<br>направление</div></div>
+      <div class="people">
+        <svg width="380" height="104" viewBox="0 0 380 104" fill="none">
+          <g stroke="#1A1714" stroke-width="3">
+            <circle cx="78" cy="32" r="20"/><path d="M44 100 C44 72 112 72 112 100"/>
+            <circle cx="190" cy="26" r="24"/><path d="M148 100 C148 66 232 66 232 100"/>
+            <circle cx="302" cy="32" r="20"/><path d="M268 100 C268 72 336 72 336 100"/>
+          </g>
+          <path d="M190 52 l8 13 -8 13 -8 -13 z" fill="#E84A38"/>
+        </svg>
+      </div>
+      <div class="vector">Задают <span class="r">вектор</span> и принимают <span class="r">решение</span></div>
+      <ul class="check">
+        <li class="acc"><span class="box"></span>Собственник</li>
+        <li class="acc"><span class="box"></span>Топ-команда</li>
+        <li><span class="box"></span>Приносят: сегмент, УТП, первые клиенты, пилот</li>
+      </ul>
+      <div class="rule"><div class="m">!</div><div class="b">У них есть <strong>право выбрать направление развития</strong></div></div>
+    </div>
+
+    <!-- 02 -->
+    <div class="panel">
+      <div class="pnum"><div class="n">02</div><div class="t">Кто доведёт<br>до исполнения</div></div>
+
+      <svg class="schemeSvg" viewBox="0 0 1080 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="ar" markerWidth="11" markerHeight="11" refX="7" refY="5" orient="auto"><path d="M0 0 L9 5 L0 10 z" fill="#1A1714"/></marker>
+          <marker id="arR" markerWidth="11" markerHeight="11" refX="7" refY="5" orient="auto"><path d="M0 0 L9 5 L0 10 z" fill="#E84A38"/></marker>
+        </defs>
+
+        <!-- center -->
+        <circle cx="540" cy="250" r="98" fill="#F8F5ED" stroke="#E84A38" stroke-width="2.4"/>
+        <text x="540" y="244" text-anchor="middle" font-family="Oswald" font-weight="700" font-size="26" fill="#E84A38">НОВОЕ</text>
+        <text x="540" y="276" text-anchor="middle" font-family="Oswald" font-weight="700" font-size="26" fill="#E84A38">НАПРАВЛЕНИЕ</text>
+
+        <!-- arrows left: fan into circle -->
+        <g stroke="#1A1714" stroke-width="2.2">
+          <line x1="318" y1="92"  x2="446" y2="232" marker-end="url(#ar)"/>
+          <line x1="318" y1="250" x2="438" y2="250" marker-end="url(#ar)"/>
+          <line x1="318" y1="436" x2="446" y2="270" marker-end="url(#ar)"/>
+        </g>
+        <!-- arrows right: fan out of circle -->
+        <g stroke="#E84A38" stroke-width="2.2">
+          <line x1="634" y1="232" x2="752" y2="120" marker-end="url(#arR)"/>
+          <line x1="634" y1="270" x2="752" y2="392" marker-end="url(#arR)"/>
+        </g>
+
+        <!-- LEFT role 1: Юрист -->
+        <g>
+          <rect x="8" y="40" width="310" height="108" fill="#F8F5ED" stroke="#1A1714" stroke-width="1.6"/>
+          <rect x="8" y="40" width="8" height="108" fill="#E84A38"/>
+          <text x="30" y="74" font-family="Oswald" font-weight="700" font-size="22" fill="#1A1714">ЮРИСТ</text>
+          <text x="30" y="102" font-family="Inter Tight" font-size="16.5" fill="#3a352f">какую ответственность готовы</text>
+          <text x="30" y="124" font-family="Inter Tight" font-size="16.5" fill="#3a352f">взять и что готовы пообещать</text>
+          <text x="30" y="146" font-family="Inter Tight" font-size="16.5" fill="#3a352f">клиенту</text>
+        </g>
+        <!-- LEFT role 2: Финдиректор -->
+        <g>
+          <rect x="8" y="186" width="310" height="128" fill="#F8F5ED" stroke="#1A1714" stroke-width="1.6"/>
+          <rect x="8" y="186" width="8" height="128" fill="#E84A38"/>
+          <text x="30" y="218" font-family="Oswald" font-weight="700" font-size="22" fill="#1A1714">ФИНАНСОВЫЙ ДИРЕКТОР</text>
+          <text x="30" y="246" font-family="Inter Tight" font-size="16.5" fill="#3a352f">что признавать выручкой, какие</text>
+          <text x="30" y="268" font-family="Inter Tight" font-size="16.5" fill="#3a352f">затраты относить на исполнение,</text>
+          <text x="30" y="290" font-family="Inter Tight" font-size="16.5" fill="#3a352f">какой документ закрывает этап</text>
+        </g>
+        <!-- LEFT role 3: IT -->
+        <g>
+          <rect x="8" y="392" width="310" height="92" fill="#F8F5ED" stroke="#1A1714" stroke-width="1.6"/>
+          <rect x="8" y="392" width="8" height="92" fill="#E84A38"/>
+          <text x="30" y="424" font-family="Oswald" font-weight="700" font-size="22" fill="#1A1714">IT И ДАННЫЕ</text>
+          <text x="30" y="452" font-family="Inter Tight" font-size="16.5" fill="#3a352f">данные для сервиса,</text>
+          <text x="30" y="474" font-family="Inter Tight" font-size="16.5" fill="#3a352f">которого раньше не было</text>
+        </g>
+
+        <!-- RIGHT role 1: Поставщики -->
+        <g>
+          <rect x="752" y="56" width="320" height="116" fill="#F8F5ED" stroke="#E84A38" stroke-width="2"/>
+          <rect x="752" y="56" width="8" height="116" fill="#E84A38"/>
+          <text x="776" y="90" font-family="Oswald" font-weight="700" font-size="21" fill="#1A1714">ВЫБОР ПОСТАВЩИКОВ</text>
+          <text x="776" y="120" font-family="Inter Tight" font-size="16.5" fill="#3a352f">кто отвечает за выбор</text>
+          <text x="776" y="142" font-family="Inter Tight" font-size="16.5" fill="#3a352f">поставщиков</text>
+        </g>
+        <!-- RIGHT role 2: Владелец результата -->
+        <g>
+          <rect x="752" y="332" width="320" height="152" fill="#F8F5ED" stroke="#E84A38" stroke-width="2"/>
+          <rect x="752" y="332" width="8" height="152" fill="#E84A38"/>
+          <text x="776" y="366" font-family="Oswald" font-weight="700" font-size="21" fill="#1A1714">ВЛАДЕЛЕЦ РЕЗУЛЬТАТА</text>
+          <text x="776" y="394" font-family="Inter Tight" font-size="16.5" fill="#3a352f">менять срок, просить замену,</text>
+          <text x="776" y="416" font-family="Inter Tight" font-size="16.5" fill="#3a352f">видеть статус и фактическое</text>
+          <text x="776" y="438" font-family="Inter Tight" font-size="16.5" fill="#3a352f">исполнение, получать документ,</text>
+          <text x="776" y="460" font-family="Inter Tight" font-size="16.5" fill="#3a352f">которым клиент подтверждает работу</text>
+        </g>
+      </svg>
+
+      <!-- bottom lane -->
+      <div class="lcap" style="margin-top:8px;">Отвечают за то, <span class="r">как</span> и <span class="r">на каких условиях</span> внедряем решение</div>
+      <div class="lane">
+        <div class="step"><div class="dot"></div><div class="tx">кто обещает результат и берёт ответственность</div></div>
+        <div class="step"><div class="dot"></div><div class="tx">каким документом закрывается этап</div></div>
+        <div class="step"><div class="dot"></div><div class="tx">как считать затраты на исполнение</div></div>
+        <div class="step"><div class="dot"></div><div class="tx">кто меняет поставщика, срок или данные</div></div>
+        <div class="step"><div class="dot"></div><div class="tx">без согласования по кругу</div></div>
+        <div class="step"><div class="dot"></div><div class="tx">решение в договор, оплату и пилот</div></div>
+      </div>
+
+      <div class="rule"><div class="m">!</div><div class="b">Звать <strong>не для статуса</strong>, а в тот блок, где решение ещё можно уточнить — до того как оно станет заявкой в юротдел, спором о выручке или срочной задачей для IT</div></div>
+    </div>
+
+  </div>
+</div>
+<script>document.fonts.ready.then(()=>{document.body.dataset.fontsReady="1";});</script>
+</body>
+</html>

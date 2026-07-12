@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>QA-агент — editorial v1</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#EFEBE7; --ink:#1A1714; --red:#D62219; --muted:#B8B3AD; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body { background: var(--paper); font-family: 'Inter Tight', system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .slide { width: 1600px; height: 1200px; position: relative; overflow: hidden; background: var(--paper); }
+  .bg { position: absolute; inset: 0; z-index: 0; }
+  .bg .marks { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; }
+  .layer { position: absolute; inset: 0; z-index: 2; padding: 58px 80px 0 80px; display: grid; grid-template-rows: auto 1fr auto; row-gap: 16px; }
+  .header { display: block; margin-bottom: 2px; }
+  .title-block { position: relative; padding-left: 26px; }
+  .title-block::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 12px; width: 6px; background: var(--red); }
+  .topline { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--red); margin-bottom: 10px; }
+  h1 { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 96px; line-height: 1.0; letter-spacing: -0.02em; text-transform: uppercase; color: var(--ink); }
+  h1 .dot { color: var(--red); }
+  .scheme { position: relative; display: flex; align-items: center; justify-content: center; }
+  .scheme svg { width: 100%; max-width: 1440px; height: auto; }
+  .rule { margin: 0 0 84px 0; border: 1.5px solid var(--ink); padding: 22px 28px; display: grid; grid-template-columns: 60px auto 1fr; gap: 28px; align-items: center; background: var(--paper); box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
+  .rule .mark { width: 56px; height: 56px; border: 2px solid var(--red); border-radius: 50%; display: grid; place-items: center; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 32px; color: var(--red); }
+  .rule .label { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; position: relative; padding-left: 16px; white-space: nowrap; }
+  .rule .label::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background: var(--red); }
+  .rule .body { font-size: 17px; line-height: 1.5; }
+  .rule .body strong { font-weight: 700; color: var(--red); }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="bg">
+    <img class="marks" src="../backgrounds/07_red_bar_right.png" alt="">
+  </div>
+
+  <div class="layer">
+
+    <div class="header">
+      <div class="title-block">
+        <div class="topline">PP.MEDIA · И_И_ · контур «делай» · проверка</div>
+        <h1>QA-агент<span class="dot">.</span></h1>
+      </div>
+    </div>
+
+    <div class="scheme">
+      <svg viewBox="0 0 1440 540" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- ============ НОРМАТИВ (эталон, кормит гейт) ============ -->
+        <rect x="468" y="16" width="384" height="78" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.6"/>
+        <text x="660" y="44" font-family="Unbounded" font-weight="800" font-size="15" fill="#D62219" text-anchor="middle" letter-spacing="0.5">НОРМАТИВ · ЭТАЛОН</text>
+        <text x="660" y="72" font-family="JetBrains Mono" font-size="13" fill="#1A1714" text-anchor="middle">обязательные блоки · стандарт · запреты</text>
+        <line x1="660" y1="94" x2="660" y2="148" stroke="#1A1714" stroke-width="1.6"/>
+        <polygon points="655,148 665,148 660,158" fill="#1A1714"/>
+
+        <!-- ============ АРТЕФАКТ (вход) ============ -->
+        <rect x="60" y="172" width="216" height="132" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.8"/>
+        <g stroke="#9A958E" stroke-width="2">
+          <line x1="92" y1="200" x2="244" y2="200"/>
+          <line x1="92" y1="218" x2="244" y2="218"/>
+          <line x1="92" y1="236" x2="206" y2="236"/>
+        </g>
+        <text x="168" y="272" font-family="Unbounded" font-weight="800" font-size="16" fill="#1A1714" text-anchor="middle">АРТЕФАКТ</text>
+        <text x="168" y="292" font-family="JetBrains Mono" font-size="12" fill="#6E6963" text-anchor="middle">готовый результат</text>
+
+        <!-- стрелка артефакт → гейт -->
+        <g stroke="#1A1714" stroke-width="2.2" fill="#1A1714">
+          <line x1="276" y1="238" x2="456" y2="238"/>
+          <polygon points="456,232 468,238 456,244"/>
+        </g>
+
+        <!-- ============ QA-ГЕЙТ ============ -->
+        <rect x="468" y="160" width="384" height="180" fill="#EFEBE7" stroke="#1A1714" stroke-width="2.4"/>
+        <text x="660" y="190" font-family="Unbounded" font-weight="900" font-size="18" fill="#1A1714" text-anchor="middle" letter-spacing="0.5">QA-АГЕНТ · ГЕЙТ</text>
+        <text x="660" y="212" font-family="Inter Tight" font-size="13" fill="#6E6963" text-anchor="middle">сверка с нормативом, пункт за пунктом</text>
+
+        <!-- строки сверки -->
+        <g font-family="Inter Tight" font-size="15" fill="#1A1714">
+          <!-- ok -->
+          <circle cx="502" cy="244" r="11" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.6"/>
+          <path d="M496 244 L500 248 L508 239" stroke="#1A1714" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="524" y="249">обязательные блоки на месте</text>
+          <!-- ok -->
+          <circle cx="502" cy="278" r="11" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.6"/>
+          <path d="M496 278 L500 282 L508 273" stroke="#1A1714" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="524" y="283">стандарт соблюдён</text>
+          <!-- fail -->
+          <circle cx="502" cy="312" r="11" fill="#EFEBE7" stroke="#D62219" stroke-width="1.6"/>
+          <path d="M497 307 L507 317 M507 307 L497 317" stroke="#D62219" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <text x="524" y="317" fill="#D62219">есть запрещённое</text>
+        </g>
+
+        <!-- ============ РАЗВИЛКА: ПРОШЁЛ / ВОЗВРАТ ============ -->
+        <!-- стрелки из гейта -->
+        <g stroke="#1A1714" stroke-width="2.2" fill="#1A1714">
+          <line x1="852" y1="206" x2="1002" y2="200"/>
+          <polygon points="1002,194 1014,200 1002,206"/>
+        </g>
+        <g stroke="#D62219" stroke-width="2.2" fill="#D62219">
+          <line x1="852" y1="296" x2="1002" y2="300"/>
+          <polygon points="1002,294 1014,300 1002,306"/>
+        </g>
+
+        <!-- ПРОШЁЛ -->
+        <rect x="1014" y="166" width="360" height="74" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.8"/>
+        <circle cx="1052" cy="203" r="15" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.8"/>
+        <path d="M1044 203 L1050 209 L1061 196" stroke="#1A1714" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="1086" y="198" font-family="Unbounded" font-weight="800" font-size="15" fill="#1A1714">ПРОШЁЛ</text>
+        <text x="1086" y="220" font-family="Inter Tight" font-size="13" fill="#6E6963">уходит в выпуск</text>
+
+        <!-- ВОЗВРАТ -->
+        <rect x="1014" y="262" width="360" height="86" fill="#EFEBE7" stroke="#D62219" stroke-width="1.8"/>
+        <circle cx="1052" cy="305" r="15" fill="#EFEBE7" stroke="#D62219" stroke-width="1.8"/>
+        <path d="M1046 299 L1058 311 M1058 299 L1046 311" stroke="#D62219" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        <text x="1086" y="298" font-family="Unbounded" font-weight="800" font-size="15" fill="#D62219">ВОЗВРАТ С ПОМЕТКОЙ</text>
+        <text x="1086" y="320" font-family="Inter Tight" font-size="13" fill="#6E6963">где не сошлось и почему</text>
+
+        <!-- петля доработки: возврат → обратно в артефакт -->
+        <g stroke="#D62219" stroke-width="2" fill="#D62219">
+          <path d="M1014 332 L168 332 L168 308" fill="none"/>
+          <polygon points="163,308 173,308 168,298"/>
+        </g>
+        <rect x="520" y="322" width="280" height="20" fill="#EFEBE7"/>
+        <text x="660" y="337" font-family="JetBrains Mono" font-size="12" fill="#D62219" text-anchor="middle">исправить и проверить заново</text>
+
+        <!-- ============ НИЗ: ИЗ ЧЕГО СОБРАН QA-АГЕНТ ============ -->
+        <text x="0" y="392" font-family="Unbounded" font-weight="700" font-size="11" fill="#D62219" letter-spacing="1.5">ИЗ ЧЕГО СОБРАН QA-АГЕНТ</text>
+
+        <g transform="translate(0, 402)" font-family="Inter Tight">
+          <g transform="translate(0,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">01</text>
+            <text x="60" y="30" font-family="Unbounded" font-weight="800" font-size="12" fill="#1A1714" letter-spacing="0.3">НОРМАТИВ</text>
+            <text x="60" y="60" font-size="13" fill="#1A1714">что считается хорошим:</text>
+            <text x="60" y="80" font-size="13" fill="#1A1714">обязательные блоки,</text>
+            <text x="60" y="100" font-size="13" fill="#1A1714">стандарты, запреты</text>
+          </g>
+          <g transform="translate(365,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">02</text>
+            <text x="60" y="30" font-family="Unbounded" font-weight="800" font-size="12" fill="#1A1714" letter-spacing="0.3">СВЕРКА</text>
+            <text x="60" y="60" font-size="13" fill="#1A1714">артефакт проверяют</text>
+            <text x="60" y="80" font-size="13" fill="#1A1714">по нормативу,</text>
+            <text x="60" y="100" font-size="13" fill="#1A1714">пункт за пунктом</text>
+          </g>
+          <g transform="translate(730,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">03</text>
+            <text x="60" y="30" font-family="Unbounded" font-weight="800" font-size="12" fill="#1A1714" letter-spacing="0.3">ВЕРДИКТ С ПОМЕТКОЙ</text>
+            <text x="60" y="60" font-size="13" fill="#1A1714">где не сошлось</text>
+            <text x="60" y="80" font-size="13" fill="#1A1714">и почему,</text>
+            <text x="60" y="100" font-size="13" fill="#1A1714">без общего «плохо»</text>
+          </g>
+          <g transform="translate(1095,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">04</text>
+            <text x="60" y="30" font-family="Unbounded" font-weight="800" font-size="12" fill="#1A1714" letter-spacing="0.3">ВЛАДЕЛЕЦ И СРОК</text>
+            <text x="60" y="60" font-size="13" fill="#1A1714">за правило кто-то</text>
+            <text x="60" y="80" font-size="13" fill="#1A1714">отвечает; без обновления</text>
+            <text x="60" y="100" font-size="13" fill="#1A1714">90 дней оно устаревает</text>
+          </g>
+        </g>
+
+      </svg>
+    </div>
+
+    <!-- RULE: финал -->
+    <div class="rule">
+      <div class="mark">!</div>
+      <div class="label">Итог</div>
+      <div class="body">
+        Норматив в голове проверяет один человек и непостоянно.
+        <strong>Норматив, ставший кодом, проверяет каждый артефакт одинаково и не устаёт.</strong>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  document.fonts.ready.then(() => { document.body.dataset.fontsReady = "1"; });
+</script>
+</body>
+</html>

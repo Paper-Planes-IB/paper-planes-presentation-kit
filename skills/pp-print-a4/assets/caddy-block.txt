@@ -1,0 +1,35 @@
+# Caddy-блок для гайдбука Paper Planes на PPM-VPS (72.56.234.191).
+# Замени NAME на имя гайда (bk, azbuka, admin, ...). Добавь оба блока в
+# /etc/caddy/Caddyfile, затем:
+#   ssh ppm-vps "caddy validate --config /etc/caddy/Caddyfile && systemctl reload caddy"
+#
+# Файлы лежат в /var/www/NAME-guide/:
+#   index.html          — редактируемая HTML-версия (для коллег по ссылке)
+#   NAME-guide-print.pdf — печатный A4-PDF
+#
+# Красивый домен NAME-guide.paper-planes.ru требует A-записи
+#   NAME-guide → 72.56.234.191  в DNS-панели paper-planes.ru (ручной шаг).
+# sslip-версия NAME-guide.72-56-234-191.sslip.io работает сразу, без DNS.
+
+NAME-guide.paper-planes.ru {
+	root * /var/www/NAME-guide
+	encode zstd gzip
+	try_files {path} {path}/index.html =404
+	file_server
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		Cache-Control "no-cache, must-revalidate"
+	}
+}
+
+NAME-guide.72-56-234-191.sslip.io {
+	root * /var/www/NAME-guide
+	encode zstd gzip
+	try_files {path} {path}/index.html =404
+	file_server
+	header {
+		X-Content-Type-Options "nosniff"
+		Cache-Control "no-cache, must-revalidate"
+	}
+}

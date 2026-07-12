@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Виды коллекта — editorial v1</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#EFEBE7; --ink:#1A1714; --red:#D62219; --muted:#B8B3AD; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body { background: var(--paper); font-family: 'Inter Tight', system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .slide { width: 1600px; height: 1200px; position: relative; overflow: hidden; background: var(--paper); }
+  .bg { position: absolute; inset: 0; z-index: 0; }
+  .bg .marks { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; }
+  .layer { position: absolute; inset: 0; z-index: 2; padding: 58px 80px 0 80px; display: grid; grid-template-rows: auto 1fr auto; row-gap: 16px; }
+  .header { display: block; margin-bottom: 2px; }
+  .title-block { position: relative; padding-left: 26px; }
+  .title-block::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 12px; width: 6px; background: var(--red); }
+  .topline { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--red); margin-bottom: 10px; }
+  h1 { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 88px; line-height: 1.0; letter-spacing: -0.02em; text-transform: uppercase; color: var(--ink); }
+  h1 .dot { color: var(--red); }
+  .scheme { position: relative; display: flex; align-items: center; justify-content: center; }
+  .scheme svg { width: 100%; max-width: 1440px; height: auto; }
+  .rule { margin: 0 0 78px 0; border: 1.5px solid var(--ink); padding: 22px 28px; display: grid; grid-template-columns: 60px auto 1fr; gap: 28px; align-items: center; background: var(--paper); box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
+  .rule .mark { width: 56px; height: 56px; border: 2px solid var(--red); border-radius: 50%; display: grid; place-items: center; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 30px; color: var(--red); }
+  .rule .label { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; position: relative; padding-left: 16px; white-space: nowrap; }
+  .rule .label::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background: var(--red); }
+  .rule .body { font-size: 17px; line-height: 1.5; }
+  .rule .body strong { font-weight: 700; color: var(--red); }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="bg">
+    <img class="marks" src="../backgrounds/10_radar_red.png" alt="">
+  </div>
+
+  <div class="layer">
+
+    <div class="header">
+      <div class="title-block">
+        <div class="topline">PP.MEDIA · И_И_ · контур «думай» · сбор</div>
+        <h1>Виды Collect<span class="dot">.</span></h1>
+      </div>
+    </div>
+
+    <div class="scheme">
+      <svg viewBox="0 0 1440 560" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- ============ 6 каналов в одну колонку (крупно) ============ -->
+        <g font-family="Inter Tight">
+          <g>
+            <rect x="0" y="6" width="510" height="78" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.8"/>
+            <text x="24" y="44" font-family="Unbounded" font-weight="800" font-size="18" fill="#1A1714">ВСТРЕЧИ И ПЕРЕГОВОРЫ</text>
+            <text x="24" y="70" font-family="JetBrains Mono" font-size="14" fill="#6E6963">созвоны → транскрибация → MCP → Codex</text>
+          </g>
+          <g>
+            <rect x="0" y="98" width="510" height="78" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.8"/>
+            <text x="24" y="136" font-family="Unbounded" font-weight="800" font-size="18" fill="#1A1714">ЛЕКЦИИ, ВЫСТУПЛЕНИЯ, МЫСЛИ</text>
+            <text x="24" y="162" font-family="JetBrains Mono" font-size="14" fill="#6E6963">умные очки + Voice Notes</text>
+          </g>
+          <g>
+            <rect x="0" y="190" width="510" height="78" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.8"/>
+            <text x="24" y="228" font-family="Unbounded" font-weight="800" font-size="18" fill="#1A1714">ЧТЕНИЕ КНИГ</text>
+            <text x="24" y="254" font-family="JetBrains Mono" font-size="14" fill="#6E6963">Readwise: хайлайты, теги, связи в графе Obsidian</text>
+          </g>
+          <g>
+            <rect x="0" y="282" width="510" height="78" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.8"/>
+            <text x="24" y="320" font-family="Unbounded" font-weight="800" font-size="18" fill="#1A1714">РУКОПИСНЫЕ ЗАМЕТКИ</text>
+            <text x="24" y="346" font-family="JetBrains Mono" font-size="14" fill="#6E6963">Remarkable → Obsidian → отчёт за день</text>
+          </g>
+          <g>
+            <rect x="0" y="374" width="510" height="78" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.8"/>
+            <text x="24" y="412" font-family="Unbounded" font-weight="800" font-size="18" fill="#1A1714">ДОП ИСТОЧНИКИ</text>
+            <text x="24" y="438" font-family="JetBrains Mono" font-size="14" fill="#6E6963">календарь · метрики из CRM</text>
+          </g>
+          <g>
+            <rect x="0" y="466" width="510" height="78" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.8"/>
+            <text x="24" y="504" font-family="Unbounded" font-weight="800" font-size="18" fill="#1A1714">МАТЕРИАЛЫ КОЛЛЕГ</text>
+            <text x="24" y="530" font-family="JetBrains Mono" font-size="14" fill="#6E6963">туннель → проходчики поднимают важное</text>
+          </g>
+        </g>
+
+        <!-- отводы к вертикальной шине -->
+        <g stroke="#B8B3AD" stroke-width="2.2">
+          <line x1="510" y1="45" x2="588" y2="45"/>
+          <line x1="510" y1="137" x2="588" y2="137"/>
+          <line x1="510" y1="229" x2="588" y2="229"/>
+          <line x1="510" y1="321" x2="588" y2="321"/>
+          <line x1="510" y1="413" x2="588" y2="413"/>
+          <line x1="510" y1="505" x2="588" y2="505"/>
+          <line x1="588" y1="45" x2="588" y2="505"/>
+        </g>
+
+        <!-- шина → COLLECT -->
+        <g stroke="#1A1714" stroke-width="3" fill="#1A1714">
+          <line x1="588" y1="275" x2="690" y2="275"/><polygon points="690,266 708,275 690,284"/>
+        </g>
+
+        <!-- ============ ХАБ COLLECT (крупный) ============ -->
+        <circle cx="838" cy="275" r="128" fill="#EFEBE7" stroke="#D62219" stroke-width="3.5"/>
+        <text x="838" y="285" font-family="Unbounded" font-weight="900" font-size="34" fill="#D62219" text-anchor="middle">COLLECT</text>
+
+        <!-- COLLECT → ОРГАНАЙЗ -->
+        <g stroke="#1A1714" stroke-width="3" fill="#1A1714">
+          <line x1="966" y1="275" x2="1118" y2="275"/><polygon points="1118,266 1136,275 1118,284"/>
+        </g>
+
+        <!-- ОРГАНАЙЗ (выход) -->
+        <rect x="1156" y="207" width="240" height="136" fill="#1A1714"/>
+        <text x="1276" y="285" font-family="Unbounded" font-weight="800" font-size="26" fill="#EFEBE7" text-anchor="middle">ORGANISE</text>
+
+      </svg>
+    </div>
+
+    <!-- RULE -->
+    <div class="rule">
+      <div class="mark">!</div>
+      <div class="label">Задача</div>
+      <div class="body">
+        Главная задача Collect — не пропустить сигнал.
+        <strong>У любой задачи должно быть множество каналов коллекта; помыслить их — значит начать работать над вашей системой.</strong>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  document.fonts.ready.then(() => { document.body.dataset.fontsReady = "1"; });
+</script>
+</body>
+</html>

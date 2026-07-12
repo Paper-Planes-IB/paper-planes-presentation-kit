@@ -1,0 +1,114 @@
+/* =========================================================================
+   УНИВЕРСАЛЬНЫЙ печатный слой A4 для ПРОИЗВОЛЬНОЙ HTML-вёрстки.
+   Не привязан к blueprint-классам — годится для лендингов, отчётов,
+   статей, любой чужой разметки. Вставить целиком в <style> страницы
+   (в конец, до мобильных @media) либо подключить отдельным <link media="print">.
+
+   Профиль blueprint-методички с вкладками — в print-blueprint.css.
+   Если у документа есть вкладки/таймлайн/глоссарий в фирстиле — бери тот.
+   ========================================================================= */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm 12mm;
+  }
+
+  /* Фоны и цвета печатаем как на экране */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Чистый белый фон, убираем зафиксированные фоновые подложки (косят PDF) */
+  html, body {
+    background: #fff !important;
+    background-image: none !important;
+    background-attachment: scroll !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 11pt;
+    line-height: 1.35;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Контейнер на всю ширину листа */
+  .container, .wrapper, .page, main, article {
+    max-width: 100% !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    float: none !important;
+  }
+
+  /* Прячем интерактив и навигацию, которым на бумаге нечего делать.
+     Свой элемент можно скрыть классом .no-print */
+  nav, .nav, .navbar, .menu, .sidebar, .toc,
+  header[role="banner"], .header-sticky, .sticky, .fixed,
+  .cookie, .cookie-banner, .popup, .modal, .overlay,
+  .share, .social, .breadcrumbs, .pagination,
+  button, .btn, .cta, form, input, select, textarea,
+  video, audio, iframe, .no-print, [data-no-print] {
+    display: none !important;
+  }
+
+  /* Фикс/стики ломают разбивку на страницы — распускаем в поток */
+  * {
+    position: static !important;
+  }
+
+  /* Заголовки не отрываются от своего текста и не висят в конце страницы */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    break-after: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  h1 { font-size: 22pt; }
+  h2 { font-size: 16pt; }
+  h3 { font-size: 13pt; }
+  p, li { orphans: 3; widows: 3; }
+
+  /* Не рвём по середине неделимые блоки */
+  img, figure, table, pre, blockquote,
+  tr, .card, .box, li {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Картинки и медиа — по ширине листа */
+  img, svg, canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Таблицы во всю ширину, перенос длинных слов, шапка повторяется на каждой странице */
+  table { width: 100% !important; border-collapse: collapse; table-layout: fixed; }
+  th, td { word-wrap: break-word; overflow-wrap: break-word; }
+  thead { display: table-header-group; }
+  tfoot  { display: table-footer-group; }
+
+  /* Многоколоночные сетки часто обрезаются по ширине A4 — в одну колонку.
+     Если нужно 2 колонки конкретному блоку — задай ему .print-2col */
+  .grid, .row, .columns, .flex, [class*="col-"] {
+    display: block !important;
+    width: 100% !important;
+    float: none !important;
+  }
+  .print-2col { column-count: 2; column-gap: 14px; }
+
+  /* Утилиты для ручного управления разрывами:
+     <div class="page-break"></div> — принудительная новая страница
+     class="avoid-break" — не разрывать элемент */
+  .page-break { page-break-before: always; break-before: page; }
+  .avoid-break { page-break-inside: avoid; break-inside: avoid; }
+
+  /* Ссылки печатаем как обычный текст. Хочешь показывать URL на бумаге —
+     раскомментируй блок ниже. */
+  a { color: inherit; text-decoration: none; }
+  /*
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 8pt; color: #666; word-break: break-all;
+  }
+  */
+}

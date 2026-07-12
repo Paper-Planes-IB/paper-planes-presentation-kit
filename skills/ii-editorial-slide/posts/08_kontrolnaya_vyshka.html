@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Контрольная вышка — editorial</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EFEBE7; --paper-dim: #E7E2DC;
+    --ink: #1A1714; --red: #D62219; --muted: #B8B3AD;
+    --grid-line: rgba(184, 179, 173, 0.35);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body {
+    background: var(--paper); font-family: 'Inter Tight', system-ui, sans-serif;
+    color: var(--ink); -webkit-font-smoothing: antialiased;
+  }
+  .slide {
+    width: 1600px; height: 1000px; padding: 56px 72px; position: relative;
+    display: grid; grid-template-columns: 380px 1fr; grid-template-rows: auto auto 1fr auto;
+    grid-template-areas: "header header" "intro steps" "intro diagram" "rule rule";
+    gap: 28px 52px;
+  }
+  .header { grid-area: header; display: flex; align-items: flex-start; gap: 24px; }
+  .red-bar { width: 64px; height: 4px; background: var(--red); margin-top: 18px; }
+  .title { font-family: 'Unbounded'; font-weight: 800; font-size: 76px; line-height: 0.95; letter-spacing: -1.5px; text-transform: uppercase; }
+  .title .accent { color: var(--red); }
+  .title-meta { margin-left: auto; font-family: 'JetBrains Mono'; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.6; text-align: right; }
+
+  .intro { grid-area: intro; padding-top: 8px; position: relative; }
+  .intro p { font-size: 17px; line-height: 1.55; margin-bottom: 18px; }
+  .intro p .red-word { color: var(--red); font-weight: 600; }
+  .target { position: absolute; bottom: 16px; left: 0; width: 120px; height: 120px; }
+
+  .steps { grid-area: steps; display: grid; grid-template-columns: repeat(5, 1fr); gap: 28px; align-items: start; }
+  .step { padding-top: 8px; border-top: 2px solid var(--ink); }
+  .step .num { font-family: 'Unbounded'; font-weight: 900; font-size: 36px; color: var(--red); line-height: 1; margin-bottom: 8px; }
+  .step .label { font-family: 'Unbounded'; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1.25; margin-bottom: 10px; }
+  .step .desc { font-size: 12.5px; line-height: 1.5; color: #4A4642; }
+
+  .diagram { grid-area: diagram; position: relative; }
+
+  .rule { grid-area: rule; border: 1.5px solid var(--ink); padding: 22px 28px; display: grid; grid-template-columns: 60px auto 1fr; gap: 28px; align-items: center; }
+  .rule .mark { width: 56px; height: 56px; border: 2px solid var(--red); border-radius: 50%; display: grid; place-items: center; font-family: 'Unbounded'; font-weight: 800; font-size: 32px; color: var(--red); }
+  .rule .label { font-family: 'Unbounded'; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; position: relative; padding-left: 16px; }
+  .rule .label::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background: var(--red); }
+  .rule .body { font-size: 15px; line-height: 1.55; }
+  .rule .body strong { font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 0.5px; font-family: 'Unbounded'; font-size: 12.5px; }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="header">
+    <div class="red-bar"></div>
+    <h1 class="title">Контрольная<br>вышка<span class="accent">.</span></h1>
+    <div class="title-meta">
+      PP.MEDIA. · И_И_<br>
+      Канал, выпуск 08<br>
+      25.05.2026
+    </div>
+  </div>
+
+  <div class="intro">
+    <p>На вебинаре я рассказывал про образ, которым описываю собственную роль внутри своей ИИ-системы. Я называю это <span class="red-word">контрольной вышкой</span>.</p>
+    <p>У меня в управлении сейчас несколько контуров одновременно. Агентство Paper Planes, бизнес-школа, программа «Стрела», медиа Мув, программа для детей.</p>
+    <p>Без машины я бы держал в петле 2–3 задачи одновременно под большой когнитивной нагрузкой. Дальше — выгорание, провалы, забытые решения.</p>
+    <p>С машиной я держу 10–15 задач одновременно, и нагрузка ниже, чем была когда-то на трёх. Машина забирает на себя пересборку контекста.</p>
+    <svg class="target" viewBox="0 0 120 120" fill="none">
+      <circle cx="60" cy="60" r="56" stroke="#B8B3AD" stroke-width="1" stroke-dasharray="3 4"/>
+      <circle cx="60" cy="60" r="42" stroke="#B8B3AD" stroke-width="1" stroke-dasharray="3 4"/>
+      <circle cx="60" cy="60" r="26" stroke="#B8B3AD" stroke-width="1" stroke-dasharray="3 4"/>
+      <line x1="0" y1="60" x2="120" y2="60" stroke="#B8B3AD" stroke-width="1"/>
+      <line x1="60" y1="0" x2="60" y2="120" stroke="#B8B3AD" stroke-width="1"/>
+      <circle cx="60" cy="60" r="5" fill="#D62219"/>
+      <line x1="60" y1="60" x2="220" y2="20" stroke="#D62219" stroke-width="1.5" stroke-dasharray="4 3"/>
+    </svg>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="num">01</div>
+      <div class="label">Codex<br>сканирует</div>
+      <div class="desc">Сам собирает инциденты, отклонения, ошибки и противоречия в реестрах за прошедшие дни.</div>
+    </div>
+    <div class="step">
+      <div class="num">02</div>
+      <div class="label">Составляет<br>повестку</div>
+      <div class="desc">Помечает то, что требует обсуждения. Расставляет приоритеты. Группирует по темам.</div>
+    </div>
+    <div class="step">
+      <div class="num">03</div>
+      <div class="label">Ставит встречу<br>в календарь</div>
+      <div class="desc">Создаёт событие «контрольная вышка». Присылает мне повестку с приоритетами в чат.</div>
+    </div>
+    <div class="step">
+      <div class="num">04</div>
+      <div class="label">Я прохожу<br>17 пунктов</div>
+      <div class="desc">По каждому либо принимаю решение, либо возвращаю машине вопрос с уточнением.</div>
+    </div>
+    <div class="step">
+      <div class="num">05</div>
+      <div class="label">Контур<br>замкнут</div>
+      <div class="desc">Решения уходят в систему, ничего не потерялось. Сборка, поиск, сверка — не в моём дне.</div>
+    </div>
+  </div>
+
+  <div class="diagram">
+    <svg viewBox="0 0 1140 380" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" fill="none">
+      <g opacity="0.4">
+        <path d="M40 30 L40 38 M36 34 L44 34" stroke="#B8B3AD"/>
+        <path d="M880 20 L880 28 M876 24 L884 24" stroke="#B8B3AD"/>
+        <path d="M520 360 L520 368 M516 364 L524 364" stroke="#B8B3AD"/>
+        <path d="M1080 340 L1080 348 M1076 344 L1084 344" stroke="#B8B3AD"/>
+      </g>
+
+      <!-- 5 contours on the left (Paper Planes, Стрела, Школа, Мув, Дети) -->
+      <g font-family="Inter Tight" font-size="13" fill="#1A1714">
+        <g transform="translate(40, 20)">
+          <rect x="0" y="0" width="200" height="44" fill="#FFFFFF" stroke="#1A1714" stroke-width="1.5" rx="3"/>
+          <rect x="0" y="0" width="3" height="44" fill="#D62219"/>
+          <text x="18" y="20" font-weight="700">Paper Planes</text>
+          <text x="18" y="36" font-size="11" fill="#7A7570">консалтинг-агентство</text>
+        </g>
+        <g transform="translate(40, 76)">
+          <rect x="0" y="0" width="200" height="44" fill="#FFFFFF" stroke="#1A1714" stroke-width="1.5" rx="3"/>
+          <rect x="0" y="0" width="3" height="44" fill="#D62219"/>
+          <text x="18" y="20" font-weight="700">Стрела</text>
+          <text x="18" y="36" font-size="11" fill="#7A7570">программа для МСБ</text>
+        </g>
+        <g transform="translate(40, 132)">
+          <rect x="0" y="0" width="200" height="44" fill="#FFFFFF" stroke="#1A1714" stroke-width="1.5" rx="3"/>
+          <rect x="0" y="0" width="3" height="44" fill="#D62219"/>
+          <text x="18" y="20" font-weight="700">Бизнес-школа</text>
+          <text x="18" y="36" font-size="11" fill="#7A7570">обучение собственников</text>
+        </g>
+        <g transform="translate(40, 188)">
+          <rect x="0" y="0" width="200" height="44" fill="#FFFFFF" stroke="#1A1714" stroke-width="1.5" rx="3"/>
+          <rect x="0" y="0" width="3" height="44" fill="#D62219"/>
+          <text x="18" y="20" font-weight="700">Мув</text>
+          <text x="18" y="36" font-size="11" fill="#7A7570">медиа-сервис</text>
+        </g>
+        <g transform="translate(40, 244)">
+          <rect x="0" y="0" width="200" height="44" fill="#FFFFFF" stroke="#1A1714" stroke-width="1.5" rx="3"/>
+          <rect x="0" y="0" width="3" height="44" fill="#D62219"/>
+          <text x="18" y="20" font-weight="700">Программа для детей</text>
+          <text x="18" y="36" font-size="11" fill="#7A7570">системное мышление</text>
+        </g>
+        <text x="40" y="316" font-size="11" font-weight="600" fill="#7A7570" font-family="JetBrains Mono" letter-spacing="0.5">5 КОНТУРОВ В УПРАВЛЕНИИ</text>
+      </g>
+
+      <!-- Aggregating lines into Codex -->
+      <g stroke="#1A1714" stroke-width="1.2" fill="none">
+        <path d="M240 42 C 320 42, 380 100, 450 145" />
+        <path d="M240 98 C 320 98, 380 130, 450 160" />
+        <path d="M240 154 C 320 154, 400 154, 450 175" />
+        <path d="M240 210 C 320 210, 380 190, 450 190" />
+        <path d="M240 266 C 320 266, 380 230, 450 205" />
+      </g>
+
+      <!-- Codex block -->
+      <g transform="translate(450, 130)">
+        <rect x="0" y="0" width="200" height="120" fill="#FFFFFF" stroke="#1A1714" stroke-width="2"/>
+        <rect x="0" y="0" width="200" height="36" fill="#1A1714"/>
+        <text x="100" y="24" font-family="Unbounded" font-weight="700" font-size="20" fill="#EFEBE7" text-anchor="middle">CODEX</text>
+        <text x="100" y="64" font-family="Inter Tight" font-size="13" fill="#1A1714" text-anchor="middle">сканирует реестры</text>
+        <text x="100" y="84" font-family="Inter Tight" font-size="13" fill="#1A1714" text-anchor="middle">собирает повестку</text>
+        <text x="100" y="104" font-family="Inter Tight" font-size="13" fill="#1A1714" text-anchor="middle">ставит встречу</text>
+      </g>
+
+      <!-- Arrow Codex → calendar event -->
+      <g transform="translate(660, 190)">
+        <line x1="0" y1="0" x2="60" y2="0" stroke="#1A1714" stroke-width="2"/>
+        <polygon points="60,-6 72,0 60,6" fill="#1A1714"/>
+      </g>
+
+      <!-- Calendar event block (повестка) -->
+      <g transform="translate(740, 110)">
+        <rect x="0" y="0" width="220" height="160" fill="#FFFFFF" stroke="#1A1714" stroke-width="1.5" rx="4"/>
+        <rect x="0" y="0" width="220" height="28" fill="#D62219"/>
+        <text x="12" y="19" font-family="JetBrains Mono" font-size="11" font-weight="500" fill="#EFEBE7" letter-spacing="0.5">КОНТРОЛЬНАЯ ВЫШКА · СЕГОДНЯ</text>
+        <g font-family="Inter Tight" font-size="11" fill="#1A1714">
+          <text x="12" y="48">— конфликт KPI в продажах</text>
+          <text x="12" y="64">— проседание Стрелы по retention</text>
+          <text x="12" y="80">— дебиторка ноябрьская</text>
+          <text x="12" y="96">— Мув: переход на новый stack</text>
+          <text x="12" y="112">— 13 других пунктов в реестрах</text>
+        </g>
+        <g transform="translate(12, 128)">
+          <rect x="0" y="0" width="196" height="22" fill="#EFEBE7" stroke="#1A1714" stroke-width="1"/>
+          <text x="98" y="15" font-family="Unbounded" font-size="11" font-weight="700" fill="#1A1714" text-anchor="middle" letter-spacing="0.5">17 РЕШЕНИЙ ЗА ЧАС</text>
+        </g>
+      </g>
+
+      <!-- Arrow event → decisions -->
+      <g transform="translate(970, 190)">
+        <line x1="0" y1="0" x2="40" y2="0" stroke="#D62219" stroke-width="2"/>
+        <polygon points="40,-6 52,0 40,6" fill="#D62219"/>
+      </g>
+
+      <!-- Owner / decisions node -->
+      <g transform="translate(1020, 130)">
+        <circle cx="60" cy="60" r="58" fill="none" stroke="#D62219" stroke-width="2"/>
+        <circle cx="60" cy="60" r="42" fill="none" stroke="#D62219" stroke-width="1" stroke-dasharray="3 3"/>
+        <!-- person silhouette -->
+        <circle cx="60" cy="44" r="10" fill="none" stroke="#1A1714" stroke-width="2"/>
+        <path d="M40 80 Q 60 64 80 80" fill="none" stroke="#1A1714" stroke-width="2"/>
+        <text x="60" y="148" font-family="Inter Tight" font-size="12.5" font-weight="600" fill="#1A1714" text-anchor="middle">собственник</text>
+        <text x="60" y="164" font-family="Inter Tight" font-size="12.5" font-weight="600" fill="#1A1714" text-anchor="middle">с управленческой</text>
+        <text x="60" y="180" font-family="Inter Tight" font-size="12.5" font-weight="600" fill="#1A1714" text-anchor="middle">мощностью</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="rule">
+    <div class="mark">!</div>
+    <div class="label">Главное<br>правило</div>
+    <div class="body">
+      ИИ к месту, где принимаются решения, подбирается с другой стороны. Освобождает к нему подходы, держит видимым весь поток входящих сигналов, готовит повестку.
+      <strong>Машина по-прежнему в служебной роли.</strong>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

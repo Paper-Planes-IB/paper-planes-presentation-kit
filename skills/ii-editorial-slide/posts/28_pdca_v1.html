@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Цикл PDCA — editorial v3</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#EFEBE7; --ink:#1A1714; --red:#D62219; --muted:#B8B3AD; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body { background: var(--paper); font-family: 'Inter Tight', system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .slide { width: 1600px; height: 1200px; position: relative; overflow: hidden; background: var(--paper); }
+  .bg { position: absolute; inset: 0; z-index: 0; }
+  .bg .marks { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; }
+  .layer { position: absolute; inset: 0; z-index: 2; padding: 58px 80px 0 80px; display: grid; grid-template-rows: auto 1fr auto; row-gap: 16px; }
+  .header { display: block; margin-bottom: 2px; }
+  .title-block { position: relative; padding-left: 26px; }
+  .title-block::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 12px; width: 6px; background: var(--red); }
+  .topline { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--red); margin-bottom: 10px; }
+  h1 { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 88px; line-height: 1.0; letter-spacing: -0.02em; text-transform: uppercase; color: var(--ink); }
+  h1 .dot { color: var(--red); }
+  .scheme { position: relative; display: flex; align-items: center; justify-content: center; }
+  .scheme svg { width: 100%; max-width: 1440px; height: auto; }
+  .rule { margin: 0 0 80px 0; border: 1.5px solid var(--ink); padding: 22px 28px; display: grid; grid-template-columns: 60px auto 1fr; gap: 28px; align-items: center; background: var(--paper); box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
+  .rule .mark { width: 56px; height: 56px; border: 2px solid var(--red); border-radius: 50%; display: grid; place-items: center; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 32px; color: var(--red); }
+  .rule .label { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; position: relative; padding-left: 16px; white-space: nowrap; }
+  .rule .label::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background: var(--red); }
+  .rule .body { font-size: 17px; line-height: 1.5; }
+  .rule .body strong { font-weight: 700; color: var(--red); }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="bg">
+    <img class="marks" src="../backgrounds/04_editorial_marks.png" alt="">
+  </div>
+
+  <div class="layer">
+
+    <div class="header">
+      <div class="title-block">
+        <div class="topline">PP.MEDIA · И_И_ · цикл улучшения</div>
+        <h1>Цикл PDCA<span class="dot">.</span></h1>
+      </div>
+    </div>
+
+    <div class="scheme">
+      <svg viewBox="0 0 1440 560" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- ============ ЛЕВО: РАЗОМКНУТЫЙ ЦИКЛ ============ -->
+        <text x="20" y="14" font-family="Unbounded" font-weight="700" font-size="14" fill="#9A958E" letter-spacing="1">КАК БЫВАЕТ · CHECK БЕЗ ACT</text>
+        <rect x="20" y="24" width="640" height="318" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2" stroke-dasharray="5 4"/>
+
+        <!-- P D C — идут, A выпал -->
+        <g font-family="Unbounded" font-weight="900" font-size="22" text-anchor="middle">
+          <g><rect x="56" y="92" width="92" height="76" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.6"/><text x="102" y="130" fill="#1A1714">P</text><text x="102" y="156" font-family="Inter Tight" font-weight="500" font-size="12" fill="#6E6963">план</text></g>
+          <g stroke="#1A1714" stroke-width="1.8" fill="#1A1714"><line x1="148" y1="130" x2="178" y2="130"/><polygon points="178,124 188,130 178,136"/></g>
+          <g><rect x="190" y="92" width="92" height="76" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.6"/><text x="236" y="130" fill="#1A1714">D</text><text x="236" y="156" font-family="Inter Tight" font-weight="500" font-size="12" fill="#6E6963">делай</text></g>
+          <g stroke="#1A1714" stroke-width="1.8" fill="#1A1714"><line x1="282" y1="130" x2="312" y2="130"/><polygon points="312,124 322,130 312,136"/></g>
+          <g><rect x="324" y="92" width="92" height="76" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.6"/><text x="370" y="130" fill="#1A1714">C</text><text x="370" y="156" font-family="Inter Tight" font-weight="500" font-size="12" fill="#6E6963">проверь</text></g>
+          <!-- разрыв к A -->
+          <g stroke="#D62219" stroke-width="2" fill="#D62219" stroke-dasharray="4 4"><line x1="416" y1="130" x2="446" y2="130"/></g>
+          <g><rect x="458" y="92" width="92" height="76" fill="#EFEBE7" stroke="#D62219" stroke-width="1.8" stroke-dasharray="5 4"/><text x="504" y="130" fill="#D62219">A</text><text x="504" y="156" font-family="Inter Tight" font-weight="500" font-size="12" fill="#D62219">выпал</text></g>
+        </g>
+        <!-- крестик на разрыве -->
+        <g stroke="#D62219" stroke-width="2.4"><line x1="424" y1="104" x2="438" y2="118"/><line x1="438" y1="104" x2="424" y2="118"/></g>
+
+        <!-- ошибка возвращается: петля назад -->
+        <path d="M504 168 C504 250, 102 250, 102 172" stroke="#D62219" stroke-width="2" stroke-dasharray="6 4" fill="none"/>
+        <polygon points="97,178 107,178 102,168" fill="#D62219"/>
+        <text x="303" y="258" font-family="Inter Tight" font-size="14" fill="#D62219" text-anchor="middle">та же ошибка приходит снова</text>
+
+        <text x="340" y="328" font-family="Unbounded" font-weight="800" font-size="13" fill="#9A958E" text-anchor="middle" letter-spacing="0.5">КРУГ РАЗОМКНУТ</text>
+
+        <!-- ============ РАЗДЕЛИТЕЛЬ ============ -->
+        <g>
+          <line x1="690" y1="24" x2="690" y2="342" stroke="#1A1714" stroke-width="1" stroke-dasharray="4 4"/>
+          <rect x="666" y="170" width="48" height="24" fill="#EFEBE7"/>
+          <text x="690" y="188" font-family="Unbounded" font-weight="800" font-size="16" fill="#D62219" text-anchor="middle">→</text>
+        </g>
+
+        <!-- ============ ПРАВО: ЗАМКНУТЫЙ ЦИКЛ ============ -->
+        <text x="720" y="14" font-family="Unbounded" font-weight="700" font-size="14" fill="#D62219" letter-spacing="1">КАК НАДО · ACT ЗАКРЫТ</text>
+        <rect x="720" y="24" width="700" height="318" fill="#EFEBE7" stroke="#1A1714" stroke-width="2"/>
+
+        <g font-family="Unbounded" font-weight="900" font-size="22" text-anchor="middle">
+          <g><rect x="752" y="92" width="96" height="76" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.6"/><text x="800" y="130" fill="#1A1714">P</text><text x="800" y="156" font-family="Inter Tight" font-weight="500" font-size="12" fill="#6E6963">план</text></g>
+          <g stroke="#1A1714" stroke-width="1.8" fill="#1A1714"><line x1="848" y1="130" x2="878" y2="130"/><polygon points="878,124 888,130 878,136"/></g>
+          <g><rect x="890" y="92" width="96" height="76" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.6"/><text x="938" y="130" fill="#1A1714">D</text><text x="938" y="156" font-family="Inter Tight" font-weight="500" font-size="12" fill="#6E6963">делай</text></g>
+          <g stroke="#1A1714" stroke-width="1.8" fill="#1A1714"><line x1="986" y1="130" x2="1016" y2="130"/><polygon points="1016,124 1026,130 1016,136"/></g>
+          <g><rect x="1028" y="92" width="96" height="76" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.6"/><text x="1076" y="130" fill="#1A1714">C</text><text x="1076" y="156" font-family="Inter Tight" font-weight="500" font-size="12" fill="#6E6963">проверь</text></g>
+          <g stroke="#D62219" stroke-width="2.2" fill="#D62219"><line x1="1124" y1="130" x2="1154" y2="130"/><polygon points="1154,123 1166,130 1154,137"/></g>
+          <g><rect x="1166" y="92" width="96" height="76" fill="#EFEBE7" stroke="#D62219" stroke-width="2.2"/><text x="1214" y="130" fill="#D62219">A</text><text x="1214" y="156" font-family="Inter Tight" font-weight="500" font-size="12" fill="#D62219">улучшай</text></g>
+        </g>
+        <!-- замыкание A→P обратной дугой -->
+        <path d="M1214 168 C1214 256, 800 256, 800 172" stroke="#1A1714" stroke-width="2" fill="none"/>
+        <polygon points="795,178 805,178 800,168" fill="#1A1714"/>
+        <text x="1007" y="262" font-family="Inter Tight" font-size="14" fill="#1A1714" text-anchor="middle">система изменилась, ошибка не повторяется</text>
+
+        <text x="1070" y="328" font-family="Unbounded" font-weight="800" font-size="13" fill="#D62219" text-anchor="middle" letter-spacing="0.5">КРУГ ЗАМКНУТ</text>
+
+        <!-- ============ НИЗ: 4 ПРИЗНАКА ПРОЙДЕННОГО ACT ============ -->
+        <text x="0" y="392" font-family="Unbounded" font-weight="700" font-size="11" fill="#D62219" letter-spacing="1.5">ЧТО ЗНАЧИТ ЗАКРЫТЬ ACT · ИЗМЕНИЛОСЬ ОДНО ИЗ</text>
+
+        <g transform="translate(0, 402)" font-family="Inter Tight">
+          <g transform="translate(0,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">01</text>
+            <text x="60" y="40" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.3">ПРАВИЛО</text>
+            <text x="60" y="68" font-size="13" fill="#1A1714">переписали норматив,</text>
+            <text x="60" y="88" font-size="13" fill="#1A1714">по которому работают</text>
+          </g>
+          <g transform="translate(365,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">02</text>
+            <text x="60" y="40" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.3">ОТВЕТСТВЕННЫЙ</text>
+            <text x="60" y="68" font-size="13" fill="#1A1714">у изменения есть</text>
+            <text x="60" y="88" font-size="13" fill="#1A1714">человек, кто отвечает</text>
+          </g>
+          <g transform="translate(730,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">03</text>
+            <text x="60" y="40" font-family="Unbounded" font-weight="800" font-size="12" fill="#1A1714" letter-spacing="0.3">ПРЕДУПРЕДИТ. СИГНАЛ</text>
+            <text x="60" y="68" font-size="13" fill="#1A1714">маркер ловит ошибку</text>
+            <text x="60" y="88" font-size="13" fill="#1A1714">раньше</text>
+          </g>
+          <g transform="translate(1095,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">04</text>
+            <text x="60" y="40" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.3">ОБУЧЕНИЕ</text>
+            <text x="60" y="68" font-size="13" fill="#1A1714">обновление дошло</text>
+            <text x="60" y="88" font-size="13" fill="#1A1714">и до команды</text>
+          </g>
+        </g>
+
+      </svg>
+    </div>
+
+    <!-- RULE: финал -->
+    <div class="rule">
+      <div class="mark">!</div>
+      <div class="label">Что делать</div>
+      <div class="body">
+        На каждый разобранный случай — одно конкретное изменение в системе.
+        <strong>Эту рутину собирает скилл: проверяет и сверяет с вами, что занести в правила.</strong>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  document.fonts.ready.then(() => { document.body.dataset.fontsReady = "1"; });
+</script>
+</body>
+</html>

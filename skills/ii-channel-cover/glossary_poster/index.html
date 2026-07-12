@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Словарь канала И_И_</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F8F5ED;
+    --paper-dim: #F2EEE3;
+    --ink: #1A1714;
+    --red: #E84A38;
+    --muted: #8A857A;
+    --line-light: #D6D1C6;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 1920px;
+    height: 1080px;
+    background: var(--paper);
+    font-family: 'Inter Tight', sans-serif;
+    color: var(--ink);
+    overflow: hidden;
+  }
+
+  .poster {
+    width: 1920px;
+    height: 1080px;
+    padding: 50px 60px;
+    display: grid;
+    grid-template-columns: 380px 1fr 1fr 1fr;
+    grid-template-rows: auto 1fr 1fr;
+    grid-template-areas:
+      "brand sec01 sec02 sec03"
+      "title sec01 sec02 sec03"
+      "title sec04 sec04 sec05";
+    gap: 30px 35px;
+    position: relative;
+    background-image: radial-gradient(circle, rgba(26,23,20,0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* Шапка слева — лейбл канала */
+  .brand {
+    grid-area: brand;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 26px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Главный заголовок */
+  .title-block {
+    grid-area: title;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .title-main {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 96px;
+    line-height: 0.95;
+    letter-spacing: -2px;
+  }
+  .title-desc {
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 320px;
+  }
+  .title-target {
+    margin-top: 12px;
+    width: 200px;
+    height: 200px;
+    position: relative;
+  }
+
+  /* Секции */
+  .section {
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .section-num {
+    color: var(--red);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 28px;
+  }
+  .section-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* Sec 01 — формула */
+  .sec01 { grid-area: sec01; }
+  .formula-label {
+    font-size: 14px;
+    color: var(--ink);
+    margin: 8px 0 12px;
+  }
+  .formula-label b { font-family: 'JetBrains Mono', monospace; color: var(--red); }
+  .formula-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .formula-cell {
+    flex: 1;
+    border: 1.5px solid var(--ink);
+    padding: 14px 8px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .formula-cell small {
+    display: block;
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0;
+  }
+  .formula-mult {
+    color: var(--ink);
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .callout {
+    border: 1.5px solid var(--ink);
+    padding: 14px 14px 14px 50px;
+    position: relative;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .callout::before {
+    content: "↻";
+    position: absolute;
+    left: 14px;
+    top: 12px;
+    font-size: 24px;
+    color: var(--red);
+  }
+  .callout b {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    color: var(--ink);
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+  .callout em { color: var(--red); font-style: normal; font-weight: 600; }
+
+  /* Sec 02 — контуры (потоки) */
+  .sec02 { grid-area: sec02; }
+  .flow-block { margin-bottom: 18px; }
+  .flow-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    color: var(--red);
+    font-size: 13px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+  .flow-label span { color: var(--ink); font-weight: 400; text-transform: none; letter-spacing: 0; }
+  .flow-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+  }
+  .flow-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .flow-icon {
+    width: 56px;
+    height: 56px;
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .flow-icon svg { width: 24px; height: 24px; fill: none; stroke: var(--ink); stroke-width: 1.8; }
+  .flow-caption {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink);
+  }
+  .flow-arrow {
+    color: var(--ink);
+    font-size: 16px;
+    margin-bottom: 18px;
+  }
+
+  /* Sec 03 — объекты системы */
+  .sec03 { grid-area: sec03; }
+  .objects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 18px;
+  }
+  .obj-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .obj-icon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    border: 1.5px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .obj-icon svg { width: 18px; height: 18px; fill: none; stroke: var(--ink); stroke-width: 1.8; }
+  .obj-icon.accent { border-color: var(--red); }
+  .obj-icon.accent svg { stroke: var(--red); }
+  .obj-body { flex: 1; }
+  .obj-term {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .obj-desc {
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+
+  /* Sec 04 — операции и места */
+  .sec04 { grid-area: sec04; }
+  .ops-diagram {
+    flex: 1;
+    position: relative;
+    min-height: 320px;
+  }
+
+  /* Sec 05 — качество ИИ-внедрения */
+  .sec05 { grid-area: sec05; }
+  .quality-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-top: 10px;
+  }
+  .quality-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .quality-icon {
+    width: 56px;
+    height: 56px;
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .quality-icon.red { border-color: var(--red); }
+  .quality-icon.red svg { stroke: var(--red); }
+  .quality-icon svg { width: 28px; height: 28px; fill: none; stroke: var(--ink); stroke-width: 1.8; }
+  .quality-term {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--red);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+  .quality-desc {
+    font-size: 11px;
+    line-height: 1.45;
+    color: var(--ink);
+  }
+
+  /* Нижняя плашка */
+  .footer {
+    position: absolute;
+    bottom: 18px;
+    left: 60px;
+    right: 60px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+  .corner-bracket {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    width: 26px;
+    height: 26px;
+    border-right: 2px solid var(--red);
+    border-bottom: 2px solid var(--red);
+  }
+
+  /* Точки-сетка в правом верхнем */
+  .dot-grid-tl, .dot-grid-tr {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-image: radial-gradient(circle, var(--muted) 1px, transparent 1px);
+    background-size: 10px 10px;
+    opacity: 0.5;
+  }
+  .dot-grid-tr { top: 30px; right: 60px; }
+</style>
+</head>
+<body>
+<div class="poster">
+
+  <div class="brand">И_И_</div>
+
+  <div class="title-block">
+    <div class="title-main">Словарь<br>канала</div>
+    <div class="title-desc">
+      В канале будут постепенно набираться спец-термины. Часть слов я ввёл сам, часть забрал из внешних источников и закрепил у нас. Собираю полный список, чтобы после не возвращаться.
+    </div>
+    <div class="title-target">
+      <svg width="200" height="200" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="90" fill="none" stroke="#1A1714" stroke-width="1"/>
+        <circle cx="100" cy="100" r="65" fill="none" stroke="#1A1714" stroke-width="1"/>
+        <circle cx="100" cy="100" r="40" fill="none" stroke="#1A1714" stroke-width="1"/>
+        <circle cx="100" cy="100" r="15" fill="none" stroke="#E84A38" stroke-width="2"/>
+        <line x1="100" y1="80" x2="100" y2="120" stroke="#E84A38" stroke-width="2"/>
+        <line x1="80" y1="100" x2="120" y2="100" stroke="#E84A38" stroke-width="2"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- 01 Концептуальная рамка -->
+  <div class="section sec01">
+    <div class="section-head"><div class="section-num">01</div><div class="section-title">Концептуальная рамка</div></div>
+    <div class="formula-label"><b>AI-ready</b> — рабочая формула готовности:</div>
+    <div class="formula-row">
+      <div class="formula-cell">ЭФФЕКТ<small>что мы получаем</small></div>
+      <div class="formula-mult">×</div>
+      <div class="formula-cell">ГОТОВНОСТЬ<small>насколько система к этому готова</small></div>
+      <div class="formula-mult">×</div>
+      <div class="formula-cell">ВНЕДРЯЕМОСТЬ<small>насколько легко это можно внедрить</small></div>
+    </div>
+    <div class="callout">
+      <b>Замыкание петли</b> — правило, по которому артефакт фазы <em>do</em> обязан вернуться в систему как новый сигнал.
+    </div>
+  </div>
+
+  <!-- 02 Контуры системы -->
+  <div class="section sec02">
+    <div class="section-head"><div class="section-num">02</div><div class="section-title">Контуры системы</div></div>
+    <div class="flow-block">
+      <div class="flow-label">ДУМАЙ <span>— контур работы со знанием</span></div>
+      <div class="flow-row">
+        <div class="flow-node"><div class="flow-icon"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg></div><div class="flow-caption">собирай</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node"><div class="flow-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div><div class="flow-caption">структурируй</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node"><div class="flow-icon"><svg viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div><div class="flow-caption">проверяй</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node"><div class="flow-icon"><svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20"/></svg></div><div class="flow-caption">применяй</div></div>
+      </div>
+    </div>
+    <div class="flow-block">
+      <div class="flow-label">ДЕЛАЙ <span>— контур работы с артефактом</span></div>
+      <div class="flow-row">
+        <div class="flow-node"><div class="flow-icon"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="18" rx="1"/><path d="M9 4v-1h6v1M9 10h6M9 14h6M9 18h4"/></svg></div><div class="flow-caption">планируй</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node"><div class="flow-icon"><svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20"/></svg></div><div class="flow-caption">делай</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node"><div class="flow-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="8,12 11,15 16,9"/></svg></div><div class="flow-caption">проверяй</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node"><div class="flow-icon"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21,4 21,12 13,12"/></svg></div><div class="flow-caption">действуй</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 Объекты ИИ-системы -->
+  <div class="section sec03">
+    <div class="section-head"><div class="section-num">03</div><div class="section-title">Объекты ИИ-системы</div></div>
+    <div class="objects-grid">
+      <div class="obj-item">
+        <div class="obj-icon"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="1"/><text x="12" y="16" font-size="7" text-anchor="middle" font-family="JetBrains Mono" fill="#1A1714" stroke="none">MD</text></svg></div>
+        <div class="obj-body"><div class="obj-term">Vault</div><div class="obj-desc">хранилище md-файлов с вики-разметкой; у нас в связке Codex → Obsidian → Google Drive.</div></div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-icon"><svg viewBox="0 0 24 24"><path d="M9 2v6h2V2zM13 2v6h2V2zM7 8h10v4a5 5 0 0 1-5 5v5"/></svg></div>
+        <div class="obj-body"><div class="obj-term">Плагин</div><div class="obj-desc">внешний коннектор к комбайну: Notion, Drive, MCP-интеграции.</div></div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-icon"><svg viewBox="0 0 24 24"><polyline points="13,3 4,14 11,14 11,21 20,10 13,10 13,3"/></svg></div>
+        <div class="obj-body"><div class="obj-term">Скилл</div><div class="obj-desc">исполняемый артефакт методологии с триггерами, шагами, проверками и выходами.</div></div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-icon"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="3" height="20"/><rect x="14" y="2" width="3" height="20"/><line x1="7" y1="7" x2="17" y2="7"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="17" x2="17" y2="17"/></svg></div>
+        <div class="obj-body"><div class="obj-term">Рельса</div><div class="obj-desc">сквозной производственный маршрут с входом, шагами, скиллами и артефактами.</div></div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12,7 12,12 15,14"/><line x1="6" y1="6" x2="18" y2="18" stroke="#E84A38"/></svg></div>
+        <div class="obj-body"><div class="obj-term">Проходчик</div><div class="obj-desc">автоматический крон-оператор, сканирует Vault по расписанию.</div></div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-icon"><svg viewBox="0 0 24 24"><path d="M12 3l9 5v8l-9 5-9-5V8z"/><polyline points="9,11 11,13 15,9"/></svg></div>
+        <div class="obj-body"><div class="obj-term">QA-агент</div><div class="obj-desc">отдельный класс агентов, занятый только проверкой качества по правилам.</div></div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-icon"><svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="8" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1.5"/><circle cx="4" cy="12" r="1.5"/><circle cx="4" cy="18" r="1.5"/></svg></div>
+        <div class="obj-body"><div class="obj-term">Пополняемый реестр</div><div class="obj-desc">самосовершенствующийся список, который сам ищет потерянные единицы.</div></div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-icon accent"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="#E84A38"/><circle cx="4" cy="6" r="2.5"/><circle cx="20" cy="6" r="2.5"/><circle cx="4" cy="18" r="2.5"/><circle cx="20" cy="18" r="2.5"/><line x1="6" y1="7" x2="10" y2="11"/><line x1="18" y1="7" x2="14" y2="11"/><line x1="6" y1="17" x2="10" y2="13"/><line x1="18" y1="17" x2="14" y2="13"/></svg></div>
+        <div class="obj-body"><div class="obj-term">Non-human entity</div><div class="obj-desc">агент или workflow как самостоятельная сущность с владельцем, журналом и правилами эскалации.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 Операции и места -->
+  <div class="section sec04">
+    <div class="section-head"><div class="section-num">04</div><div class="section-title">Операции и места</div></div>
+    <div style="display: flex; gap: 20px; flex: 1;">
+      <!-- Левая колонка терминов -->
+      <div style="display: flex; flex-direction: column; gap: 14px; flex: 0 0 220px;">
+        <div class="obj-item">
+          <div class="obj-icon"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><line x1="8" y1="8" x2="16" y2="16"/></svg></div>
+          <div class="obj-body"><div class="obj-term">Туннелирование</div><div class="obj-desc">разнесение входящего сигнала по нескольким местам приземления, термин из BPMN.</div></div>
+        </div>
+        <div class="obj-item">
+          <div class="obj-icon"><svg viewBox="0 0 24 24"><path d="M4 12h14M14 6l6 6-6 6"/></svg></div>
+          <div class="obj-body"><div class="obj-term">Handoff</div><div class="obj-desc">передача задачи или контекста от одного исполнителя к другому, точка потери смысла и времени.</div></div>
+        </div>
+        <div class="obj-item">
+          <div class="obj-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="#E84A38"/></svg></div>
+          <div class="obj-body"><div class="obj-term">Дом приземления</div><div class="obj-desc">конкретное место в Vault, куда сигнал относится по правилам разнесения.</div></div>
+        </div>
+      </div>
+
+      <!-- Диаграмма потока -->
+      <div class="ops-diagram">
+        <svg width="100%" height="320" viewBox="0 0 600 320">
+          <!-- Контрольная вышка (слева) -->
+          <g transform="translate(50, 130)">
+            <rect x="0" y="0" width="36" height="50" fill="none" stroke="#1A1714" stroke-width="1.5"/>
+            <polygon points="-5,0 41,0 18,-12" fill="none" stroke="#1A1714" stroke-width="1.5"/>
+            <line x1="18" y1="0" x2="18" y2="50"/>
+            <text x="18" y="68" text-anchor="middle" font-family="JetBrains Mono" font-size="9" font-weight="700">КОНТРОЛЬНАЯ</text>
+            <text x="18" y="78" text-anchor="middle" font-family="JetBrains Mono" font-size="9" font-weight="700">ВЫШКА</text>
+          </g>
+          <!-- Входящий сигнал -->
+          <g transform="translate(160, 155)">
+            <circle cx="0" cy="0" r="14" fill="#E84A38"/>
+            <text x="0" y="36" text-anchor="middle" font-family="JetBrains Mono" font-size="9">ВХОДЯЩИЙ</text>
+            <text x="0" y="46" text-anchor="middle" font-family="JetBrains Mono" font-size="9">СИГНАЛ</text>
+          </g>
+          <!-- Дома (три) -->
+          <g transform="translate(280, 80)">
+            <path d="M0 16 L18 0 L36 16 L36 36 L0 36 Z" fill="none" stroke="#1A1714" stroke-width="1.5"/>
+            <text x="50" y="20" font-family="JetBrains Mono" font-size="9" font-weight="700">ДОМ 1</text>
+          </g>
+          <g transform="translate(280, 145)">
+            <path d="M0 16 L18 0 L36 16 L36 36 L0 36 Z" fill="none" stroke="#1A1714" stroke-width="1.5"/>
+            <text x="50" y="20" font-family="JetBrains Mono" font-size="9" font-weight="700">ДОМ 2</text>
+          </g>
+          <g transform="translate(280, 210)">
+            <path d="M0 16 L18 0 L36 16 L36 36 L0 36 Z" fill="none" stroke="#1A1714" stroke-width="1.5"/>
+            <text x="50" y="20" font-family="JetBrains Mono" font-size="9" font-weight="700">ДОМ N</text>
+          </g>
+          <!-- Стрелки от сигнала к домам -->
+          <path d="M174 155 Q220 100 280 95" fill="none" stroke="#E84A38" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <path d="M174 155 L280 160" fill="none" stroke="#1A1714" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <path d="M174 155 Q220 210 280 225" fill="none" stroke="#1A1714" stroke-width="1.2" stroke-dasharray="4 3"/>
+
+          <!-- Handoff кружки -->
+          <circle cx="430" cy="120" r="12" fill="none" stroke="#1A1714" stroke-width="1.2"/>
+          <text x="430" y="124" text-anchor="middle" font-family="JetBrains Mono" font-size="8">⊙</text>
+          <circle cx="450" cy="155" r="12" fill="none" stroke="#1A1714" stroke-width="1.2"/>
+          <text x="430" y="180" text-anchor="middle" font-family="JetBrains Mono" font-size="9" font-weight="700">HANDOFF</text>
+          <circle cx="430" cy="195" r="12" fill="none" stroke="#1A1714" stroke-width="1.2"/>
+
+          <!-- Стрелки от домов через handoff -->
+          <path d="M335 95 L420 115" fill="none" stroke="#1A1714" stroke-width="1.2"/>
+          <path d="M335 160 L440 155" fill="none" stroke="#1A1714" stroke-width="1.2"/>
+          <path d="M335 225 L420 200" fill="none" stroke="#1A1714" stroke-width="1.2"/>
+
+          <!-- Контрольная вышка (справа) с красной мишенью -->
+          <g transform="translate(520, 130)">
+            <rect x="0" y="0" width="36" height="50" fill="none" stroke="#E84A38" stroke-width="1.5"/>
+            <polygon points="-5,0 41,0 18,-12" fill="none" stroke="#E84A38" stroke-width="1.5"/>
+            <line x1="18" y1="0" x2="18" y2="50" stroke="#E84A38"/>
+            <circle cx="18" cy="20" r="14" fill="none" stroke="#E84A38" stroke-width="1" opacity="0.6"/>
+            <circle cx="18" cy="20" r="8" fill="none" stroke="#E84A38" stroke-width="1" opacity="0.6"/>
+            <circle cx="18" cy="20" r="3" fill="#E84A38"/>
+            <text x="18" y="68" text-anchor="middle" font-family="JetBrains Mono" font-size="9" font-weight="700">КОНТРОЛЬНАЯ</text>
+            <text x="18" y="78" text-anchor="middle" font-family="JetBrains Mono" font-size="9" font-weight="700">ВЫШКА</text>
+          </g>
+          <path d="M462 155 L515 155" fill="none" stroke="#1A1714" stroke-width="1.2"/>
+
+          <!-- Стрелка от вышки в начало (петля) -->
+          <path d="M86 155 L150 155" fill="none" stroke="#1A1714" stroke-width="1.2" stroke-dasharray="4 3"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 Качество ИИ-внедрения -->
+  <div class="section sec05">
+    <div class="section-head"><div class="section-num">05</div><div class="section-title">Качество ИИ-внедрения</div></div>
+    <div class="quality-grid">
+      <div class="quality-card">
+        <div class="quality-icon red"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 22c0-5 4-8 8-8s8 3 8 8"/></svg></div>
+        <div class="quality-term">HITL<br>(Human in the Loop)</div>
+        <div class="quality-desc">человек как центр системы; владелец смысла, постановщик задачи, держатель решения.</div>
+      </div>
+      <div class="quality-card">
+        <div class="quality-icon red"><svg viewBox="0 0 24 24"><path d="M9 3a4 4 0 0 0-4 4v3a3 3 0 0 0-2 3 3 3 0 0 0 2 3v3a4 4 0 0 0 4 4M9 3v18M9 7h2M9 11h3M9 15h2M9 19h3"/><circle cx="17" cy="9" r="1" fill="#E84A38"/><circle cx="20" cy="14" r="1" fill="#E84A38"/><circle cx="17" cy="19" r="1" fill="#E84A38"/><line x1="12" y1="9" x2="16" y2="9"/><line x1="12" y1="14" x2="19" y2="14"/><line x1="12" y1="19" x2="16" y2="19"/></svg></div>
+        <div class="quality-term">Когнитивная стратегия</div>
+        <div class="quality-desc">алгоритм рассуждения, который человек способен интерпретировать, проверить и улучшить.</div>
+      </div>
+      <div class="quality-card">
+        <div class="quality-icon red"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg></div>
+        <div class="quality-term">Скафолдинг</div>
+        <div class="quality-desc">поддерживающие леса вокруг сотрудника; полезны, опасны без когнитивной стратегии.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Точки-сетка в правом верхнем -->
+  <div class="dot-grid-tr"></div>
+
+  <!-- Нижняя плашка -->
+  <div class="footer">
+    <div>ИИ_СИСТЕМА / ГЛОССАРИЙ</div>
+    <div>V 1.0 &nbsp;&nbsp; 24.05.2026</div>
+  </div>
+  <div class="corner-bracket"></div>
+
+</div>
+</body>
+</html>

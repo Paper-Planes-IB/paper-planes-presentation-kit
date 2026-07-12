@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Принудительное замедление — editorial v1</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#EFEBE7; --ink:#1A1714; --red:#D62219; --muted:#B8B3AD; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body { background: var(--paper); font-family: 'Inter Tight', system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .slide { width: 1600px; height: 1200px; position: relative; overflow: hidden; background: var(--paper); }
+  .bg { position: absolute; inset: 0; z-index: 0; }
+  .bg .marks { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; }
+  .layer { position: absolute; inset: 0; z-index: 2; padding: 58px 80px 0 80px; display: grid; grid-template-rows: auto 1fr auto; row-gap: 16px; }
+  .header { display: block; margin-bottom: 2px; }
+  .title-block { position: relative; padding-left: 26px; }
+  .title-block::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 12px; width: 6px; background: var(--red); }
+  .topline { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--red); margin-bottom: 10px; }
+  h1 { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 76px; line-height: 1.0; letter-spacing: -0.02em; text-transform: uppercase; color: var(--ink); }
+  h1 .dot { color: var(--red); }
+  .scheme { position: relative; display: flex; align-items: center; justify-content: center; }
+  .scheme svg { width: 100%; max-width: 1440px; height: auto; }
+  .rule { margin: 0 0 80px 0; border: 1.5px solid var(--ink); padding: 22px 28px; display: grid; grid-template-columns: 60px auto 1fr; gap: 28px; align-items: center; background: var(--paper); box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
+  .rule .mark { width: 56px; height: 56px; border: 2px solid var(--red); border-radius: 50%; display: grid; place-items: center; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 32px; color: var(--red); }
+  .rule .label { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; position: relative; padding-left: 16px; white-space: nowrap; }
+  .rule .label::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background: var(--red); }
+  .rule .body { font-size: 17px; line-height: 1.5; }
+  .rule .body strong { font-weight: 700; color: var(--red); }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="bg">
+    <img class="marks" src="../backgrounds/08_thin_lines_right.png" alt="">
+  </div>
+
+  <div class="layer">
+
+    <div class="header">
+      <div class="title-block">
+        <div class="topline">PP.MEDIA · И_И_ · модель обучения</div>
+        <h1>Принудительное<br>замедление<span class="dot">.</span></h1>
+      </div>
+    </div>
+
+    <div class="scheme">
+      <svg viewBox="0 0 1440 560" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- ============ ЛЕВО: ПРОВЕРКА ДО ЧЕЛОВЕКА ============ -->
+        <text x="20" y="14" font-family="Unbounded" font-weight="700" font-size="14" fill="#9A958E" letter-spacing="1">ПРОВЕРКА ДО ЧЕЛОВЕКА</text>
+        <rect x="20" y="24" width="640" height="318" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2" stroke-dasharray="5 4"/>
+
+        <!-- цепочка: ИИ-программа → человек → гладкий результат -->
+        <g font-family="Inter Tight">
+          <g>
+            <rect x="50" y="80" width="170" height="80" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.5"/>
+            <text x="135" y="116" font-family="Unbounded" font-weight="800" font-size="14" fill="#9A958E" text-anchor="middle">ИИ-ПРОГРАММА</text>
+            <text x="135" y="140" font-size="13" fill="#9A958E" text-anchor="middle">идеальный сценарий</text>
+          </g>
+          <g stroke="#B8B3AD" stroke-width="1.8" fill="#B8B3AD">
+            <line x1="220" y1="120" x2="256" y2="120"/><polygon points="256,114 266,120 256,126"/>
+          </g>
+          <g>
+            <rect x="266" y="80" width="150" height="80" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.5"/>
+            <text x="341" y="116" font-family="Unbounded" font-weight="800" font-size="14" fill="#9A958E" text-anchor="middle">ЧЕЛОВЕК</text>
+            <text x="341" y="140" font-size="13" fill="#9A958E" text-anchor="middle">идёт по рельсе</text>
+          </g>
+          <g stroke="#B8B3AD" stroke-width="1.8" fill="#B8B3AD">
+            <line x1="416" y1="120" x2="452" y2="120"/><polygon points="452,114 462,120 452,126"/>
+          </g>
+          <g>
+            <rect x="462" y="80" width="170" height="80" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.5"/>
+            <text x="547" y="112" font-family="Unbounded" font-weight="800" font-size="13" fill="#9A958E" text-anchor="middle">ГЛАДКО</text>
+            <text x="547" y="136" font-size="12" fill="#9A958E" text-anchor="middle">но не разбирается</text>
+          </g>
+        </g>
+
+        <!-- не растёт: плоская линия -->
+        <g transform="translate(50,210)">
+          <text x="0" y="0" font-family="JetBrains Mono" font-size="12" fill="#9A958E">кривая роста:</text>
+          <line x1="0" y1="40" x2="560" y2="40" stroke="#B8B3AD" stroke-width="2"/>
+          <text x="280" y="68" font-family="Inter Tight" font-size="14" fill="#9A958E" text-anchor="middle">навык стоит на месте</text>
+        </g>
+
+        <text x="340" y="328" font-family="Unbounded" font-weight="800" font-size="13" fill="#9A958E" text-anchor="middle" letter-spacing="0.5">ОЛОВЯННЫЕ СОЛДАТИКИ</text>
+
+        <!-- ============ РАЗДЕЛИТЕЛЬ ============ -->
+        <g>
+          <line x1="690" y1="24" x2="690" y2="342" stroke="#1A1714" stroke-width="1" stroke-dasharray="4 4"/>
+          <rect x="666" y="170" width="48" height="24" fill="#EFEBE7"/>
+          <text x="690" y="188" font-family="Unbounded" font-weight="800" font-size="16" fill="#D62219" text-anchor="middle">→</text>
+        </g>
+
+        <!-- ============ ПРАВО: ПРОВЕРКА ПОСЛЕ ЧЕЛОВЕКА ============ -->
+        <text x="720" y="14" font-family="Unbounded" font-weight="700" font-size="14" fill="#D62219" letter-spacing="1">ПРОВЕРКА ПОСЛЕ ЧЕЛОВЕКА</text>
+        <rect x="720" y="24" width="700" height="318" fill="#EFEBE7" stroke="#1A1714" stroke-width="2"/>
+
+        <!-- цепочка: человек сам → ошибка → QA-разбор → рост -->
+        <g font-family="Inter Tight">
+          <g>
+            <rect x="748" y="72" width="156" height="80" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.6"/>
+            <text x="826" y="106" font-family="Unbounded" font-weight="800" font-size="14" fill="#1A1714" text-anchor="middle">ЧЕЛОВЕК САМ</text>
+            <text x="826" y="130" font-size="13" fill="#1A1714" text-anchor="middle">проходит задачу</text>
+          </g>
+          <g stroke="#1A1714" stroke-width="1.8" fill="#1A1714">
+            <line x1="904" y1="112" x2="936" y2="112"/><polygon points="936,106 946,112 936,118"/>
+          </g>
+          <g>
+            <rect x="946" y="72" width="150" height="80" fill="#EFEBE7" stroke="#D62219" stroke-width="1.8"/>
+            <text x="1021" y="106" font-family="Unbounded" font-weight="800" font-size="14" fill="#D62219" text-anchor="middle">ОШИБКА</text>
+            <text x="1021" y="130" font-size="13" fill="#1A1714" text-anchor="middle">допустима, нужна</text>
+          </g>
+          <g stroke="#1A1714" stroke-width="1.8" fill="#1A1714">
+            <line x1="1096" y1="112" x2="1128" y2="112"/><polygon points="1128,106 1138,112 1128,118"/>
+          </g>
+          <g>
+            <rect x="1138" y="72" width="258" height="80" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.6"/>
+            <text x="1267" y="106" font-family="Unbounded" font-weight="800" font-size="14" fill="#1A1714" text-anchor="middle">QA-АГЕНТ РАЗБИРАЕТ</text>
+            <text x="1267" y="130" font-size="13" fill="#1A1714" text-anchor="middle">где не дожал, что пропустил</text>
+          </g>
+        </g>
+
+        <!-- кривая роста: восходящая -->
+        <g transform="translate(748,196)">
+          <text x="0" y="0" font-family="JetBrains Mono" font-size="12" fill="#D62219">кривая роста:</text>
+          <path d="M0 84 L160 64 L320 40 L480 16 L620 4" stroke="#D62219" stroke-width="2.4" fill="none"/>
+          <polygon points="614,-2 626,2 618,12" fill="#D62219"/>
+          <text x="320" y="108" font-family="Inter Tight" font-size="14" fill="#1A1714" text-anchor="middle">с каждой ошибкой навык растёт</text>
+        </g>
+
+        <text x="1070" y="328" font-family="Unbounded" font-weight="800" font-size="13" fill="#D62219" text-anchor="middle" letter-spacing="0.5">РАСТУЩИЙ СПЕЦИАЛИСТ</text>
+
+        <!-- ============ НИЗ: ГДЕ ПРОВЕРКУ СТАВЯТ ПОСЛЕ ============ -->
+        <text x="0" y="392" font-family="Unbounded" font-weight="700" font-size="11" fill="#D62219" letter-spacing="1.5">ГДЕ ПРОВЕРКУ СТАВЯТ УЖЕ ПОСЛЕ ЧЕЛОВЕКА</text>
+
+        <g transform="translate(0, 402)" font-family="Inter Tight">
+          <g transform="translate(0,0)">
+            <rect x="0" y="0" width="460" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">01</text>
+            <text x="60" y="40" font-family="Unbounded" font-weight="800" font-size="14" fill="#1A1714" letter-spacing="0.3">ОБУЧЕНИЕ И АДАПТАЦИЯ</text>
+            <text x="60" y="72" font-size="14" fill="#1A1714">человек должен набить руку сам,</text>
+            <text x="60" y="94" font-size="14" fill="#1A1714">чужой готовый опыт этого не даёт</text>
+          </g>
+          <g transform="translate(490,0)">
+            <rect x="0" y="0" width="460" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">02</text>
+            <text x="60" y="40" font-family="Unbounded" font-weight="800" font-size="14" fill="#1A1714" letter-spacing="0.3">ЭКСПЕРТНЫЕ ЗАДАЧИ</text>
+            <text x="60" y="72" font-size="14" fill="#1A1714">где ценность в суждении,</text>
+            <text x="60" y="94" font-size="14" fill="#1A1714">а оно растёт только через ошибки</text>
+          </g>
+          <g transform="translate(980,0)">
+            <rect x="0" y="0" width="460" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">03</text>
+            <text x="60" y="40" font-family="Unbounded" font-weight="800" font-size="14" fill="#D62219" letter-spacing="0.3">ПОСТАНОВКА И ИНТЕРВЬЮ</text>
+            <text x="60" y="72" font-size="14" fill="#1A1714">навык рождается в живом</text>
+            <text x="60" y="94" font-size="14" fill="#1A1714">контакте, не в заготовке</text>
+          </g>
+        </g>
+
+      </svg>
+    </div>
+
+    <!-- RULE: финал -->
+    <div class="rule">
+      <div class="mark">!</div>
+      <div class="label">Итог</div>
+      <div class="body">
+        Гладкий процесс без ошибок это остановка обучения.
+        <strong>И скорость, и взросление людей: проверку ставят там, где она учит. Право ошибиться человеку оставляют.</strong>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  document.fonts.ready.then(() => { document.body.dataset.fontsReady = "1"; });
+</script>
+</body>
+</html>

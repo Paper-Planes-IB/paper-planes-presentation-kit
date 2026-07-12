@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Путь задачи — editorial v3</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EFEBE7;
+    --ink: #1A1714;
+    --red: #D62219;
+    --muted: #B8B3AD;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body {
+    background: var(--paper);
+    font-family: 'Inter Tight', system-ui, sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .slide {
+    width: 1600px;
+    height: 1200px;
+    position: relative;
+    overflow: hidden;
+    background: var(--paper);
+  }
+
+  .bg { position: absolute; inset: 0; z-index: 0; }
+  .bg .marks {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: fill;
+  }
+
+  .layer {
+    position: absolute; inset: 0;
+    z-index: 2;
+    padding: 72px 80px 0 80px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    row-gap: 28px;
+  }
+
+  .header { display: block; margin-bottom: 8px; }
+  .title-block { position: relative; padding-left: 26px; }
+  .title-block::before {
+    content: "";
+    position: absolute; left: 0; top: 16px; bottom: 28px;
+    width: 6px; background: var(--red);
+  }
+  .topline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--red);
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: 108px;
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  h1 .dot { color: var(--red); }
+
+  .scheme {
+    position: relative; margin: 0; padding: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .scheme svg { width: 100%; max-width: 1440px; height: auto; }
+
+  .rule {
+    margin: 0 0 80px 0;
+    border: 1.5px solid var(--ink);
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: 60px auto 1fr;
+    gap: 28px;
+    align-items: center;
+    background: var(--paper);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+  }
+  .rule .mark {
+    width: 56px; height: 56px;
+    border: 2px solid var(--red); border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800; font-size: 32px; color: var(--red);
+  }
+  .rule .label {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700; font-size: 14px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    position: relative; padding-left: 16px;
+    white-space: nowrap;
+  }
+  .rule .label::before {
+    content: ""; position: absolute;
+    left: 0; top: 50%; transform: translateY(-50%);
+    width: 6px; height: 6px; background: var(--red);
+  }
+  .rule .body { font-size: 16px; line-height: 1.5; }
+  .rule .body strong {
+    font-weight: 700; color: var(--red);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    font-family: 'Unbounded', sans-serif; font-size: 13px;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="bg">
+    <img class="marks" src="../backgrounds/04_editorial_marks.png" alt="">
+  </div>
+
+  <div class="layer">
+
+    <div class="header">
+      <div class="title-block">
+        <div class="topline">PP.MEDIA · И_И_ · выпуск 15</div>
+        <h1>Путь<br>задачи<span class="dot">.</span></h1>
+      </div>
+    </div>
+
+    <!-- СХЕМА: свалка слева vs прошедшие маршрут справа + 5 шагов снизу -->
+    <div class="scheme">
+      <svg viewBox="0 0 1440 620" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- ===== ЛЕВО: СВАЛКА ЗАДАЧ ===== -->
+        <g>
+          <text x="20" y="-2" font-family="Unbounded" font-weight="700" font-size="12" fill="#D62219" letter-spacing="1.5">СВАЛКА · «200 ЗАДАЧ В NOTION»</text>
+        </g>
+
+        <!-- Рамка зоны свалки -->
+        <g transform="translate(20, 16)">
+          <rect x="0" y="0" width="680" height="360" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2" stroke-dasharray="4 4"/>
+        </g>
+
+        <!-- Хаотичные карточки задач (без меток, разные размеры, повороты) -->
+        <g font-family="Inter Tight" fill="#6E6963">
+          <!-- 1 -->
+          <g transform="translate(60, 50) rotate(-3)">
+            <rect x="0" y="0" width="200" height="48" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2"/>
+            <text x="12" y="22" font-size="12">собрать модельку для…</text>
+            <text x="12" y="38" font-size="11" opacity="0.5">без владельца</text>
+          </g>
+          <!-- 2 -->
+          <g transform="translate(290, 36) rotate(2)">
+            <rect x="0" y="0" width="220" height="48" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2"/>
+            <text x="12" y="22" font-size="12">подумать про сегмент…</text>
+            <text x="12" y="38" font-size="11" opacity="0.5">без срока</text>
+          </g>
+          <!-- 3 -->
+          <g transform="translate(80, 110) rotate(-2)">
+            <rect x="0" y="0" width="240" height="48" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2"/>
+            <text x="12" y="22" font-size="12">переделать таблицу когда-то</text>
+            <text x="12" y="38" font-size="11" opacity="0.5">без типа выхода</text>
+          </g>
+          <!-- 4 -->
+          <g transform="translate(360, 116) rotate(4)">
+            <rect x="0" y="0" width="200" height="48" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2"/>
+            <text x="12" y="22" font-size="12">оч важно — посмотреть</text>
+            <text x="12" y="38" font-size="11" opacity="0.5">дубль из вчерашней</text>
+          </g>
+          <!-- 5 -->
+          <g transform="translate(40, 192) rotate(1)">
+            <rect x="0" y="0" width="220" height="48" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2"/>
+            <text x="12" y="22" font-size="12">созвон с командой на след</text>
+            <text x="12" y="38" font-size="11" opacity="0.5">формулировка</text>
+          </g>
+          <!-- 6 -->
+          <g transform="translate(310, 200) rotate(-4)">
+            <rect x="0" y="0" width="250" height="48" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2"/>
+            <text x="12" y="22" font-size="12">разобраться с этим вопросом</text>
+            <text x="12" y="38" font-size="11" opacity="0.5">без действия</text>
+          </g>
+          <!-- 7 -->
+          <g transform="translate(120, 268) rotate(-1)">
+            <rect x="0" y="0" width="230" height="48" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2"/>
+            <text x="12" y="22" font-size="12">проверить тоже самое</text>
+            <text x="12" y="38" font-size="11" opacity="0.5">тоже дубль</text>
+          </g>
+          <!-- 8 -->
+          <g transform="translate(380, 268) rotate(3)">
+            <rect x="0" y="0" width="200" height="48" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2"/>
+            <text x="12" y="22" font-size="12">подготовить заметку</text>
+            <text x="12" y="38" font-size="11" opacity="0.5">кто, кому?</text>
+          </g>
+        </g>
+
+        <text x="360" y="396" font-family="Unbounded" font-weight="700" font-size="12" fill="#D62219" text-anchor="middle" letter-spacing="1">ПРИЗНАК ФЕЙКОВОГО ИСПОЛНЕНИЯ</text>
+
+        <!-- ===== РАЗДЕЛИТЕЛЬ ===== -->
+        <g transform="translate(720, 16)">
+          <line x1="0" y1="0" x2="0" y2="360" stroke="#1A1714" stroke-width="1" stroke-dasharray="4 4"/>
+          <rect x="-22" y="170" width="44" height="20" fill="#EFEBE7"/>
+          <text x="0" y="184" font-family="Unbounded" font-weight="800" font-size="11" fill="#D62219" text-anchor="middle" letter-spacing="1">→</text>
+        </g>
+
+        <!-- ===== ПРАВО: ПРОШЕДШИЕ МАРШРУТ ===== -->
+        <g>
+          <text x="740" y="-2" font-family="Unbounded" font-weight="700" font-size="12" fill="#D62219" letter-spacing="1.5">ПРОШЕДШИЕ МАРШРУТ · ОПЕРАЦИОННАЯ УПРАВЛЯЕМОСТЬ</text>
+        </g>
+
+        <!-- Рамка зоны маршрута -->
+        <g transform="translate(740, 16)">
+          <rect x="0" y="0" width="680" height="360" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+        </g>
+
+        <!-- Карточки задач с метками: владелец / срок / тип / приёмка -->
+        <g font-family="Inter Tight" fill="#1A1714">
+          <!-- T-01 -->
+          <g transform="translate(760, 40)">
+            <rect x="0" y="0" width="640" height="60" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <text x="14" y="22" font-family="JetBrains Mono" font-size="11" font-weight="600" fill="#D62219">T-01</text>
+            <text x="56" y="22" font-size="13" font-weight="600">Модель сегментации B2B-портфеля</text>
+
+            <!-- метки -->
+            <g transform="translate(14, 36)" font-family="JetBrains Mono" font-size="10" fill="#1A1714">
+              <rect x="0" y="0" width="64" height="18" fill="none" stroke="#1A1714" stroke-width="1"/>
+              <text x="6" y="13">В · ИРИНА</text>
+              <rect x="76" y="0" width="80" height="18" fill="none" stroke="#1A1714" stroke-width="1"/>
+              <text x="82" y="13">С · 02.06</text>
+              <rect x="164" y="0" width="92" height="18" fill="none" stroke="#1A1714" stroke-width="1"/>
+              <text x="170" y="13">Т · документ</text>
+            </g>
+
+            <!-- галочка приёмки -->
+            <circle cx="608" cy="30" r="14" fill="#EFEBE7" stroke="#D62219" stroke-width="1.5"/>
+            <path d="M601 30 L606 35 L615 26" stroke="#D62219" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+
+          <!-- T-02 -->
+          <g transform="translate(760, 110)">
+            <rect x="0" y="0" width="640" height="60" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <text x="14" y="22" font-family="JetBrains Mono" font-size="11" font-weight="600" fill="#D62219">T-02</text>
+            <text x="56" y="22" font-size="13" font-weight="600">Решение по запуску витрины услуг</text>
+
+            <g transform="translate(14, 36)" font-family="JetBrains Mono" font-size="10" fill="#1A1714">
+              <rect x="0" y="0" width="64" height="18" fill="none" stroke="#1A1714" stroke-width="1"/>
+              <text x="6" y="13">В · АНДРЕЙ</text>
+              <rect x="76" y="0" width="80" height="18" fill="none" stroke="#1A1714" stroke-width="1"/>
+              <text x="82" y="13">С · 28.05</text>
+              <rect x="164" y="0" width="92" height="18" fill="none" stroke="#1A1714" stroke-width="1"/>
+              <text x="170" y="13">Т · решение</text>
+            </g>
+
+            <circle cx="608" cy="30" r="14" fill="#EFEBE7" stroke="#D62219" stroke-width="1.5"/>
+            <path d="M601 30 L606 35 L615 26" stroke="#D62219" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+
+          <!-- T-03 -->
+          <g transform="translate(760, 180)">
+            <rect x="0" y="0" width="640" height="60" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <text x="14" y="22" font-family="JetBrains Mono" font-size="11" font-weight="600" fill="#D62219">T-03</text>
+            <text x="56" y="22" font-size="13" font-weight="600">Чек-лист онбординга подрядчика</text>
+
+            <g transform="translate(14, 36)" font-family="JetBrains Mono" font-size="10" fill="#1A1714">
+              <rect x="0" y="0" width="64" height="18" fill="none" stroke="#1A1714" stroke-width="1"/>
+              <text x="6" y="13">В · ОЛЬГА</text>
+              <rect x="76" y="0" width="80" height="18" fill="none" stroke="#1A1714" stroke-width="1"/>
+              <text x="82" y="13">С · 05.06</text>
+              <rect x="164" y="0" width="92" height="18" fill="none" stroke="#1A1714" stroke-width="1"/>
+              <text x="170" y="13">Т · артефакт</text>
+            </g>
+
+            <circle cx="608" cy="30" r="14" fill="#EFEBE7" stroke="#D62219" stroke-width="1.5"/>
+            <path d="M601 30 L606 35 L615 26" stroke="#D62219" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+
+          <!-- T-04 (дубль / no-op) -->
+          <g transform="translate(760, 250)" opacity="0.6">
+            <rect x="0" y="0" width="640" height="60" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.5"/>
+            <text x="14" y="22" font-family="JetBrains Mono" font-size="11" font-weight="600" fill="#6E6963">T-04</text>
+            <text x="56" y="22" font-size="13" font-weight="600" fill="#6E6963">Подготовить заметку (дубль T-01)</text>
+
+            <text x="14" y="50" font-family="JetBrains Mono" font-size="10" fill="#6E6963">отмечена как закрытая, без действия</text>
+
+            <circle cx="608" cy="30" r="14" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.5"/>
+            <path d="M601 23 L615 37 M615 23 L601 37" stroke="#B8B3AD" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </g>
+        </g>
+
+        <text x="1080" y="396" font-family="Unbounded" font-weight="700" font-size="12" fill="#D62219" text-anchor="middle" letter-spacing="1">КАЖДАЯ С ОТМЕТКОЙ ПРИЁМКИ</text>
+
+        <!-- ===== ВНИЗУ: 5 ШАГОВ МАРШРУТА ===== -->
+        <g transform="translate(0, 440)">
+          <text x="0" y="0" font-family="Unbounded" font-weight="700" font-size="11" fill="#D62219" letter-spacing="1.5">МАРШРУТ ЗАДАЧИ · 5 ОБЯЗАТЕЛЬНЫХ ШАГОВ</text>
+        </g>
+
+        <g transform="translate(0, 458)" font-family="Inter Tight">
+          <!-- 5 шагов в ряд -->
+          <g transform="translate(0, 0)">
+            <rect x="0" y="0" width="272" height="130" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="130" fill="#1A1714"/>
+            <text x="22" y="74" font-family="Unbounded" font-weight="900" font-size="20" fill="#EFEBE7" text-anchor="middle">01</text>
+            <text x="56" y="30" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.5">СБОРКА СМЫСЛА</text>
+            <text x="56" y="58" font-size="12" fill="#1A1714">задача отделена</text>
+            <text x="56" y="76" font-size="12" fill="#1A1714">от обсуждения</text>
+            <text x="56" y="94" font-size="12" fill="#1A1714">и стала действием</text>
+          </g>
+          <g transform="translate(292, 0)">
+            <rect x="0" y="0" width="272" height="130" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="130" fill="#1A1714"/>
+            <text x="22" y="74" font-family="Unbounded" font-weight="900" font-size="20" fill="#EFEBE7" text-anchor="middle">02</text>
+            <text x="56" y="30" font-family="Unbounded" font-weight="800" font-size="13" fill="#D62219" letter-spacing="0.5">АТРИБУЦИЯ</text>
+            <text x="56" y="58" font-size="12" fill="#1A1714">владелец</text>
+            <text x="56" y="76" font-size="12" fill="#1A1714">срок</text>
+            <text x="56" y="94" font-size="12" fill="#1A1714">тип выхода</text>
+          </g>
+          <g transform="translate(584, 0)">
+            <rect x="0" y="0" width="272" height="130" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="130" fill="#1A1714"/>
+            <text x="22" y="74" font-family="Unbounded" font-weight="900" font-size="20" fill="#EFEBE7" text-anchor="middle">03</text>
+            <text x="56" y="30" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.5">ФАЙЛ ПРОЕКТА</text>
+            <text x="56" y="58" font-size="12" fill="#1A1714">первичная фиксация</text>
+            <text x="56" y="76" font-size="12" fill="#1A1714">статус «открыта»</text>
+            <text x="56" y="94" font-size="12" fill="#1A1714">ссылка на источник</text>
+          </g>
+          <g transform="translate(876, 0)">
+            <rect x="0" y="0" width="272" height="130" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="130" fill="#1A1714"/>
+            <text x="22" y="74" font-family="Unbounded" font-weight="900" font-size="20" fill="#EFEBE7" text-anchor="middle">04</text>
+            <text x="56" y="30" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.5">МОСТ В БАЗУ</text>
+            <text x="56" y="58" font-size="12" fill="#1A1714">кросс-запись</text>
+            <text x="56" y="76" font-size="12" fill="#1A1714">отметка приёмки:</text>
+            <text x="56" y="94" font-size="12" fill="#1A1714">доехала / разрыв / дубль</text>
+          </g>
+          <g transform="translate(1168, 0)">
+            <rect x="0" y="0" width="272" height="130" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="130" fill="#1A1714"/>
+            <text x="22" y="74" font-family="Unbounded" font-weight="900" font-size="20" fill="#EFEBE7" text-anchor="middle">05</text>
+            <text x="56" y="30" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.5">КОНТРОЛЬ</text>
+            <text x="56" y="58" font-size="12" fill="#1A1714">кто что сделал</text>
+            <text x="56" y="76" font-size="12" fill="#1A1714">что зависло</text>
+            <text x="56" y="94" font-size="12" fill="#1A1714">что переоткрыто</text>
+          </g>
+
+          <!-- стрелки между шагами -->
+          <g stroke="#1A1714" stroke-width="1.4" fill="#1A1714">
+            <line x1="272" y1="65" x2="288" y2="65"/>
+            <polygon points="288,61 294,65 288,69"/>
+            <line x1="564" y1="65" x2="580" y2="65"/>
+            <polygon points="580,61 586,65 580,69"/>
+            <line x1="856" y1="65" x2="872" y2="65"/>
+            <polygon points="872,61 878,65 872,69"/>
+            <line x1="1148" y1="65" x2="1164" y2="65"/>
+            <polygon points="1164,61 1170,65 1164,69"/>
+          </g>
+        </g>
+
+      </svg>
+    </div>
+
+    <!-- RULE: финал ФОТ vs operating model -->
+    <div class="rule">
+      <div class="mark">!</div>
+      <div class="label">Итог</div>
+      <div class="body">
+        Если AI ведёт длинный список задач в одном месте, это бухгалтерская история.
+        <strong>Если проводит каждую задачу через маршрут с подтверждением приёмки, это операционная управляемость.</strong>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  document.fonts.ready.then(() => { document.body.dataset.fontsReady = "1"; });
+</script>
+</body>
+</html>

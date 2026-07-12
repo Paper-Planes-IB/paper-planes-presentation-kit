@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Куда вообще ставить ИИ — editorial v1</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#EFEBE7; --ink:#1A1714; --red:#D62219; --muted:#B8B3AD; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body { background: var(--paper); font-family: 'Inter Tight', system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .slide { width: 1600px; height: 1200px; position: relative; overflow: hidden; background: var(--paper); }
+  .bg { position: absolute; inset: 0; z-index: 0; }
+  .bg .marks { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; }
+  .layer { position: absolute; inset: 0; z-index: 2; padding: 58px 80px 0 80px; display: grid; grid-template-rows: auto 1fr auto; row-gap: 16px; }
+  .header { display: block; margin-bottom: 2px; }
+  .title-block { position: relative; padding-left: 26px; }
+  .title-block::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 12px; width: 6px; background: var(--red); }
+  .topline { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--red); margin-bottom: 10px; }
+  h1 { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 84px; line-height: 1.0; letter-spacing: -0.02em; text-transform: uppercase; color: var(--ink); }
+  h1 .dot { color: var(--red); }
+  .scheme { position: relative; display: flex; align-items: center; justify-content: center; }
+  .scheme svg { width: 100%; max-width: 1440px; height: auto; }
+  .rule { margin: 0 0 132px 0; border: 1.5px solid var(--ink); padding: 22px 28px; display: grid; grid-template-columns: 60px auto 1fr; gap: 28px; align-items: center; background: var(--paper); box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
+  .rule .mark { width: 56px; height: 56px; border: 2px solid var(--red); border-radius: 50%; display: grid; place-items: center; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 32px; color: var(--red); }
+  .rule .label { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; position: relative; padding-left: 16px; white-space: nowrap; }
+  .rule .label::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background: var(--red); }
+  .rule .body { font-size: 17px; line-height: 1.5; }
+  .rule .body strong { font-weight: 700; color: var(--red); }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="bg">
+    <img class="marks" src="../backgrounds/04_editorial_marks.png" alt="">
+  </div>
+
+  <div class="layer">
+
+    <div class="header">
+      <div class="title-block">
+        <div class="topline">PP.MEDIA · И_И_ · карта приоритизации</div>
+        <h1>Что значит<br>внедрить ИИ<span class="dot">.</span></h1>
+      </div>
+    </div>
+
+    <div class="scheme">
+      <svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- ============ ЛЕВО: 3 УРОВНЯ ЦЕННОСТИ (стопка сверху вниз) ============ -->
+        <text x="0" y="14" font-family="Unbounded" font-weight="700" font-size="13" fill="#D62219" letter-spacing="1.2">ТРИ УРОВНЯ ЦЕННОСТИ</text>
+
+        <!-- 1. Экономика — ворота, верх -->
+        <g transform="translate(0,30)">
+          <rect width="430" height="118" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.8"/>
+          <rect width="430" height="38" fill="#1A1714"/>
+          <text x="18" y="26" font-family="Unbounded" font-weight="800" font-size="16" fill="#EFEBE7">1 · ЭКОНОМИКА</text>
+          
+          <text x="18" y="72" font-size="16" fill="#1A1714">двигает ли это деньги.</text>
+          <text x="18" y="96" font-size="16" fill="#1A1714">первый вопрос: это окупится?</text>
+        </g>
+
+        <!-- вертикальная связка вниз -->
+        <g stroke="#1A1714" stroke-width="2" fill="#1A1714">
+          <line x1="215" y1="148" x2="215" y2="168"/><polygon points="209,168 221,168 215,178"/>
+        </g>
+
+        <!-- 2. Операции — важнейший, красный, центр; тут раскрываются 8 классов -->
+        <g transform="translate(0,180)">
+          <rect width="430" height="158" fill="#EFEBE7" stroke="#D62219" stroke-width="2.6"/>
+          <rect width="430" height="38" fill="#D62219"/>
+          <text x="18" y="26" font-family="Unbounded" font-weight="800" font-size="16" fill="#EFEBE7">2 · ОПЕРАЦИИ</text>
+          
+          <text x="18" y="72" font-size="16" fill="#1A1714">ИИ меняет, как компания</text>
+          <text x="18" y="96" font-size="16" fill="#1A1714">принимает решения и ведёт</text>
+          <text x="18" y="120" font-size="16" fill="#1A1714">процессы. здесь живут</text>
+          <text x="18" y="144" font-family="Unbounded" font-weight="800" font-size="14" fill="#D62219">8 КЛАССОВ ЗАДАЧ →</text>
+        </g>
+
+        <!-- связка вниз -->
+        <g stroke="#1A1714" stroke-width="2" fill="#1A1714">
+          <line x1="215" y1="338" x2="215" y2="358"/><polygon points="209,358 221,358 215,368"/>
+        </g>
+
+        <!-- 3. Рутина — мелкий, серый, низ -->
+        <g transform="translate(0,370)">
+          <rect width="430" height="100" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.6"/>
+          <rect width="430" height="38" fill="#B8B3AD"/>
+          <text x="18" y="26" font-family="Unbounded" font-weight="800" font-size="16" fill="#1A1714">3 · РУТИНА</text>
+          
+          <text x="18" y="68" font-size="16" fill="#6E6963">вымещение ручного труда,</text>
+          <text x="18" y="90" font-size="16" fill="#6E6963">эффекта почти не даёт</text>
+        </g>
+
+        <!-- ============ СВЯЗКА ОПЕРАЦИИ → 8 КЛАССОВ ============ -->
+        <g stroke="#D62219" stroke-width="2.6" fill="#D62219">
+          <line x1="430" y1="259" x2="500" y2="259"/><polygon points="500,252 514,259 500,266"/>
+        </g>
+
+        <!-- ============ ПРАВО: 8 КЛАССОВ ЗАДАЧ (сетка 2×4) ============ -->
+        <text x="516" y="14" font-family="Unbounded" font-weight="700" font-size="13" fill="#D62219" letter-spacing="1.2">ВОСЕМЬ КЛАССОВ ЗАДАЧ · РАСКРЫВАЮТ УРОВЕНЬ ОПЕРАЦИИ</text>
+
+        <g font-family="Inter Tight">
+          <!-- ряд 1 -->
+          <g transform="translate(516,30)">
+            <rect width="455" height="98" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <text x="14" y="28" font-family="Unbounded" font-weight="800" font-size="14" fill="#D62219">01</text>
+            <text x="48" y="28" font-family="Unbounded" font-weight="800" font-size="14" fill="#1A1714">ФОРМАЛИЗАЦИЯ</text>
+            <text x="14" y="56" font-size="14" fill="#1A1714">собрать из разрозненных входов</text>
+            <text x="14" y="78" font-size="14" fill="#1A1714">машиночитаемое ТЗ. база всего</text>
+          </g>
+          <g transform="translate(987,30)">
+            <rect width="455" height="98" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <text x="14" y="28" font-family="Unbounded" font-weight="800" font-size="14" fill="#D62219">02</text>
+            <text x="48" y="28" font-family="Unbounded" font-weight="800" font-size="14" fill="#1A1714">ВЫРАВНИВАНИЕ</text>
+            <text x="14" y="56" font-size="14" fill="#1A1714">состыковать рассинхрон:</text>
+            <text x="14" y="78" font-size="14" fill="#1A1714">продажи с производством</text>
+          </g>
+          <!-- ряд 2 -->
+          <g transform="translate(516,140)">
+            <rect width="455" height="98" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <text x="14" y="28" font-family="Unbounded" font-weight="800" font-size="14" fill="#D62219">03</text>
+            <text x="48" y="28" font-family="Unbounded" font-weight="800" font-size="14" fill="#1A1714">УСКОРЕНИЕ</text>
+            <text x="14" y="56" font-size="14" fill="#1A1714">сжать цикл: сделку, вывод</text>
+            <text x="14" y="78" font-size="14" fill="#1A1714">продукта, время до ценности</text>
+          </g>
+          <g transform="translate(987,140)">
+            <rect width="455" height="98" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <text x="14" y="28" font-family="Unbounded" font-weight="800" font-size="14" fill="#D62219">04</text>
+            <text x="48" y="28" font-family="Unbounded" font-weight="800" font-size="14" fill="#1A1714">ЭКСПЕРТИЗА И РЫНОК</text>
+            <text x="14" y="56" font-size="14" fill="#1A1714">столкнуть экспертизу компании</text>
+            <text x="14" y="78" font-size="14" fill="#1A1714">с внешними данными</text>
+          </g>
+          <!-- ряд 3 -->
+          <g transform="translate(516,250)">
+            <rect width="455" height="98" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <text x="14" y="28" font-family="Unbounded" font-weight="800" font-size="14" fill="#D62219">05</text>
+            <text x="48" y="28" font-family="Unbounded" font-weight="800" font-size="14" fill="#1A1714">КОНТРОЛЬ КАЧЕСТВА</text>
+            <text x="14" y="56" font-size="14" fill="#1A1714">проверка артефактов и ранние</text>
+            <text x="14" y="78" font-size="14" fill="#1A1714">сигналы, пока не стало убытком</text>
+          </g>
+          <g transform="translate(987,250)">
+            <rect width="455" height="98" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <text x="14" y="28" font-family="Unbounded" font-weight="800" font-size="14" fill="#D62219">06</text>
+            <text x="48" y="28" font-family="Unbounded" font-weight="800" font-size="14" fill="#1A1714">ЗНАНИЯ И ЛЮДИ</text>
+            <text x="14" y="56" font-size="14" fill="#1A1714">обучение, адаптация, передача</text>
+            <text x="14" y="78" font-size="14" fill="#1A1714">знаний, найм как процесс</text>
+          </g>
+          <!-- ряд 4 -->
+          <g transform="translate(516,360)">
+            <rect width="455" height="98" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <text x="14" y="28" font-family="Unbounded" font-weight="800" font-size="14" fill="#D62219">07</text>
+            <text x="48" y="28" font-family="Unbounded" font-weight="800" font-size="14" fill="#1A1714">КЛИЕНТСКИЙ СЕРВИС</text>
+            <text x="14" y="56" font-size="14" fill="#1A1714">работа до продажи и после:</text>
+            <text x="14" y="78" font-size="14" fill="#1A1714">квалификация, удержание</text>
+          </g>
+          <g transform="translate(987,360)">
+            <rect width="455" height="98" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <text x="14" y="28" font-family="Unbounded" font-weight="800" font-size="14" fill="#D62219">08</text>
+            <text x="48" y="28" font-family="Unbounded" font-weight="800" font-size="14" fill="#1A1714">СМЫСЛОВАЯ РАБОТА</text>
+            <text x="14" y="56" font-size="14" fill="#1A1714">контент, аналитика, тексты —</text>
+            <text x="14" y="78" font-size="14" fill="#1A1714">где нужен смысл, форма вторична</text>
+          </g>
+        </g>
+
+        <!-- ============ НИЗ: признак неправильного входа ============ -->
+        <g transform="translate(0,492)">
+          <rect x="0" y="0" width="1440" height="86" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.4" stroke-dasharray="5 4"/>
+          <text x="20" y="30" font-family="Unbounded" font-weight="800" font-size="13" fill="#D62219" letter-spacing="0.5">ПРИЗНАК МНИМОГО ВНЕДРЕНИЯ</text>
+          <text x="20" y="58" font-size="16" fill="#1A1714">«Давайте внедрим ИИ в продажи». Продажи это функция, а никакая не задача.</text>
+          <text x="20" y="80" font-size="16" fill="#1A1714">Пока не назван класс и уровень ценности — внедрять нечего, получится бот ради бота.</text>
+        </g>
+
+      </svg>
+    </div>
+
+    <!-- RULE: финал -->
+    <div class="rule">
+      <div class="mark">!</div>
+      <div class="label">Итог</div>
+      <div class="body">
+        Сначала карта, потом инструмент. Когда видно класс задачи и её уровень, выбор инструмента становится мелким техническим вопросом.
+        <strong>А без карты любой инструмент ставят наугад.</strong>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  document.fonts.ready.then(() => { document.body.dataset.fontsReady = "1"; });
+</script>
+</body>
+</html>

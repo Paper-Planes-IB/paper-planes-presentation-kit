@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>AI и ручной старший труд — editorial v3</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EFEBE7;
+    --ink: #1A1714;
+    --red: #D62219;
+    --muted: #B8B3AD;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body {
+    background: var(--paper);
+    font-family: 'Inter Tight', system-ui, sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .slide {
+    width: 1600px;
+    height: 1200px;
+    position: relative;
+    overflow: hidden;
+    background: var(--paper);
+  }
+
+  .bg { position: absolute; inset: 0; z-index: 0; }
+  .bg .marks {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: fill;
+  }
+
+  .layer {
+    position: absolute; inset: 0;
+    z-index: 2;
+    padding: 72px 80px 0 80px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    row-gap: 28px;
+  }
+
+  .header { display: block; margin-bottom: 8px; }
+  .title-block { position: relative; padding-left: 26px; }
+  .title-block::before {
+    content: "";
+    position: absolute; left: 0; top: 16px; bottom: 28px;
+    width: 6px; background: var(--red);
+  }
+  .topline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--red);
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: 68px;
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  h1 .dot { color: var(--red); }
+  h1 .accent { color: var(--red); }
+
+  .scheme {
+    position: relative; margin: 0; padding: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .scheme svg { width: 100%; max-width: 1440px; height: auto; }
+
+  .rule {
+    margin: 0 0 64px 0;
+    border: 1.5px solid var(--ink);
+    padding: 22px 28px;
+    display: grid;
+    grid-template-columns: 60px auto 1fr;
+    gap: 28px;
+    align-items: center;
+    background: var(--paper);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+  }
+  .rule .mark {
+    width: 56px; height: 56px;
+    border: 2px solid var(--red); border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800; font-size: 32px; color: var(--red);
+  }
+  .rule .label {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700; font-size: 14px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    position: relative; padding-left: 16px;
+    white-space: nowrap;
+  }
+  .rule .label::before {
+    content: ""; position: absolute;
+    left: 0; top: 50%; transform: translateY(-50%);
+    width: 6px; height: 6px; background: var(--red);
+  }
+  .rule .body { font-size: 15px; line-height: 1.5; }
+  .rule .body strong {
+    font-weight: 700; color: var(--red);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    font-family: 'Unbounded', sans-serif; font-size: 12.5px;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="bg">
+    <img class="marks" src="../backgrounds/08_thin_lines_right.png" alt="">
+  </div>
+
+  <div class="layer">
+
+    <div class="header">
+      <div class="title-block">
+        <div class="topline">PP.MEDIA · И_И_ · выпуск 14</div>
+        <h1>AI сокращает<br>не людей, <span class="accent">а ручной труд</span><br>старших сотрудников<span class="dot">.</span></h1>
+      </div>
+    </div>
+
+    <!-- СХЕМА: 3 зоны (метрика / признак фейка / алгоритм) + ось загрузки сверху -->
+    <div class="scheme">
+      <svg viewBox="0 0 1440 580" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- ===== ВЕРХ: ось senior review load с порогом 30% ===== -->
+        <g>
+          <text x="0" y="-2" font-family="Unbounded" font-weight="700" font-size="11" fill="#D62219" letter-spacing="1.5">ОБЪЕКТ УПРАВЛЕНИЯ · SENIOR REVIEW LOAD</text>
+
+          <!-- ось -->
+          <line x1="0" y1="40" x2="1440" y2="40" stroke="#1A1714" stroke-width="1.5"/>
+
+          <!-- деления -->
+          <g font-family="JetBrains Mono" font-size="11" fill="#1A1714">
+            <line x1="0" y1="36" x2="0" y2="44" stroke="#1A1714" stroke-width="1.5"/>
+            <text x="0" y="62">0%</text>
+            <line x1="360" y1="36" x2="360" y2="44" stroke="#1A1714" stroke-width="1.5"/>
+            <text x="360" y="62" text-anchor="middle">10%</text>
+            <line x1="720" y1="36" x2="720" y2="44" stroke="#1A1714" stroke-width="1.5"/>
+            <text x="720" y="62" text-anchor="middle">20%</text>
+            <!-- порог 30% -->
+            <line x1="1080" y1="20" x2="1080" y2="56" stroke="#D62219" stroke-width="2"/>
+            <text x="1080" y="14" font-family="Unbounded" font-weight="800" font-size="12" fill="#D62219" text-anchor="middle">ПОРОГ</text>
+            <text x="1080" y="62" font-family="Unbounded" font-weight="800" font-size="13" fill="#D62219" text-anchor="middle">30%</text>
+            <line x1="1440" y1="36" x2="1440" y2="44" stroke="#1A1714" stroke-width="1.5"/>
+            <text x="1440" y="62" text-anchor="end">50%+</text>
+          </g>
+
+          <!-- закраска: зелёная зона до 30% и красная после -->
+          <rect x="0" y="32" width="1080" height="2" fill="#1A1714"/>
+          <rect x="1080" y="32" width="360" height="2" fill="#D62219"/>
+
+          <text x="540" y="86" font-family="Inter Tight" font-size="13" fill="#1A1714" text-anchor="middle" font-weight="500">часы в неделе старшего на правки чужих, повторную сборку, ответы на однотипные, поиск в архиве</text>
+        </g>
+
+        <!-- ===== ДВЕ ЗОНЫ: метрика (что считаем) + признак фейка ===== -->
+
+        <!-- LEFT: senior review load в деталях (компактнее) -->
+        <g transform="translate(0, 110)">
+          <rect x="0" y="0" width="700" height="170" fill="#EFEBE7" stroke="#1A1714" stroke-width="2"/>
+          <rect x="0" y="0" width="700" height="38" fill="#1A1714"/>
+          <text x="20" y="25" font-family="Unbounded" font-weight="800" font-size="16" fill="#EFEBE7" letter-spacing="1">SENIOR REVIEW LOAD</text>
+          <text x="680" y="25" font-family="Inter Tight" font-size="12" fill="#EFEBE7" text-anchor="end">измеряемая величина</text>
+
+          <text x="20" y="60" font-family="Inter Tight" font-size="13" fill="#1A1714" font-weight="500">Что считаем у каждого старшего:</text>
+
+          <g font-family="Inter Tight" font-size="13" fill="#1A1714" transform="translate(20, 78)">
+            <rect x="0" y="0" width="3" height="3" fill="#D62219"/>
+            <text x="12" y="6">правки чужих текстов и доделка за командой</text>
+            <rect x="0" y="20" width="3" height="3" fill="#D62219"/>
+            <text x="12" y="26">повторная сборка по уже сделанному стандарту</text>
+            <rect x="0" y="40" width="3" height="3" fill="#D62219"/>
+            <text x="12" y="46">ответы на однотипные вопросы младших</text>
+            <rect x="0" y="60" width="3" height="3" fill="#D62219"/>
+            <text x="12" y="66">поиск похожей фактуры в архиве проектов</text>
+          </g>
+
+        </g>
+
+        <!-- RIGHT: признак фейка -->
+        <g transform="translate(740, 110)">
+          <rect x="0" y="0" width="700" height="170" fill="#EFEBE7" stroke="#D62219" stroke-width="2"/>
+          <rect x="0" y="0" width="700" height="38" fill="#D62219"/>
+          <text x="20" y="25" font-family="Unbounded" font-weight="800" font-size="16" fill="#EFEBE7" letter-spacing="1">ПРИЗНАК ФЕЙКОВОЙ АВТОМАТИЗАЦИИ</text>
+
+          <text x="20" y="60" font-family="Inter Tight" font-size="13" fill="#1A1714" font-weight="500">Симптом, который виден за неделю работы:</text>
+
+          <g font-family="Inter Tight" font-size="13" fill="#1A1714" transform="translate(20, 78)">
+            <rect x="0" y="0" width="3" height="3" fill="#D62219"/>
+            <text x="12" y="6" font-weight="600">старший продолжает править всё, что выходит из системы</text>
+            <rect x="0" y="20" width="3" height="3" fill="#D62219"/>
+            <text x="12" y="26">скилл написан, агент запущен, демо красивое</text>
+            <rect x="0" y="40" width="3" height="3" fill="#D62219"/>
+            <text x="12" y="46">финальное качество собирается руками senior'а</text>
+            <rect x="0" y="60" width="3" height="3" fill="#D62219"/>
+            <text x="12" y="66">черновиков больше, ручную доработку не сняли</text>
+          </g>
+
+        </g>
+
+        <!-- ===== НИЖНЯЯ ПОЛОСА: АЛГОРИТМ 5 ШАГОВ ===== -->
+
+        <g transform="translate(0, 312)">
+          <text x="0" y="0" font-family="Unbounded" font-weight="700" font-size="11" fill="#D62219" letter-spacing="1.5">АЛГОРИТМ ДЛЯ РУКОВОДИТЕЛЯ</text>
+        </g>
+
+        <!-- 5 нумерованных карточек шагов (компактнее) -->
+        <g transform="translate(0, 332)">
+          <!-- 01 ЗАМЕРИТЬ -->
+          <g transform="translate(0, 0)">
+            <rect x="0" y="0" width="272" height="156" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.8"/>
+            <rect x="0" y="0" width="44" height="156" fill="#1A1714"/>
+            <text x="22" y="86" font-family="Unbounded" font-weight="900" font-size="20" fill="#EFEBE7" text-anchor="middle">01</text>
+            <text x="56" y="30" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.5">ЗАМЕРИТЬ</text>
+            <text x="56" y="48" font-family="Inter Tight" font-size="11" fill="#6E6963">базовая фотография</text>
+            <g font-family="Inter Tight" font-size="12" fill="#1A1714" transform="translate(56, 68)">
+              <text x="0" y="0">тайм-лог</text>
+              <text x="0" y="18">по каждому</text>
+              <text x="0" y="36">старшему</text>
+              <text x="0" y="54">за две недели</text>
+            </g>
+          </g>
+          <!-- 02 НАЙТИ -->
+          <g transform="translate(292, 0)">
+            <rect x="0" y="0" width="272" height="156" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.8"/>
+            <rect x="0" y="0" width="44" height="156" fill="#1A1714"/>
+            <text x="22" y="86" font-family="Unbounded" font-weight="900" font-size="20" fill="#EFEBE7" text-anchor="middle">02</text>
+            <text x="56" y="30" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.5">НАЙТИ</text>
+            <text x="56" y="48" font-family="Inter Tight" font-size="11" fill="#6E6963">повторяемую операцию</text>
+            <g font-family="Inter Tight" font-size="12" fill="#1A1714" transform="translate(56, 68)">
+              <text x="0" y="0">одна операция,</text>
+              <text x="0" y="18">которая повторяется</text>
+              <text x="0" y="36">чаще всего</text>
+              <text x="0" y="54">и съедает старшего</text>
+            </g>
+          </g>
+          <!-- 03 ОПИСАТЬ -->
+          <g transform="translate(584, 0)">
+            <rect x="0" y="0" width="272" height="156" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.8"/>
+            <rect x="0" y="0" width="44" height="156" fill="#1A1714"/>
+            <text x="22" y="86" font-family="Unbounded" font-weight="900" font-size="20" fill="#EFEBE7" text-anchor="middle">03</text>
+            <text x="56" y="30" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.5">ОПИСАТЬ</text>
+            <text x="56" y="48" font-family="Inter Tight" font-size="11" fill="#6E6963">стандарт качества</text>
+            <g font-family="Inter Tight" font-size="12" fill="#1A1714" transform="translate(56, 68)">
+              <text x="0" y="0">так, чтобы работал</text>
+              <text x="0" y="18">без автора</text>
+              <text x="0" y="36">и любого старшего</text>
+              <text x="0" y="54">в команде</text>
+            </g>
+          </g>
+          <!-- 04 ПЕРЕНЕСТИ -->
+          <g transform="translate(876, 0)">
+            <rect x="0" y="0" width="272" height="156" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.8"/>
+            <rect x="0" y="0" width="44" height="156" fill="#1A1714"/>
+            <text x="22" y="86" font-family="Unbounded" font-weight="900" font-size="20" fill="#EFEBE7" text-anchor="middle">04</text>
+            <text x="56" y="30" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.5">ПЕРЕНЕСТИ</text>
+            <text x="56" y="48" font-family="Inter Tight" font-size="11" fill="#6E6963">в исполняемый скилл</text>
+            <g font-family="Inter Tight" font-size="12" fill="#1A1714" transform="translate(56, 68)">
+              <text x="0" y="0">с человеческой</text>
+              <text x="0" y="18">проверкой</text>
+              <text x="0" y="36">на выходе</text>
+              <text x="0" y="54">(HITL-гейт)</text>
+            </g>
+          </g>
+          <!-- 05 ЗАМЕРИТЬ СНОВА -->
+          <g transform="translate(1168, 0)">
+            <rect x="0" y="0" width="272" height="156" fill="#EFEBE7" stroke="#D62219" stroke-width="2"/>
+            <rect x="0" y="0" width="44" height="156" fill="#D62219"/>
+            <text x="22" y="86" font-family="Unbounded" font-weight="900" font-size="20" fill="#EFEBE7" text-anchor="middle">05</text>
+            <text x="56" y="30" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.5">ЗАМЕРИТЬ</text>
+            <text x="56" y="44" font-family="Unbounded" font-weight="800" font-size="13" fill="#D62219" letter-spacing="0.5">СНОВА</text>
+            <g font-family="Inter Tight" font-size="12" fill="#1A1714" transform="translate(56, 68)">
+              <text x="0" y="0" font-weight="600">упал — двигаться</text>
+              <text x="0" y="18">по следующей;</text>
+              <text x="0" y="36">не упал —</text>
+              <text x="0" y="54" font-weight="600">пересобрать скилл</text>
+            </g>
+          </g>
+
+          <!-- Соединительные стрелки между шагами -->
+          <g stroke="#1A1714" stroke-width="1.4" fill="#1A1714">
+            <line x1="272" y1="78" x2="288" y2="78"/>
+            <polygon points="288,74 294,78 288,82"/>
+            <line x1="564" y1="78" x2="580" y2="78"/>
+            <polygon points="580,74 586,78 580,82"/>
+            <line x1="856" y1="78" x2="872" y2="78"/>
+            <polygon points="872,74 878,78 872,82"/>
+            <line x1="1148" y1="78" x2="1164" y2="78"/>
+            <polygon points="1164,74 1170,78 1164,82"/>
+          </g>
+        </g>
+
+
+      </svg>
+    </div>
+
+    <!-- RULE: финал ФОТ vs operating model -->
+    <div class="rule">
+      <div class="mark">!</div>
+      <div class="label">Итог</div>
+      <div class="body">
+        Если AI снижает только ФОТ, это бухгалтерская история.
+        <strong>Если он снижает senior review load при сохранении качества, это сдвиг operating model.</strong>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  document.fonts.ready.then(() => { document.body.dataset.fontsReady = "1"; });
+</script>
+</body>
+</html>

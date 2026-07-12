@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#F8F5ED; --ink:#1A1714; --red:#E84A38; --muted:#9A958E; --line:#1A1714; --grid:rgba(184,179,173,0.20); }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html,body { width:100%; height:100%; }
+  body { background:var(--paper); font-family:'Inter Tight',system-ui,sans-serif; color:var(--ink); -webkit-font-smoothing:antialiased; }
+  .slide { width:1680px; height:960px; position:relative; overflow:hidden; padding:54px 64px 56px;
+    background-color:var(--paper);
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:48px 48px; }
+
+  .eyebrow { font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--red); margin-bottom:8px; }
+  h1 { font-family:'Oswald',sans-serif; font-weight:700; font-size:58px; line-height:1.0; letter-spacing:-0.01em; text-transform:uppercase; }
+  .sub { font-family:'Inter Tight'; font-weight:500; font-size:21px; color:#555049; margin-top:8px; }
+  h1 .r { color:var(--red); }
+
+  .cols { display:grid; grid-template-columns:560px 1fr; gap:34px; margin-top:34px; height:720px; }
+  .panel { border:1.5px solid var(--line); border-radius:3px; padding:30px 32px; display:flex; flex-direction:column; position:relative; background:rgba(248,245,237,0.55); }
+  .pnum { position:relative; display:flex; align-items:center; gap:18px; margin-bottom:22px; }
+  .pnum .n { width:54px; height:54px; background:var(--ink); color:var(--paper); font-family:'Oswald'; font-weight:700; font-size:28px; display:grid; place-items:center; }
+  .pnum .t { font-family:'Oswald'; font-weight:700; font-size:30px; text-transform:uppercase; line-height:1; }
+  .pnum .c { font-family:'Inter Tight'; font-size:16px; color:var(--muted); margin-top:4px; }
+
+  .people { display:flex; justify-content:center; gap:6px; margin:6px 0 14px; }
+  .vector { text-align:center; font-family:'Oswald'; font-weight:600; font-size:21px; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:22px; }
+  .vector .r { color:var(--red); }
+
+  .check { list-style:none; display:flex; flex-direction:column; gap:0; }
+  .check li { display:flex; align-items:center; gap:14px; padding:13px 4px; border-bottom:1px solid rgba(154,149,142,0.32); font-size:19px; }
+  .check li:last-child { border-bottom:none; }
+  .check .box { width:18px; height:18px; border:2px solid var(--ink); flex:0 0 auto; }
+  .check li.acc .box { border-color:var(--red); background:var(--red); }
+  .check li.acc { color:var(--ink); font-weight:600; }
+
+  .rule { margin-top:auto; border:1.5px solid var(--ink); padding:16px 20px; display:flex; align-items:center; gap:18px; }
+  .rule .m { width:42px; height:42px; flex:0 0 auto; border:2px solid var(--red); border-radius:50%; display:grid; place-items:center; font-family:'Oswald'; font-weight:700; font-size:26px; color:var(--red); }
+  .rule .b { font-size:18px; line-height:1.35; }
+  .rule .b strong { color:var(--red); font-weight:600; }
+
+  /* panel 02 */
+  .scheme { flex:1; position:relative; }
+  .lane { position:absolute; left:0; right:0; }
+  .role { border:1.5px solid var(--line); background:var(--paper); padding:13px 16px 14px; position:relative; }
+  .role::before { content:""; position:absolute; left:0; top:0; bottom:0; width:7px; background:var(--red); }
+  .role.key::before { background:var(--red); }
+  .role h4 { font-family:'Oswald'; font-weight:600; font-size:19px; text-transform:uppercase; letter-spacing:0.3px; padding-left:8px; }
+  .role p { font-size:15px; line-height:1.32; color:#3a352f; margin-top:5px; padding-left:8px; }
+
+  .center { position:absolute; width:150px; height:150px; border:2px solid var(--red); border-radius:50%; display:grid; place-items:center; text-align:center; background:var(--paper); }
+  .center span { font-family:'Oswald'; font-weight:700; font-size:19px; text-transform:uppercase; color:var(--red); line-height:1.05; }
+
+  .laneCaption { text-align:center; font-family:'Inter Tight'; font-weight:600; font-size:17px; }
+  .laneCaption .r { color:var(--red); }
+  .steps { display:grid; grid-template-columns:repeat(6,1fr); gap:0; margin-top:14px; }
+  .step { padding:0 12px; text-align:center; position:relative; }
+  .step .dot { width:13px; height:13px; border:2px solid var(--red); border-radius:50%; margin:0 auto 12px; background:var(--paper); }
+  .step .tx { font-size:13.5px; line-height:1.3; color:#3a352f; }
+  .stepline { position:absolute; top:6px; left:8%; right:8%; height:2px; background:var(--muted); opacity:0.5; }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="eyebrow">ILYA BALAHNIN · стратегическая сессия</div>
+  <h1>Кого позвать на стратегическую сессию<span class="r">,</span></h1>
+  <div class="sub">чтобы стратегия потом не затормозила на внедрении</div>
+
+  <div class="cols">
+
+    <!-- 01 -->
+    <div class="panel">
+      <div class="pnum">
+        <div class="n">01</div>
+        <div>
+          <div class="t">Кто выбирает</div>
+          <div class="c">определяют направление развития</div>
+        </div>
+      </div>
+
+      <div class="people">
+        <svg width="430" height="110" viewBox="0 0 430 110" fill="none">
+          <g stroke="#1A1714" stroke-width="3" fill="none">
+            <circle cx="90" cy="34" r="22"/><path d="M52 104 C52 74 128 74 128 104"/>
+            <circle cx="215" cy="28" r="26"/><path d="M168 104 C168 68 262 68 262 104"/>
+            <circle cx="340" cy="34" r="22"/><path d="M302 104 C302 74 378 74 378 104"/>
+          </g>
+          <path d="M215 56 l9 14 -9 14 -9 -14 z" fill="#E84A38"/>
+        </svg>
+      </div>
+      <div class="vector">Задают <span class="r">вектор</span> и принимают <span class="r">решение</span></div>
+
+      <ul class="check">
+        <li class="acc"><span class="box"></span>Собственник и акционеры</li>
+        <li class="acc"><span class="box"></span>Топ-команда</li>
+        <li><span class="box"></span>Руководители ключевых направлений</li>
+        <li><span class="box"></span>Что приносят: сегмент, УТП, первые клиенты</li>
+        <li><span class="box"></span>Право выбрать направление развития</li>
+      </ul>
+
+      <div class="rule">
+        <div class="m">!</div>
+        <div class="b">Они отвечают на вопрос <strong>куда идём и зачем</strong></div>
+      </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="panel">
+      <div class="pnum">
+        <div class="n">02</div>
+        <div>
+          <div class="t">Кого ещё позвать</div>
+          <div class="c">кто доведёт решение до исполнения</div>
+        </div>
+      </div>
+
+      <div class="scheme">
+        <!-- left roles -->
+        <div class="role" style="position:absolute; left:0; top:6px; width:300px;">
+          <h4>Юрист</h4><p>где граница: что именно обещаем клиенту</p>
+        </div>
+        <div class="role" style="position:absolute; left:0; top:104px; width:300px;">
+          <h4>Финансовый директор</h4><p>что считать выручкой, куда относить затраты, какой документ закрывает этап</p>
+        </div>
+        <div class="role" style="position:absolute; left:0; top:222px; width:300px;">
+          <h4>IT и данные</h4><p>доступ к данным и сервисам, которых раньше не было</p>
+        </div>
+
+        <!-- center -->
+        <div class="center" style="left:362px; top:80px;"><span>Новое<br>направление</span></div>
+
+        <!-- right roles -->
+        <div class="role key" style="position:absolute; right:0; top:6px; width:320px;">
+          <h4>Ответственный за поставщиков</h4><p>кто и по какому критерию меняет поставщика</p>
+        </div>
+        <div class="role key" style="position:absolute; right:0; top:120px; width:320px;">
+          <h4>Владелец результата</h4><p>права: менять срок, просить замену, видеть статус и фактическое исполнение</p>
+        </div>
+
+        <!-- connectors -->
+        <svg style="position:absolute; left:0; top:0; width:100%; height:300px; pointer-events:none;" fill="none">
+          <g stroke="#1A1714" stroke-width="2">
+            <path d="M300 40 H360"/><path d="M300 150 H360"/><path d="M300 258 C 340 258 340 150 360 150"/>
+          </g>
+          <g stroke="#E84A38" stroke-width="2">
+            <path d="M512 150 C 560 150 560 50 600 50" marker-end="url(#a)"/>
+            <path d="M512 150 C 560 150 560 165 600 165" marker-end="url(#a)"/>
+          </g>
+          <defs><marker id="a" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto"><path d="M0 0 L8 4.5 L0 9 z" fill="#E84A38"/></marker></defs>
+          <polygon points="360,40 350,35 350,45" fill="#1A1714"/>
+          <polygon points="360,150 350,145 350,155" fill="#1A1714"/>
+        </svg>
+
+        <!-- bottom lane -->
+        <div style="position:absolute; left:0; right:0; top:320px;">
+          <div class="laneCaption">Отвечают за то, <span class="r">как</span> и <span class="r">на каких условиях</span> внедряем решение</div>
+          <div class="steps">
+            <div class="step"><div class="stepline"></div><div class="dot"></div><div class="tx">кто обещает результат и берёт ответственность</div></div>
+            <div class="step"><div class="stepline"></div><div class="dot"></div><div class="tx">каким документом закрывается этап</div></div>
+            <div class="step"><div class="stepline"></div><div class="dot"></div><div class="tx">затраты и экономика исполнения</div></div>
+            <div class="step"><div class="stepline"></div><div class="dot"></div><div class="tx">поставщик и кто может его менять</div></div>
+            <div class="step"><div class="stepline"></div><div class="dot"></div><div class="tx">полномочия и доступ к данным</div></div>
+            <div class="step"><div class="dot"></div><div class="tx">решение в договор, оплату и пилот</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="m">!</div>
+        <div class="b">Звать не для статуса, а в тот блок, где решение ещё <strong>можно уточнить</strong> — до того как оно станет заявкой, спором или срочной задачей</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script>document.fonts.ready.then(()=>{document.body.dataset.fontsReady="1";});</script>
+</body>
+</html>

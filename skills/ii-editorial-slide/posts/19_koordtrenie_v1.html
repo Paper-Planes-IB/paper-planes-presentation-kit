@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Координационное трение — editorial v1</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#EFEBE7; --ink:#1A1714; --red:#D62219; --muted:#B8B3AD; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body { background: var(--paper); font-family: 'Inter Tight', system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .slide { width: 1600px; height: 1200px; position: relative; overflow: hidden; background: var(--paper); }
+  .bg { position: absolute; inset: 0; z-index: 0; }
+  .bg .marks { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; }
+  .layer { position: absolute; inset: 0; z-index: 2; padding: 56px 80px 0 80px; display: grid; grid-template-rows: auto 1fr auto; row-gap: 14px; }
+  .header { display: block; margin-bottom: 2px; }
+  .title-block { position: relative; padding-left: 26px; }
+  .title-block::before { content: ""; position: absolute; left: 0; top: 10px; bottom: 14px; width: 6px; background: var(--red); }
+  .topline { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--red); margin-bottom: 10px; }
+  h1 { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 68px; line-height: 1.02; letter-spacing: -0.02em; text-transform: uppercase; color: var(--ink); }
+  h1 .dot { color: var(--red); }
+  .scheme { position: relative; display: flex; align-items: center; justify-content: center; }
+  .scheme svg { width: 100%; max-width: 1440px; height: auto; }
+  .rule { margin: 0 0 92px 0; border: 1.5px solid var(--ink); padding: 22px 28px; display: grid; grid-template-columns: 60px auto 1fr; gap: 28px; align-items: center; background: var(--paper); box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
+  .rule .mark { width: 56px; height: 56px; border: 2px solid var(--red); border-radius: 50%; display: grid; place-items: center; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 32px; color: var(--red); }
+  .rule .label { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; position: relative; padding-left: 16px; white-space: nowrap; }
+  .rule .label::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background: var(--red); }
+  .rule .body { font-size: 17px; line-height: 1.5; }
+  .rule .body strong { font-weight: 700; color: var(--red); }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="bg">
+    <img class="marks" src="../backgrounds/09_grid_corner_glow.png" alt="">
+  </div>
+
+  <div class="layer">
+
+    <div class="header">
+      <div class="title-block">
+        <div class="topline">PP.MEDIA · И_И_ · эффект автоматизации</div>
+        <h1>Координационное<br>трение<span class="dot">.</span></h1>
+      </div>
+    </div>
+
+    <div class="scheme">
+      <svg viewBox="0 0 1440 560" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- ===================== ЛЕВО: ИИ В ГОТОВОМ ПРОЦЕССЕ ===================== -->
+        <text x="20" y="14" font-family="Unbounded" font-weight="700" font-size="14" fill="#D62219" letter-spacing="1">ИИ В ГОТОВОМ ПРОЦЕССЕ</text>
+        <rect x="20" y="24" width="660" height="364" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2" stroke-dasharray="5 4"/>
+
+        <!-- бот воткнут точечно в один этап -->
+        <g>
+          <rect x="220" y="64" width="92" height="36" fill="#EFEBE7" stroke="#D62219" stroke-width="1.6" stroke-dasharray="4 3"/>
+          <text x="266" y="88" font-family="Unbounded" font-weight="700" font-size="15" fill="#D62219" text-anchor="middle">бот</text>
+          <line x1="266" y1="100" x2="266" y2="118" stroke="#D62219" stroke-width="1.4" stroke-dasharray="3 3"/>
+        </g>
+
+        <!-- этапы (крупные) -->
+        <g font-family="Inter Tight">
+          <g>
+            <rect x="36" y="118" width="128" height="104" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.6"/>
+            <text x="100" y="166" font-size="17" fill="#1A1714" text-anchor="middle">этап</text>
+            <text x="100" y="192" font-family="JetBrains Mono" font-size="13" fill="#9A958E" text-anchor="middle">1</text>
+          </g>
+          <g>
+            <rect x="202" y="118" width="128" height="104" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.6"/>
+            <text x="266" y="166" font-size="17" fill="#1A1714" text-anchor="middle">этап</text>
+            <text x="266" y="192" font-family="JetBrains Mono" font-size="13" fill="#9A958E" text-anchor="middle">2</text>
+          </g>
+          <g>
+            <rect x="368" y="118" width="128" height="104" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.6"/>
+            <text x="432" y="166" font-size="17" fill="#1A1714" text-anchor="middle">этап</text>
+            <text x="432" y="192" font-family="JetBrains Mono" font-size="13" fill="#9A958E" text-anchor="middle">3</text>
+          </g>
+          <g>
+            <rect x="534" y="118" width="128" height="104" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.6"/>
+            <text x="598" y="166" font-size="17" fill="#1A1714" text-anchor="middle">этап</text>
+            <text x="598" y="192" font-family="JetBrains Mono" font-size="13" fill="#9A958E" text-anchor="middle">4</text>
+          </g>
+        </g>
+
+        <!-- трение на стыках: крупные красные зазубрины -->
+        <g stroke="#D62219" stroke-width="2.6" fill="none">
+          <path d="M177 120 l14 14 l-14 14 l14 14 l-14 14 l14 14 l-14 14"/>
+          <path d="M343 120 l14 14 l-14 14 l14 14 l-14 14 l14 14 l-14 14"/>
+          <path d="M509 120 l14 14 l-14 14 l14 14 l-14 14 l14 14 l-14 14"/>
+        </g>
+        <g font-family="JetBrains Mono" font-size="12" fill="#D62219" text-anchor="middle">
+          <text x="183" y="244">стык</text>
+          <text x="349" y="244">стык</text>
+          <text x="515" y="244">стык</text>
+        </g>
+
+        <text x="350" y="290" font-family="Inter Tight" font-size="14" fill="#6E6963" text-anchor="middle">бот ускорил один этап, склейка на стыках осталась</text>
+        <text x="350" y="360" font-family="Unbounded" font-weight="800" font-size="15" fill="#D62219" text-anchor="middle" letter-spacing="0.5">ТРЕНИЕ НА СТЫКАХ ОСТАЛОСЬ</text>
+
+        <!-- ===================== РАЗДЕЛИТЕЛЬ ===================== -->
+        <g>
+          <line x1="710" y1="24" x2="710" y2="388" stroke="#1A1714" stroke-width="1" stroke-dasharray="4 4"/>
+          <rect x="686" y="194" width="48" height="24" fill="#EFEBE7"/>
+          <text x="710" y="212" font-family="Unbounded" font-weight="800" font-size="16" fill="#D62219" text-anchor="middle">→</text>
+        </g>
+
+        <!-- ===================== ПРАВО: ПРОЦЕСС СОБРАН МАШИНОЧИТАЕМЫМ ===================== -->
+        <text x="740" y="14" font-family="Unbounded" font-weight="700" font-size="14" fill="#D62219" letter-spacing="1">ПРОЦЕСС СОБРАН МАШИНОЧИТАЕМЫМ</text>
+        <rect x="740" y="24" width="680" height="364" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+
+        <!-- этапы (крупные) -->
+        <g font-family="Inter Tight">
+          <g>
+            <rect x="766" y="118" width="128" height="104" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.6"/>
+            <text x="830" y="166" font-size="17" fill="#1A1714" text-anchor="middle">этап</text>
+            <text x="830" y="192" font-family="JetBrains Mono" font-size="13" fill="#9A958E" text-anchor="middle">1</text>
+          </g>
+          <g>
+            <rect x="932" y="118" width="128" height="104" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.6"/>
+            <text x="996" y="166" font-size="17" fill="#1A1714" text-anchor="middle">этап</text>
+            <text x="996" y="192" font-family="JetBrains Mono" font-size="13" fill="#9A958E" text-anchor="middle">2</text>
+          </g>
+          <g>
+            <rect x="1098" y="118" width="128" height="104" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.6"/>
+            <text x="1162" y="166" font-size="17" fill="#1A1714" text-anchor="middle">этап</text>
+            <text x="1162" y="192" font-family="JetBrains Mono" font-size="13" fill="#9A958E" text-anchor="middle">3</text>
+          </g>
+          <g>
+            <rect x="1264" y="118" width="128" height="104" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.6"/>
+            <text x="1328" y="166" font-size="17" fill="#1A1714" text-anchor="middle">этап</text>
+            <text x="1328" y="192" font-family="JetBrains Mono" font-size="13" fill="#9A958E" text-anchor="middle">4</text>
+          </g>
+        </g>
+
+        <!-- гладкие переходы без трения -->
+        <g stroke="#1A1714" stroke-width="2" fill="#1A1714">
+          <line x1="894" y1="170" x2="926" y2="170"/>
+          <polygon points="926,165 936,170 926,175"/>
+          <line x1="1060" y1="170" x2="1092" y2="170"/>
+          <polygon points="1092,165 1102,170 1092,175"/>
+          <line x1="1226" y1="170" x2="1258" y2="170"/>
+          <polygon points="1258,165 1268,170 1258,175"/>
+        </g>
+
+        <!-- общая память (озеро) кормит все этапы -->
+        <g>
+          <rect x="766" y="278" width="626" height="66" rx="5" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.8"/>
+          <text x="1079" y="306" font-family="Unbounded" font-weight="800" font-size="15" fill="#1A1714" text-anchor="middle" letter-spacing="0.5">ОБЩАЯ ПАМЯТЬ · ОЗЕРО</text>
+          <text x="1079" y="328" font-family="JetBrains Mono" font-size="12" fill="#6E6963" text-anchor="middle">контекст · правила · статусы</text>
+        </g>
+        <!-- линии: машина читает контекст из озера в каждый этап -->
+        <g stroke="#1A1714" stroke-width="1.5" fill="#1A1714">
+          <line x1="830" y1="278" x2="830" y2="230"/><polygon points="825,230 835,230 830,221"/>
+          <line x1="996" y1="278" x2="996" y2="230"/><polygon points="991,230 1001,230 996,221"/>
+          <line x1="1162" y1="278" x2="1162" y2="230"/><polygon points="1157,230 1167,230 1162,221"/>
+          <line x1="1328" y1="278" x2="1328" y2="230"/><polygon points="1323,230 1333,230 1328,221"/>
+        </g>
+
+        <text x="1080" y="360" font-family="Unbounded" font-weight="800" font-size="15" fill="#D62219" text-anchor="middle" letter-spacing="0.5">СТЫКИ ИСЧЕЗЛИ · ТРЕНИЕ СНЯТО</text>
+
+        <!-- ===================== НИЗ: НА ЧТО УХОДИТ ВРЕМЯ МЕЖДУ ЗАДАЧАМИ ===================== -->
+        <text x="0" y="416" font-family="Unbounded" font-weight="700" font-size="11" fill="#D62219" letter-spacing="1.5">НА ЧТО УХОДИТ ВРЕМЯ МЕЖДУ ЗАДАЧАМИ</text>
+
+        <g transform="translate(0, 426)" font-family="Inter Tight">
+          <g transform="translate(0,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">01</text>
+            <text x="60" y="30" font-family="Unbounded" font-weight="800" font-size="12" fill="#1A1714" letter-spacing="0.3">ПОИСК</text>
+            <text x="60" y="60" font-size="13" fill="#1A1714">где лежит файл,</text>
+            <text x="60" y="80" font-size="13" fill="#1A1714">в каком чате обсуждали,</text>
+            <text x="60" y="100" font-size="13" fill="#1A1714">какая версия свежая</text>
+          </g>
+          <g transform="translate(365,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">02</text>
+            <text x="60" y="30" font-family="Unbounded" font-weight="800" font-size="12" fill="#1A1714" letter-spacing="0.3">ПОВТОРНОЕ ВНИКАНИЕ</text>
+            <text x="60" y="60" font-size="13" fill="#1A1714">каждый поднимает</text>
+            <text x="60" y="80" font-size="13" fill="#1A1714">историю задачи</text>
+            <text x="60" y="100" font-size="13" fill="#1A1714">заново</text>
+          </g>
+          <g transform="translate(730,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">03</text>
+            <text x="60" y="30" font-family="Unbounded" font-weight="800" font-size="12" fill="#1A1714" letter-spacing="0.3">ПЕРЕДАЧА В РУКИ</text>
+            <text x="60" y="60" font-size="13" fill="#1A1714">контекст пересказывают</text>
+            <text x="60" y="80" font-size="13" fill="#1A1714">заново на каждой</text>
+            <text x="60" y="100" font-size="13" fill="#1A1714">передаче</text>
+          </g>
+          <g transform="translate(1095,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">04</text>
+            <text x="60" y="30" font-family="Unbounded" font-weight="800" font-size="12" fill="#1A1714" letter-spacing="0.3">СВЕРКА</text>
+            <text x="60" y="60" font-size="13" fill="#1A1714">что изменилось,</text>
+            <text x="60" y="80" font-size="13" fill="#1A1714">кто теперь владелец,</text>
+            <text x="60" y="100" font-size="13" fill="#1A1714">какое правило тут</text>
+          </g>
+        </g>
+
+      </svg>
+    </div>
+
+    <!-- RULE: финал -->
+    <div class="rule">
+      <div class="mark">!</div>
+      <div class="label">Итог</div>
+      <div class="body">
+        Снятое трение поднимает пропускную способность всей системы.
+        <strong>Ускорение одной задачи такого не даёт.</strong>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  document.fonts.ready.then(() => { document.body.dataset.fontsReady = "1"; });
+</script>
+</body>
+</html>

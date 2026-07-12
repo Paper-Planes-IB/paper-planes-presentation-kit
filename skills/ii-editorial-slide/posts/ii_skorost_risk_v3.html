@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Скорость как риск v3 — editorial</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#EFEBE7; --ink:#1A1714; --red:#D62219; --muted:#B8B3AD; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body { background: var(--paper); font-family: 'Inter Tight', system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .slide { width: 1600px; height: 1200px; position: relative; overflow: hidden; background: var(--paper); }
+  .bg { position: absolute; inset: 0; z-index: 0; }
+  .bg .marks { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; opacity: 0.9; }
+  .layer { position: absolute; inset: 0; z-index: 2; padding: 58px 80px 60px 80px; display: grid; grid-template-rows: auto 1fr; row-gap: 16px; }
+  .header { display: block; margin-bottom: 2px; }
+  .title-block { position: relative; padding-left: 26px; }
+  .title-block::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 12px; width: 6px; background: var(--red); }
+  .topline { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--red); margin-bottom: 10px; }
+  h1 { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 60px; line-height: 1.04; letter-spacing: -0.02em; text-transform: uppercase; color: var(--ink); }
+  h1 .dot { color: var(--red); }
+  .scheme { position: relative; display: flex; align-items: center; justify-content: center; }
+  .scheme svg { width: 100%; max-width: 1440px; height: auto; }
+  .rule { margin: 0 0 72px 0; border: 1.5px solid var(--ink); padding: 20px 28px; display: grid; grid-template-columns: 60px auto 1fr; gap: 28px; align-items: center; background: var(--paper); box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
+  .rule .mark { width: 54px; height: 54px; border: 2px solid var(--red); border-radius: 50%; display: grid; place-items: center; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 28px; color: var(--red); }
+  .rule .label { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; position: relative; padding-left: 16px; white-space: nowrap; }
+  .rule .label::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background: var(--red); }
+  .rule .body { font-size: 17px; line-height: 1.5; }
+  .rule .body strong { font-weight: 700; color: var(--red); }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="bg">
+    <img class="marks" src="../backgrounds/10_radar_red.png" alt="">
+  </div>
+
+  <div class="layer">
+
+    <div class="header">
+      <div class="title-block">
+        <div class="topline">PAPER PLANES · И_И_ · скорость как риск</div>
+        <h1>Решение устаревает<br>раньше, чем<br>его внедрили<span class="dot">.</span></h1>
+      </div>
+    </div>
+
+    <div class="scheme">
+      <svg viewBox="0 0 1440 620" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- ============ ЛЕВО: ЦИКЛ УСТАРЕВАНИЯ ============ -->
+        <text x="20" y="20" font-family="Unbounded" font-weight="700" font-size="14" fill="#9A958E" letter-spacing="1">КАК УСТАРЕВАЕТ РЕШЕНИЕ</text>
+
+        <!-- фон-плашка под круг для читаемости поверх радара -->
+        <circle cx="330" cy="320" r="210" fill="#EFEBE7" opacity="0.78"/>
+
+        <!-- круг -->
+        <circle cx="330" cy="320" r="150" fill="none" stroke="#1A1714" stroke-width="1.8" stroke-dasharray="3 6"/>
+
+        <!-- 4 узла -->
+        <g font-family="Inter Tight" font-size="17" fill="#1A1714" font-weight="500">
+          <circle cx="330" cy="170" r="9" fill="#1A1714"/>
+          <text x="330" y="140" text-anchor="middle" font-weight="600">среда меняется быстрее</text>
+          <circle cx="480" cy="320" r="9" fill="#1A1714"/>
+          <text x="500" y="325" text-anchor="start" font-weight="600">проблема сложнее</text>
+          <circle cx="330" cy="470" r="9" fill="#1A1714"/>
+          <text x="330" y="500" text-anchor="middle" font-weight="600">решение дольше</text>
+          <circle cx="180" cy="320" r="9" fill="#D62219"/>
+          <text x="160" y="325" text-anchor="end" font-weight="600" fill="#D62219">проблема уже другая</text>
+        </g>
+
+        <!-- центр -->
+        <text x="330" y="318" font-family="JetBrains Mono" font-size="13" fill="#9A958E" text-anchor="middle">и снова</text>
+        <text x="330" y="338" font-family="JetBrains Mono" font-size="13" fill="#9A958E" text-anchor="middle">по кругу, быстрее</text>
+
+        <!-- стрелки по часовой между узлами -->
+        <g stroke="#1A1714" stroke-width="2" fill="none">
+          <path d="M372 184 A150 150 0 0 1 458 256"/>
+          <path d="M458 384 A150 150 0 0 1 372 456"/>
+          <path d="M288 456 A150 150 0 0 1 202 384"/>
+        </g>
+        <g fill="#1A1714"><polygon points="456,250 466,262 450,262"/><polygon points="372,452 360,462 374,448"/></g>
+        <!-- замыкающая красная (проблема уже другая → среда снова) -->
+        <g stroke="#D62219" stroke-width="2.2" fill="none">
+          <path d="M202 256 A150 150 0 0 1 288 184"/>
+        </g>
+        <g fill="#D62219"><polygon points="286,188 298,180 292,194"/></g>
+
+        <!-- разделитель -->
+        <line x1="700" y1="20" x2="700" y2="560" stroke="#1A1714" stroke-width="1.2" stroke-dasharray="4 5"/>
+
+        <!-- ============ ПРАВО: ЧЕМ ОТВЕЧАЕМ — 3 МЕХАНИКИ ============ -->
+        <text x="760" y="20" font-family="Unbounded" font-weight="700" font-size="14" fill="#D62219" letter-spacing="1">ЧЕМ ОТВЕЧАЕМ: ЖИВОЙ КОНТУР</text>
+
+        <g font-family="Inter Tight">
+          <!-- 1 -->
+          <g transform="translate(760,52)">
+            <rect x="0" y="0" width="680" height="156" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.6"/>
+            <rect x="0" y="0" width="58" height="156" fill="#1A1714"/>
+            <text x="29" y="92" font-family="Unbounded" font-weight="900" font-size="24" fill="#EFEBE7" text-anchor="middle">1</text>
+            <text x="86" y="48" font-family="Unbounded" font-weight="800" font-size="19" fill="#1A1714">МАШИНОЧИТАЕМОСТЬ</text>
+            <text x="86" y="88" font-size="17" fill="#1A1714">ключевые объекты и связи заданы заранее:</text>
+            <text x="86" y="116" font-size="17" fill="#1A1714">итоги встреч, артефакты участников,</text>
+            <text x="86" y="144" font-size="17" fill="#1A1714">инциденты и отклонения</text>
+          </g>
+          <!-- 2 -->
+          <g transform="translate(760,228)">
+            <rect x="0" y="0" width="680" height="156" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.6"/>
+            <rect x="0" y="0" width="58" height="156" fill="#1A1714"/>
+            <text x="29" y="92" font-family="Unbounded" font-weight="900" font-size="24" fill="#EFEBE7" text-anchor="middle">2</text>
+            <text x="86" y="48" font-family="Unbounded" font-weight="800" font-size="19" fill="#1A1714">КОНТРОЛЬНАЯ ВЫШКА</text>
+            <text x="86" y="88" font-size="17" fill="#1A1714">люди и процессы, отвечающие за доклад</text>
+            <text x="86" y="116" font-size="17" fill="#1A1714">собственнику о всех отклонениях,</text>
+            <text x="86" y="144" font-size="17" fill="#1A1714">наблюдениях и изменениях</text>
+          </g>
+          <!-- 3 -->
+          <g transform="translate(760,404)">
+            <rect x="0" y="0" width="680" height="156" fill="#EFEBE7" stroke="#D62219" stroke-width="2.2"/>
+            <rect x="0" y="0" width="58" height="156" fill="#D62219"/>
+            <text x="29" y="92" font-family="Unbounded" font-weight="900" font-size="24" fill="#EFEBE7" text-anchor="middle">3</text>
+            <text x="86" y="48" font-family="Unbounded" font-weight="800" font-size="19" fill="#D62219">ЦИКЛ PDCA</text>
+            <text x="86" y="92" font-size="17" fill="#1A1714">каждое отклонение превращается</text>
+            <text x="86" y="122" font-size="17" fill="#1A1714">в сверку и пересмотр правил</text>
+          </g>
+        </g>
+
+      </svg>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  document.fonts.ready.then(() => { document.body.dataset.fontsReady = "1"; });
+</script>
+</body>
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Восемь задач для ИИ — editorial</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EFEBE7;
+    --paper-dim: #E7E2DC;
+    --ink: #1A1714;
+    --red: #D62219;
+    --muted: #B8B3AD;
+    --grid-line: rgba(184, 179, 173, 0.35);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body {
+    background: var(--paper);
+    font-family: 'Inter Tight', system-ui, sans-serif;
+    color: var(--ink);
+    font-feature-settings: 'ss01' on, 'cv01' on;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .slide {
+    width: 1600px;
+    height: 1000px;
+    padding: 56px 72px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+      "header header"
+      "intro  steps"
+      "intro  diagram"
+      "rule   rule";
+    gap: 28px 52px;
+  }
+
+  /* HEADER */
+  .header { grid-area: header; display: flex; align-items: flex-start; gap: 24px; }
+  .red-bar { width: 64px; height: 4px; background: var(--red); margin-top: 18px; }
+  .title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: 76px;
+    line-height: 0.95;
+    letter-spacing: -1.5px;
+    text-transform: uppercase;
+  }
+  .title .accent { color: var(--red); }
+  .title-meta {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+    text-align: right;
+  }
+
+  /* INTRO */
+  .intro { grid-area: intro; padding-top: 8px; position: relative; }
+  .intro p {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .intro p .red-word { color: var(--red); font-weight: 600; }
+
+  .target {
+    position: absolute;
+    bottom: 16px;
+    left: 0;
+    width: 120px;
+    height: 120px;
+  }
+
+  /* STEPS strip */
+  .steps {
+    grid-area: steps;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+  .step { padding-top: 8px; border-top: 2px solid var(--ink); }
+  .step .num {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: 34px;
+    color: var(--red);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .step .label {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    line-height: 1.25;
+    margin-bottom: 10px;
+  }
+  .step .desc {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #4A4642;
+  }
+
+  /* DIAGRAM */
+  .diagram { grid-area: diagram; position: relative; }
+
+  /* RULE */
+  .rule {
+    grid-area: rule;
+    border: 1.5px solid var(--ink);
+    padding: 22px 28px;
+    display: grid;
+    grid-template-columns: 60px auto 1fr;
+    gap: 28px;
+    align-items: center;
+  }
+  .rule .mark {
+    width: 56px;
+    height: 56px;
+    border: 2px solid var(--red);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    color: var(--red);
+  }
+  .rule .label {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding-left: 16px;
+  }
+  .rule .label::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 50%; transform: translateY(-50%);
+    width: 6px; height: 6px; background: var(--red);
+  }
+  .rule .body {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .rule .body strong {
+    font-weight: 700;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 12.5px;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="red-bar"></div>
+    <h1 class="title">Восемь задач<br>для ИИ<span class="accent">.</span></h1>
+    <div class="title-meta">
+      PP.MEDIA. · И_И_<br>
+      Канал, выпуск 21<br>
+      30.05.2026
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro">
+    <p>Сколько бы компаний ни приходило с запросом на ИИ, задач под капотом всегда <span class="red-word">восемь</span>. Одни и те же.</p>
+    <p>Боли звучат по-разному. Места, куда зовут машину, совпадают для всех.</p>
+    <p>Сверху стоит экономический эффект. Через этот фильтр проходит каждая из восьми, иначе вы автоматизируете убыток.</p>
+    <p>В центре стоит <span class="red-word">человек в петле</span>. Уберите его, и качество поползёт вниз. Машина без обратной связи сама себя не вытягивает.</p>
+
+    <!-- Decorative target -->
+    <svg class="target" viewBox="0 0 120 120" fill="none">
+      <circle cx="60" cy="60" r="56" stroke="#B8B3AD" stroke-width="1" stroke-dasharray="3 4"/>
+      <circle cx="60" cy="60" r="42" stroke="#B8B3AD" stroke-width="1" stroke-dasharray="3 4"/>
+      <circle cx="60" cy="60" r="26" stroke="#B8B3AD" stroke-width="1" stroke-dasharray="3 4"/>
+      <line x1="0" y1="60" x2="120" y2="60" stroke="#B8B3AD" stroke-width="1"/>
+      <line x1="60" y1="0" x2="60" y2="120" stroke="#B8B3AD" stroke-width="1"/>
+      <circle cx="60" cy="60" r="5" fill="#D62219"/>
+      <line x1="60" y1="60" x2="200" y2="20" stroke="#D62219" stroke-width="1.5" stroke-dasharray="4 3"/>
+    </svg>
+  </div>
+
+  <!-- STEPS -->
+  <div class="steps">
+    <div class="step">
+      <div class="num">01</div>
+      <div class="label">Найдите<br>свой класс</div>
+      <div class="desc">Любой запрос на ИИ садится в один из восьми классов. Сначала определите, в какой.</div>
+    </div>
+    <div class="step">
+      <div class="num">02</div>
+      <div class="label">Фильтр<br>эффекта</div>
+      <div class="desc">Прогоните задачу через вопрос окупаемости. Не окупается, не беретесь.</div>
+    </div>
+    <div class="step">
+      <div class="num">03</div>
+      <div class="label">Человек<br>в петле</div>
+      <div class="desc">Поставьте человека держателем смысла. Без него качество деградирует.</div>
+    </div>
+    <div class="step">
+      <div class="num">04</div>
+      <div class="label">Слепок<br>процесса</div>
+      <div class="desc">Возьмите один повторяемый процесс и снимите с него слепок.</div>
+    </div>
+    <div class="step">
+      <div class="num">05</div>
+      <div class="label">Пересборка</div>
+      <div class="desc">Соберите процесс машиночитаемым с самого начала, под будущие рельсы.</div>
+    </div>
+  </div>
+
+  <!-- DIAGRAM: зонтик эконом-эффекта над восемью классами + человек в петле -->
+  <div class="diagram">
+    <svg viewBox="0 0 1140 380" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" fill="none">
+
+      <!-- umbrella bracket: экономический эффект -->
+      <g>
+        <line x1="20" y1="46" x2="1120" y2="46" stroke="#1A1714" stroke-width="1.5"/>
+        <line x1="20" y1="46" x2="20" y2="56" stroke="#1A1714" stroke-width="1.5"/>
+        <line x1="1120" y1="46" x2="1120" y2="56" stroke="#1A1714" stroke-width="1.5"/>
+        <line x1="570" y1="46" x2="570" y2="56" stroke="#D62219" stroke-width="1.5"/>
+        <rect x="556" y="16" width="8" height="8" fill="#D62219"/>
+        <text x="574" y="30" font-family="Unbounded" font-weight="700" font-size="15" fill="#1A1714" text-anchor="middle">ЭКОНОМИЧЕСКИЙ ЭФФЕКТ · ОКУПИТСЯ ЛИ</text>
+      </g>
+
+      <!-- connectors left boxes -> center -->
+      <g stroke="#1A1714" stroke-width="1.2">
+        <line x1="200" y1="96"  x2="512" y2="196"/>
+        <line x1="200" y1="166" x2="512" y2="198"/>
+        <line x1="200" y1="236" x2="512" y2="204"/>
+        <line x1="200" y1="306" x2="512" y2="206"/>
+      </g>
+      <!-- connectors right boxes -> center -->
+      <g stroke="#1A1714" stroke-width="1.2">
+        <line x1="940" y1="96"  x2="628" y2="196"/>
+        <line x1="940" y1="166" x2="628" y2="198"/>
+        <line x1="940" y1="236" x2="628" y2="204"/>
+        <line x1="940" y1="306" x2="628" y2="206"/>
+      </g>
+
+      <!-- LEFT boxes 1-4 -->
+      <g font-family="Inter Tight">
+        <!-- 1 -->
+        <g transform="translate(20,70)">
+          <rect width="180" height="52" fill="#FFFFFF" stroke="#1A1714" stroke-width="1.5"/>
+          <text x="16" y="36" font-family="Unbounded" font-weight="900" font-size="26" fill="#D62219">1</text>
+          <text x="50" y="31" font-size="13.5" font-weight="600" fill="#1A1714">Формализация</text>
+        </g>
+        <!-- 2 -->
+        <g transform="translate(20,140)">
+          <rect width="180" height="52" fill="#FFFFFF" stroke="#1A1714" stroke-width="1.5"/>
+          <text x="16" y="36" font-family="Unbounded" font-weight="900" font-size="26" fill="#D62219">2</text>
+          <text x="50" y="31" font-size="13.5" font-weight="600" fill="#1A1714">Выравнивание</text>
+        </g>
+        <!-- 3 -->
+        <g transform="translate(20,210)">
+          <rect width="180" height="52" fill="#FFFFFF" stroke="#1A1714" stroke-width="1.5"/>
+          <text x="16" y="36" font-family="Unbounded" font-weight="900" font-size="26" fill="#D62219">3</text>
+          <text x="50" y="31" font-size="13.5" font-weight="600" fill="#1A1714">Ускорение</text>
+        </g>
+        <!-- 4 -->
+        <g transform="translate(20,280)">
+          <rect width="180" height="52" fill="#FFFFFF" stroke="#1A1714" stroke-width="1.5"/>
+          <text x="16" y="34" font-family="Unbounded" font-weight="900" font-size="26" fill="#D62219">4</text>
+          <text x="50" y="23" font-size="13" font-weight="600" fill="#1A1714">Эксперт. модели</text>
+          <text x="50" y="40" font-size="13" font-weight="600" fill="#1A1714">против рынка</text>
+        </g>
+      </g>
+
+      <!-- RIGHT boxes 5-8 -->
+      <g font-family="Inter Tight">
+        <!-- 5 -->
+        <g transform="translate(940,70)">
+          <rect width="180" height="52" fill="#FFFFFF" stroke="#1A1714" stroke-width="1.5"/>
+          <text x="16" y="36" font-family="Unbounded" font-weight="900" font-size="26" fill="#D62219">5</text>
+          <text x="50" y="31" font-size="13.5" font-weight="600" fill="#1A1714">Ранние сигналы</text>
+        </g>
+        <!-- 6 -->
+        <g transform="translate(940,140)">
+          <rect width="180" height="52" fill="#FFFFFF" stroke="#1A1714" stroke-width="1.5"/>
+          <text x="16" y="36" font-family="Unbounded" font-weight="900" font-size="26" fill="#D62219">6</text>
+          <text x="50" y="23" font-size="13" font-weight="600" fill="#1A1714">Контроль</text>
+          <text x="50" y="40" font-size="13" font-weight="600" fill="#1A1714">качества</text>
+        </g>
+        <!-- 7 -->
+        <g transform="translate(940,210)">
+          <rect width="180" height="52" fill="#FFFFFF" stroke="#1A1714" stroke-width="1.5"/>
+          <text x="16" y="34" font-family="Unbounded" font-weight="900" font-size="26" fill="#D62219">7</text>
+          <text x="50" y="23" font-size="13" font-weight="600" fill="#1A1714">Знания,</text>
+          <text x="50" y="40" font-size="13" font-weight="600" fill="#1A1714">обучение, найм</text>
+        </g>
+        <!-- 8 -->
+        <g transform="translate(940,280)">
+          <rect width="180" height="52" fill="#FFFFFF" stroke="#1A1714" stroke-width="1.5"/>
+          <text x="16" y="34" font-family="Unbounded" font-weight="900" font-size="26" fill="#D62219">8</text>
+          <text x="50" y="23" font-size="13" font-weight="600" fill="#1A1714">Смысловая</text>
+          <text x="50" y="40" font-size="13" font-weight="600" fill="#1A1714">работа</text>
+        </g>
+      </g>
+
+      <!-- CENTER node: человек в петле -->
+      <g transform="translate(570,200)">
+        <circle r="60" fill="#EFEBE7" stroke="#D62219" stroke-width="2"/>
+        <circle r="44" fill="none" stroke="#D62219" stroke-width="1" stroke-dasharray="3 3"/>
+        <!-- person glyph -->
+        <circle cx="0" cy="-12" r="9" fill="none" stroke="#1A1714" stroke-width="2"/>
+        <path d="M-15 16 C -15 0, 15 0, 15 16" fill="none" stroke="#1A1714" stroke-width="2"/>
+        <!-- loop arrow around -->
+        <path d="M40 -26 A 52 52 0 1 1 -40 -26" fill="none" stroke="#1A1714" stroke-width="1.4"/>
+        <polygon points="-40,-26 -33,-34 -29,-23" fill="#1A1714"/>
+        <text x="0" y="86" font-family="Inter Tight" font-size="13" font-weight="600" fill="#1A1714" text-anchor="middle">человек в петле</text>
+      </g>
+    </svg>
+  </div>
+
+  <!-- RULE block -->
+  <div class="rule">
+    <div class="mark">!</div>
+    <div class="label">Главное<br>правило</div>
+    <div class="body">
+      Боли у всех разные. Места, куда вы зовёте ИИ, одни на всех.
+      <strong>Сначала карта, потом машина.</strong>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

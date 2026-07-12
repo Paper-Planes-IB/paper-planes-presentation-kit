@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Экспертные продажи 2.0 — editorial v1</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#EFEBE7; --ink:#1A1714; --red:#D62219; --muted:#B8B3AD; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body { background: var(--paper); font-family: 'Inter Tight', system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .slide { width: 1600px; height: 1200px; position: relative; overflow: hidden; background: var(--paper); }
+  .bg { position: absolute; inset: 0; z-index: 0; }
+  .bg .marks { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; }
+  .layer { position: absolute; inset: 0; z-index: 2; padding: 58px 80px 0 80px; display: grid; grid-template-rows: auto 1fr auto; row-gap: 16px; }
+  .header { display: block; margin-bottom: 2px; }
+  .title-block { position: relative; padding-left: 26px; }
+  .title-block::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 12px; width: 6px; background: var(--red); }
+  .topline { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--red); margin-bottom: 10px; }
+  h1 { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 76px; line-height: 1.0; letter-spacing: -0.02em; text-transform: uppercase; color: var(--ink); }
+  h1 .dot { color: var(--red); }
+  .scheme { position: relative; display: flex; align-items: center; justify-content: center; }
+  .scheme svg { width: 100%; max-width: 1440px; height: auto; }
+  .rule { margin: 0 0 80px 0; border: 1.5px solid var(--ink); padding: 22px 28px; display: grid; grid-template-columns: 60px auto 1fr; gap: 28px; align-items: center; background: var(--paper); box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
+  .rule .mark { width: 56px; height: 56px; border: 2px solid var(--red); border-radius: 50%; display: grid; place-items: center; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 32px; color: var(--red); }
+  .rule .label { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; position: relative; padding-left: 16px; white-space: nowrap; }
+  .rule .label::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background: var(--red); }
+  .rule .body { font-size: 17px; line-height: 1.5; }
+  .rule .body strong { font-weight: 700; color: var(--red); }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="bg">
+    <img class="marks" src="../backgrounds/08_thin_lines_right.png" alt="">
+  </div>
+
+  <div class="layer">
+
+    <div class="header">
+      <div class="title-block">
+        <div class="topline">PP.MEDIA · И_И_ · экспертные продажи</div>
+        <h1>Экспертные<br>продажи 2.0<span class="dot">.</span></h1>
+      </div>
+    </div>
+
+    <div class="scheme">
+      <svg viewBox="0 0 1440 560" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- ============ ЛЕВО: КАК БЫВАЕТ · РАЗГОВОР ВСЛЕПУЮ ============ -->
+        <text x="20" y="14" font-family="Unbounded" font-weight="700" font-size="14" fill="#9A958E" letter-spacing="1">КАК БЫВАЕТ · РАЗГОВОР ВСЛЕПУЮ</text>
+        <rect x="20" y="24" width="640" height="318" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2" stroke-dasharray="5 4"/>
+
+        <g font-family="Inter Tight">
+          <g>
+            <rect x="46" y="80" width="176" height="80" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.5"/>
+            <text x="134" y="116" font-family="Unbounded" font-weight="800" font-size="14" fill="#9A958E" text-anchor="middle">МЕНЕДЖЕР</text>
+            <text x="134" y="140" font-size="13" fill="#9A958E" text-anchor="middle">скрипт SPIN</text>
+          </g>
+          <g stroke="#B8B3AD" stroke-width="1.8" fill="#B8B3AD">
+            <line x1="222" y1="120" x2="252" y2="120"/><polygon points="252,114 262,120 252,126"/>
+          </g>
+          <g>
+            <rect x="262" y="80" width="150" height="80" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.5"/>
+            <text x="337" y="116" font-family="Unbounded" font-weight="800" font-size="14" fill="#9A958E" text-anchor="middle">ВОПРОС</text>
+            <text x="337" y="140" font-size="13" fill="#9A958E" text-anchor="middle">в вакууме</text>
+          </g>
+          <g stroke="#B8B3AD" stroke-width="1.8" fill="#B8B3AD">
+            <line x1="412" y1="120" x2="442" y2="120"/><polygon points="442,114 452,120 442,126"/>
+          </g>
+          <g>
+            <rect x="452" y="80" width="188" height="80" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.5"/>
+            <text x="546" y="112" font-family="Unbounded" font-weight="800" font-size="14" fill="#9A958E" text-anchor="middle">ЦЕНОВАЯ ВОЙНА</text>
+            <text x="546" y="136" font-size="12" fill="#9A958E" text-anchor="middle">выбирают по цене</text>
+          </g>
+        </g>
+
+        <g transform="translate(46,210)">
+          <text x="0" y="0" font-family="JetBrains Mono" font-size="12" fill="#9A958E">конверсия:</text>
+          <line x1="0" y1="40" x2="594" y2="40" stroke="#B8B3AD" stroke-width="2"/>
+          <text x="297" y="68" font-family="Inter Tight" font-size="14" fill="#9A958E" text-anchor="middle">сделка под вопросом</text>
+        </g>
+
+        <text x="340" y="328" font-family="Unbounded" font-weight="800" font-size="13" fill="#9A958E" text-anchor="middle" letter-spacing="0.5">КЛИЕНТ НЕ СЛУШАЕТ</text>
+
+        <!-- ============ РАЗДЕЛИТЕЛЬ ============ -->
+        <g>
+          <line x1="690" y1="24" x2="690" y2="342" stroke="#1A1714" stroke-width="1" stroke-dasharray="4 4"/>
+          <rect x="666" y="170" width="48" height="24" fill="#EFEBE7"/>
+          <text x="690" y="188" font-family="Unbounded" font-weight="800" font-size="16" fill="#D62219" text-anchor="middle">→</text>
+        </g>
+
+        <!-- ============ ПРАВО: КАК НАДО · ПОДГОТОВКА ЧЕРЕЗ ИИ ============ -->
+        <text x="720" y="14" font-family="Unbounded" font-weight="700" font-size="14" fill="#D62219" letter-spacing="1">КАК НАДО · ПОДГОТОВКА ЧЕРЕЗ ИИ</text>
+        <rect x="720" y="24" width="700" height="318" fill="#EFEBE7" stroke="#1A1714" stroke-width="2"/>
+
+        <!-- Венн: контекст × сильные стороны = связка -->
+        <g font-family="Inter Tight">
+          <circle cx="1004" cy="120" r="92" fill="#D62219" fill-opacity="0.09" stroke="#1A1714" stroke-width="2"/>
+          <circle cx="1136" cy="120" r="92" fill="#D62219" fill-opacity="0.09" stroke="#1A1714" stroke-width="2"/>
+          <!-- подписи просто поверх линий, без обводки -->
+          <text x="936" y="113" font-family="Unbounded" font-weight="700" font-size="15" fill="#1A1714" text-anchor="middle">Контекст рынка</text>
+          <text x="936" y="137" font-family="Unbounded" font-weight="700" font-size="15" fill="#1A1714" text-anchor="middle">и отрасли</text>
+          <text x="1204" y="113" font-family="Unbounded" font-weight="700" font-size="15" fill="#1A1714" text-anchor="middle">Сильные и слабые</text>
+          <text x="1204" y="137" font-family="Unbounded" font-weight="700" font-size="15" fill="#1A1714" text-anchor="middle">стороны</text>
+          <text x="1070" y="127" font-family="Unbounded" font-weight="700" font-size="20" fill="#D62219" text-anchor="middle">Связка</text>
+        </g>
+
+        <!-- стрелка вниз → JTBD → конверсия -->
+        <g stroke="#1A1714" stroke-width="1.8" fill="#1A1714">
+          <line x1="1070" y1="216" x2="1070" y2="240"/><polygon points="1064,240 1070,250 1076,240"/>
+        </g>
+        <rect x="956" y="252" width="228" height="46" fill="#EFEBE7" stroke="#D62219" stroke-width="1.8"/>
+        <text x="1070" y="281" font-family="Unbounded" font-weight="800" font-size="15" fill="#D62219" text-anchor="middle">Попадание в JTBD</text>
+
+        <text x="1070" y="332" font-family="Unbounded" font-weight="800" font-size="13" fill="#D62219" text-anchor="middle" letter-spacing="0.5">КОНВЕРСИЯ РАСТЁТ</text>
+
+        <!-- ============ НИЗ: ЧТО СОБРАТЬ ДО РАЗГОВОРА ============ -->
+        <text x="0" y="392" font-family="Unbounded" font-weight="700" font-size="11" fill="#D62219" letter-spacing="1.5">КАК ГОТОВИТЬСЯ К РАЗГОВОРУ</text>
+
+        <g transform="translate(0, 402)" font-family="Inter Tight">
+          <g transform="translate(0,0)">
+            <rect x="0" y="0" width="340" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">01</text>
+            <text x="60" y="56" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.3">СОБРАТЬ ИНФОРМАЦИЮ</text>
+            <text x="60" y="80" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.3">О КОМПАНИИ</text>
+          </g>
+          <g transform="translate(366,0)">
+            <rect x="0" y="0" width="340" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">02</text>
+            <text x="60" y="68" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.3">СОБРАТЬ ИНФОПОВОДЫ</text>
+          </g>
+          <g transform="translate(733,0)">
+            <rect x="0" y="0" width="340" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">03</text>
+            <text x="60" y="56" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.3">СОБРАТЬ ИНФОРМАЦИЮ</text>
+            <text x="60" y="80" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.3">ПО ОТРАСЛИ</text>
+          </g>
+          <g transform="translate(1100,0)">
+            <rect x="0" y="0" width="340" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">04</text>
+            <text x="60" y="56" font-family="Unbounded" font-weight="800" font-size="13" fill="#D62219" letter-spacing="0.3">НАЙТИ ПЕРЕСЕЧЕНИЯ</text>
+            <text x="60" y="80" font-family="Unbounded" font-weight="800" font-size="13" fill="#D62219" letter-spacing="0.3">С УТП КОМПАНИИ</text>
+          </g>
+        </g>
+
+      </svg>
+    </div>
+
+    <!-- RULE: финал -->
+    <div class="rule">
+      <div class="mark">!</div>
+      <div class="label">Итог</div>
+      <div class="body">
+        Вы сопоставляете контекст рынка и отрасли, где работает клиент, со своими сильными сторонами. На пересечении получаются готовые связки, на которые можно опереться в переговорах.
+        <strong>И вместо пустого диалога, в котором вы пытаетесь угадать, что клиенту важнее, и вступаете в вечную ценовую конкуренцию, получается диалог, повышающий конверсию в сделку.</strong>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  document.fonts.ready.then(() => { document.body.dataset.fontsReady = "1"; });
+</script>
+</body>
+</html>

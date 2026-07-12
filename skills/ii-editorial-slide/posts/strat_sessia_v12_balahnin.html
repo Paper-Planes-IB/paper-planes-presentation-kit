@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#F8F5ED; --ink:#1A1714; --red:#E84A38; --muted:#9A958E; --grid:rgba(184,179,173,0.20); }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--paper); font-family:'Inter Tight',sans-serif; color:var(--ink); -webkit-font-smoothing:antialiased; }
+  .slide { width:1600px; height:900px; position:relative; overflow:hidden; padding:46px 52px 48px;
+    background-color:var(--paper);
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:48px 48px; }
+  .eyebrow { font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--red); margin-bottom:8px; }
+  h1 { font-family:'Oswald'; font-weight:700; font-size:54px; line-height:1.0; text-transform:uppercase; letter-spacing:-0.01em; }
+  h1 .r { color:var(--red); }
+  .sub { font-family:'Inter Tight'; font-weight:500; font-size:20px; color:#555049; margin-top:8px; }
+  .cols { display:grid; grid-template-columns:440px 1fr; gap:26px; margin-top:24px; height:648px; }
+  .panel { border:1.5px solid var(--ink); border-radius:3px; padding:24px 26px; display:flex; flex-direction:column; }
+  .pnum { display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+  .pnum .n { width:48px; height:48px; background:var(--ink); color:var(--paper); font-family:'Oswald'; font-weight:700; font-size:24px; display:grid; place-items:center; }
+  .pnum .t { font-family:'Oswald'; font-weight:700; font-size:26px; text-transform:uppercase; line-height:1.05; }
+  /* 01 */
+  .people { display:flex; justify-content:center; margin:8px 0 14px; }
+  .vector { text-align:center; font-family:'Oswald'; font-weight:600; font-size:19px; text-transform:uppercase; margin-bottom:18px; }
+  .vector .r { color:var(--red); }
+  .check { list-style:none; }
+  .check li { display:flex; align-items:center; gap:14px; padding:13px 2px; border-bottom:1px solid rgba(154,149,142,0.3); font-size:19px; font-weight:600; }
+  .check li:last-child { border-bottom:none; }
+  .check .box { width:18px; height:18px; border:2px solid var(--red); background:var(--red); flex:0 0 auto; }
+  .rule { margin-top:auto; border:1.5px solid var(--ink); padding:15px 18px; display:flex; align-items:center; gap:14px; }
+  .rule .m { width:40px; height:40px; flex:0 0 auto; border:2px solid var(--red); border-radius:50%; display:grid; place-items:center; font-family:'Oswald'; font-weight:700; font-size:24px; color:var(--red); }
+  .rule .b { font-size:16px; line-height:1.32; }
+  .rule .b strong { color:var(--red); font-weight:600; }
+  /* 02 chain */
+  .chain { display:flex; flex-direction:column; align-items:center; gap:4px; margin-bottom:8px; }
+  .chip { font-family:'Oswald'; font-weight:700; text-transform:uppercase; text-align:center; }
+  .chip.s { font-size:18px; color:var(--muted); letter-spacing:1px; }
+  .chip.d { font-size:24px; color:var(--ink); border:2px solid var(--ink); padding:8px 26px; background:var(--paper); }
+  .arrow { color:var(--red); font-size:20px; line-height:1; }
+  .splitcap { font-family:'Inter Tight'; font-weight:600; font-size:15px; color:#555049; margin:6px 0 14px; text-align:center; }
+  .splitcap .r { color:var(--red); }
+  .qgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .q { border:1.5px solid var(--ink); background:var(--paper); padding:14px 16px 12px; position:relative; min-height:118px; display:flex; flex-direction:column; }
+  .q::before { content:""; position:absolute; left:0; top:0; bottom:0; width:7px; background:var(--red); }
+  .q .qt { font-family:'Oswald'; font-weight:600; font-size:18px; text-transform:uppercase; line-height:1.1; padding-left:6px; }
+  .q .role { margin-top:auto; padding-left:6px; padding-top:12px; font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:1px; text-transform:uppercase; color:var(--red); }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="eyebrow">ILYA BALAHNIN · стратегическая сессия</div>
+  <h1>Кого позвать на стратегическую сессию<span class="r">,</span></h1>
+  <div class="sub">чтобы потом действительно внедрить стратегию</div>
+
+  <div class="cols">
+
+    <!-- 01 -->
+    <div class="panel">
+      <div class="pnum"><div class="n">01</div><div class="t">Кто уже<br>на сессии</div></div>
+      <div class="people">
+        <svg width="360" height="100" viewBox="0 0 360 100" fill="none">
+          <g stroke="#1A1714" stroke-width="3">
+            <circle cx="74" cy="30" r="19"/><path d="M42 96 C42 70 106 70 106 96"/>
+            <circle cx="180" cy="25" r="23"/><path d="M140 96 C140 64 220 64 220 96"/>
+            <circle cx="286" cy="30" r="19"/><path d="M254 96 C254 70 318 70 318 96"/>
+          </g>
+          <path d="M180 49 l8 12 -8 12 -8 -12 z" fill="#E84A38"/>
+        </svg>
+      </div>
+      <div class="vector">Задают <span class="r">вектор</span> и принимают <span class="r">решение</span></div>
+      <ul class="check">
+        <li><span class="box"></span>Собственник и акционеры</li>
+        <li><span class="box"></span>Топ-команда</li>
+        <li><span class="box"></span>Руководители ключевых направлений</li>
+      </ul>
+      <div class="rule"><div class="m">!</div><div class="b">Они выбирают <strong>направление развития</strong></div></div>
+    </div>
+
+    <!-- 02 -->
+    <div class="panel">
+      <div class="pnum"><div class="n">02</div><div class="t">Кого ещё позвать</div></div>
+
+      <div class="chain">
+        <div class="chip s">Стратегия</div>
+        <div class="arrow">↓</div>
+        <div class="chip d">Новое B2B-направление</div>
+      </div>
+      <div class="splitcap">распадается на <span class="r">шесть решений</span> — за каждым своя роль</div>
+
+      <div class="qgrid">
+        <div class="q"><div class="qt">Что обещаем клиенту</div><div class="role">Юрист</div></div>
+        <div class="q"><div class="qt">Кого нанять или обучить</div><div class="role">HR</div></div>
+        <div class="q"><div class="qt">Как считаем затраты</div><div class="role">Финдиректор</div></div>
+        <div class="q"><div class="qt">Кто меняет поставщика</div><div class="role">Закупки</div></div>
+        <div class="q"><div class="qt">Куда приземляется выручка</div><div class="role">Финдиректор</div></div>
+        <div class="q"><div class="qt">Кто выдаёт доступ к данным</div><div class="role">IT</div></div>
+      </div>
+
+      <div class="rule"><div class="m">!</div><div class="b">Звать в <strong>блок обсуждения</strong>, где топ-команда ещё может уточнить решение до того, как оно станет заявкой в юротдел, спором о выручке или срочной задачей для IT</div></div>
+    </div>
+
+  </div>
+</div>
+<script>document.fonts.ready.then(()=>{document.body.dataset.fontsReady="1";});</script>
+</body>
+</html>

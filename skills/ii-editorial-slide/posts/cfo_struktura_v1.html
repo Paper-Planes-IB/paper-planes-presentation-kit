@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>ЦФО структура — editorial</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#F8F5ED; --ink:#1A1714; --red:#E84A38; --muted:#B8B3AD; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body { background: var(--paper); font-family: 'Inter Tight', system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .slide { width: 1600px; height: 1200px; position: relative; overflow: hidden; background-color: var(--paper); background-image: linear-gradient(rgba(184,179,173,0.20) 1px, transparent 1px), linear-gradient(90deg, rgba(184,179,173,0.20) 1px, transparent 1px); background-size: 46px 46px; }
+  .layer { position: absolute; inset: 0; z-index: 2; padding: 58px 70px 56px 70px; display: grid; grid-template-rows: auto 1fr; row-gap: 30px; }
+  .title-block { position: relative; padding-left: 26px; }
+  .title-block::before { content: ""; position: absolute; left: 0; top: 6px; bottom: 10px; width: 6px; background: var(--red); }
+  .topline { font-family: 'JetBrains Mono', monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--red); margin-bottom: 10px; }
+  h1 { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 66px; line-height: 1.0; letter-spacing: -0.01em; text-transform: uppercase; color: var(--ink); }
+  h1 .dot { color: var(--red); }
+  .scheme { position: relative; display: flex; align-items: center; justify-content: center; }
+  .scheme svg { width: 100%; max-width: 1500px; height: auto; }
+</style>
+</head>
+<body>
+<div class="slide">
+  <div class="layer">
+    <div class="title-block">
+      <div class="topline">ILYA BALAHNIN · оргструктура · центры ответственности</div>
+      <h1>От узкого места<br>к матрице<span class="dot">.</span></h1>
+    </div>
+    <div class="scheme">
+      <svg viewBox="0 0 1480 720" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="150" y="4" width="250" height="40" fill="#1A1714"/>
+        <text x="275" y="32" font-family="Oswald" font-weight="700" font-size="22" fill="#F8F5ED" text-anchor="middle" letter-spacing="1">ЦЕНТРАЛИЗАЦИЯ</text>
+        <rect x="760" y="4" width="620" height="40" fill="#1A1714"/>
+        <text x="1070" y="32" font-family="Oswald" font-weight="700" font-size="22" fill="#F8F5ED" text-anchor="middle" letter-spacing="1">ГИБРИДНАЯ (МАТРИЧНАЯ) СТРУКТУРА</text>
+        <text x="150" y="105" font-family="Inter Tight" font-size="16" fill="#1A1714" text-anchor="end">нестандартные вопросы</text>
+        <line x1="162" y1="100" x2="300" y2="222" stroke="#1A1714" stroke-width="1.4"/>
+        <text x="150" y="155" font-family="Inter Tight" font-size="16" fill="#1A1714" text-anchor="end">согласования</text>
+        <line x1="162" y1="150" x2="300" y2="222" stroke="#1A1714" stroke-width="1.4"/>
+        <text x="150" y="210" font-family="Inter Tight" font-size="16" fill="#1A1714" text-anchor="end">решения</text>
+        <line x1="162" y1="205" x2="300" y2="222" stroke="#1A1714" stroke-width="1.4"/>
+        <text x="150" y="263" font-family="Inter Tight" font-size="16" fill="#1A1714" text-anchor="end">инициативы</text>
+        <line x1="162" y1="258" x2="300" y2="222" stroke="#1A1714" stroke-width="1.4"/>
+        <text x="150" y="335" font-family="Inter Tight" font-size="16" fill="#1A1714" text-anchor="end">проекты</text>
+        <line x1="162" y1="330" x2="300" y2="222" stroke="#1A1714" stroke-width="1.4"/>
+        <polygon points="302,222 290,217 290,227" fill="#1A1714"/>
+        <polygon points="302,222 290,217 290,227" fill="#1A1714"/>
+        <polygon points="302,222 290,217 290,227" fill="#1A1714"/>
+        <polygon points="302,222 290,217 290,227" fill="#1A1714"/>
+        <polygon points="302,222 290,217 290,227" fill="#1A1714"/>
+        <circle cx="380" cy="222" r="74" fill="#F8F5ED" stroke="#1A1714" stroke-width="2.6"/>
+        <circle cx="380" cy="206" r="15" fill="#1A1714"/>
+        <path d="M350 256 a30 30 0 0 1 60 0 z" fill="#1A1714"/>
+        <text x="380" y="280" font-family="Oswald" font-weight="600" font-size="13" fill="#1A1714" text-anchor="middle" letter-spacing="1">СОБСТВЕННИК</text>
+        <line x1="423" y1="152" x2="432" y2="139" stroke="#E84A38" stroke-width="3" stroke-linecap="round"/>
+        <line x1="451" y1="181" x2="465" y2="173" stroke="#E84A38" stroke-width="3" stroke-linecap="round"/>
+        <line x1="451" y1="263" x2="465" y2="271" stroke="#E84A38" stroke-width="3" stroke-linecap="round"/>
+        <line x1="423" y1="292" x2="432" y2="305" stroke="#E84A38" stroke-width="3" stroke-linecap="round"/>
+        <line x1="309" y1="263" x2="295" y2="271" stroke="#E84A38" stroke-width="3" stroke-linecap="round"/>
+        <line x1="309" y1="181" x2="295" y2="173" stroke="#E84A38" stroke-width="3" stroke-linecap="round"/>
+        <line x1="309" y1="181" x2="295" y2="173" stroke="#E84A38" stroke-width="3" stroke-linecap="round"/>
+        <line x1="337" y1="152" x2="328" y2="139" stroke="#E84A38" stroke-width="3" stroke-linecap="round"/>
+        <text x="380" y="330" font-family="Oswald" font-weight="700" font-size="18" fill="#E84A38" text-anchor="middle" letter-spacing="1">УЗКОЕ МЕСТО</text>
+        <line x1="454" y1="222" x2="490" y2="222" stroke="#1A1714" stroke-width="2"/>
+        <polygon points="498,222 486,216 486,228" fill="#1A1714"/>
+        <text x="506" y="212" font-family="Inter Tight" font-size="15" fill="#1A1714">ВСЕ РЕШЕНИЯ</text>
+        <text x="506" y="232" font-family="Inter Tight" font-size="15" fill="#1A1714">ЧЕРЕЗ ОДНУ</text>
+        <text x="506" y="252" font-family="Inter Tight" font-size="15" fill="#1A1714">ТОЧКУ</text>
+        <text x="648" y="236" font-family="Oswald" font-weight="700" font-size="44" fill="#1A1714" text-anchor="middle">=</text>
+        <g fill="#E84A38"><rect x="690" y="213" width="34" height="18"/><polygon points="724,202 752,222 724,242"/></g>
+        <text x="714" y="190" font-family="Oswald" font-weight="600" font-size="16" fill="#1A1714">HR</text>
+        <circle cx="902" cy="185" r="4.5" fill="#1A1714"/>
+        <line x1="906" y1="185" x2="930" y2="185" stroke="#1A1714" stroke-width="1.2"/>
+        <text x="714" y="224" font-family="Oswald" font-weight="600" font-size="16" fill="#1A1714">МАРКЕТИНГ</text>
+        <circle cx="902" cy="219" r="4.5" fill="#1A1714"/>
+        <line x1="906" y1="219" x2="930" y2="219" stroke="#1A1714" stroke-width="1.2"/>
+        <text x="714" y="259" font-family="Oswald" font-weight="600" font-size="16" fill="#1A1714">ФИНАНСЫ</text>
+        <circle cx="902" cy="254" r="4.5" fill="#1A1714"/>
+        <line x1="906" y1="254" x2="930" y2="254" stroke="#1A1714" stroke-width="1.2"/>
+        <text x="714" y="293" font-family="Oswald" font-weight="600" font-size="16" fill="#1A1714">ПРОДАЖИ</text>
+        <circle cx="902" cy="288" r="4.5" fill="#1A1714"/>
+        <line x1="906" y1="288" x2="930" y2="288" stroke="#1A1714" stroke-width="1.2"/>
+        <text x="714" y="327" font-family="Oswald" font-weight="600" font-size="16" fill="#1A1714">ОПЕРАЦИИ</text>
+        <circle cx="902" cy="322" r="4.5" fill="#1A1714"/>
+        <line x1="906" y1="322" x2="930" y2="322" stroke="#1A1714" stroke-width="1.2"/>
+        <text x="714" y="362" font-family="Oswald" font-weight="600" font-size="16" fill="#1A1714">ИТ</text>
+        <circle cx="902" cy="357" r="4.5" fill="#1A1714"/>
+        <line x1="906" y1="357" x2="930" y2="357" stroke="#1A1714" stroke-width="1.2"/>
+        <text x="714" y="396" font-family="Oswald" font-weight="600" font-size="14" fill="#1A1714">ЮРИДИЧЕСКАЯ ПОДДЕРЖКА</text>
+        <circle cx="902" cy="391" r="4.5" fill="#1A1714"/>
+        <line x1="906" y1="391" x2="930" y2="391" stroke="#1A1714" stroke-width="1.2"/>
+        <text x="714" y="429" font-family="Oswald" font-weight="600" font-size="16" fill="#1A1714">И ДР.</text>
+        <circle cx="902" cy="424" r="4.5" fill="#1A1714"/>
+        <line x1="906" y1="424" x2="930" y2="424" stroke="#1A1714" stroke-width="1.2"/>
+        <line x1="930" y1="168" x2="930" y2="432" stroke="#C9C3BB" stroke-width="1.4" stroke-dasharray="3 5"/>
+        <line x1="1062" y1="168" x2="1062" y2="432" stroke="#C9C3BB" stroke-width="1.4" stroke-dasharray="3 5"/>
+        <line x1="1194" y1="168" x2="1194" y2="432" stroke="#C9C3BB" stroke-width="1.4" stroke-dasharray="3 5"/>
+        <line x1="1326" y1="168" x2="1326" y2="432" stroke="#C9C3BB" stroke-width="1.4" stroke-dasharray="3 5"/>
+        <line x1="1440" y1="168" x2="1440" y2="432" stroke="#C9C3BB" stroke-width="1.4" stroke-dasharray="3 5"/>
+        <line x1="930" y1="168" x2="1440" y2="168" stroke="#C9C3BB" stroke-width="1.4" stroke-dasharray="3 5"/>
+        <line x1="930" y1="185" x2="1440" y2="185" stroke="#C9C3BB" stroke-width="1.4" stroke-dasharray="3 5"/>
+        <line x1="930" y1="219" x2="1440" y2="219" stroke="#C9C3BB" stroke-width="1.4" stroke-dasharray="3 5"/>
+        <line x1="930" y1="254" x2="1440" y2="254" stroke="#C9C3BB" stroke-width="1.4" stroke-dasharray="3 5"/>
+        <line x1="930" y1="288" x2="1440" y2="288" stroke="#C9C3BB" stroke-width="1.4" stroke-dasharray="3 5"/>
+        <line x1="930" y1="322" x2="1440" y2="322" stroke="#C9C3BB" stroke-width="1.4" stroke-dasharray="3 5"/>
+        <line x1="930" y1="357" x2="1440" y2="357" stroke="#C9C3BB" stroke-width="1.4" stroke-dasharray="3 5"/>
+        <line x1="930" y1="391" x2="1440" y2="391" stroke="#C9C3BB" stroke-width="1.4" stroke-dasharray="3 5"/>
+        <line x1="930" y1="424" x2="1440" y2="424" stroke="#C9C3BB" stroke-width="1.4" stroke-dasharray="3 5"/>
+        <line x1="930" y1="432" x2="1440" y2="432" stroke="#C9C3BB" stroke-width="1.4" stroke-dasharray="3 5"/>
+        <circle cx="930" cy="185" r="3" fill="#1A1714"/>
+        <circle cx="930" cy="219" r="3" fill="#1A1714"/>
+        <circle cx="930" cy="254" r="3" fill="#1A1714"/>
+        <circle cx="930" cy="288" r="3" fill="#1A1714"/>
+        <circle cx="930" cy="322" r="3" fill="#1A1714"/>
+        <circle cx="930" cy="357" r="3" fill="#1A1714"/>
+        <circle cx="930" cy="391" r="3" fill="#1A1714"/>
+        <circle cx="930" cy="424" r="3" fill="#1A1714"/>
+        <circle cx="1062" cy="185" r="3" fill="#1A1714"/>
+        <circle cx="1062" cy="219" r="3" fill="#1A1714"/>
+        <circle cx="1062" cy="254" r="3" fill="#1A1714"/>
+        <circle cx="1062" cy="288" r="3" fill="#1A1714"/>
+        <circle cx="1062" cy="322" r="3" fill="#1A1714"/>
+        <circle cx="1062" cy="357" r="3" fill="#1A1714"/>
+        <circle cx="1062" cy="391" r="3" fill="#1A1714"/>
+        <circle cx="1062" cy="424" r="3" fill="#1A1714"/>
+        <circle cx="1194" cy="185" r="3" fill="#1A1714"/>
+        <circle cx="1194" cy="219" r="3" fill="#1A1714"/>
+        <circle cx="1194" cy="254" r="3" fill="#1A1714"/>
+        <circle cx="1194" cy="288" r="3" fill="#1A1714"/>
+        <circle cx="1194" cy="322" r="3" fill="#1A1714"/>
+        <circle cx="1194" cy="357" r="3" fill="#1A1714"/>
+        <circle cx="1194" cy="391" r="3" fill="#1A1714"/>
+        <circle cx="1194" cy="424" r="3" fill="#1A1714"/>
+        <circle cx="1326" cy="185" r="3" fill="#1A1714"/>
+        <circle cx="1326" cy="219" r="3" fill="#1A1714"/>
+        <circle cx="1326" cy="254" r="3" fill="#1A1714"/>
+        <circle cx="1326" cy="288" r="3" fill="#1A1714"/>
+        <circle cx="1326" cy="322" r="3" fill="#1A1714"/>
+        <circle cx="1326" cy="357" r="3" fill="#1A1714"/>
+        <circle cx="1326" cy="391" r="3" fill="#1A1714"/>
+        <circle cx="1326" cy="424" r="3" fill="#1A1714"/>
+        <circle cx="1440" cy="185" r="3" fill="#1A1714"/>
+        <circle cx="1440" cy="219" r="3" fill="#1A1714"/>
+        <circle cx="1440" cy="254" r="3" fill="#1A1714"/>
+        <circle cx="1440" cy="288" r="3" fill="#1A1714"/>
+        <circle cx="1440" cy="322" r="3" fill="#1A1714"/>
+        <circle cx="1440" cy="357" r="3" fill="#1A1714"/>
+        <circle cx="1440" cy="391" r="3" fill="#1A1714"/>
+        <circle cx="1440" cy="424" r="3" fill="#1A1714"/>
+        <circle cx="996" cy="120" r="46" fill="#F8F5ED" stroke="#E84A38" stroke-width="2.6"/>
+        <text x="996" y="114" font-family="Oswald" font-weight="700" font-size="21" fill="#E84A38" text-anchor="middle">ЦФО</text>
+        <rect x="979" y="126" width="34" height="26" fill="#F8F5ED" stroke="#1A1714" stroke-width="1.4"/>
+        <line x1="985" y1="133" x2="1007" y2="133" stroke="#1A1714" stroke-width="1"/>
+        <text x="996" y="148" font-family="JetBrains Mono" font-size="9" fill="#1A1714" text-anchor="middle">P&amp;L</text>
+        <line x1="996" y1="166" x2="996" y2="168" stroke="#E84A38" stroke-width="1.6"/>
+        <circle cx="1128" cy="120" r="46" fill="#F8F5ED" stroke="#E84A38" stroke-width="2.6"/>
+        <text x="1128" y="114" font-family="Oswald" font-weight="700" font-size="21" fill="#E84A38" text-anchor="middle">ЦФО</text>
+        <rect x="1111" y="126" width="34" height="26" fill="#F8F5ED" stroke="#1A1714" stroke-width="1.4"/>
+        <line x1="1117" y1="133" x2="1139" y2="133" stroke="#1A1714" stroke-width="1"/>
+        <text x="1128" y="148" font-family="JetBrains Mono" font-size="9" fill="#1A1714" text-anchor="middle">P&amp;L</text>
+        <line x1="1128" y1="166" x2="1128" y2="168" stroke="#E84A38" stroke-width="1.6"/>
+        <circle cx="1260" cy="120" r="46" fill="#F8F5ED" stroke="#E84A38" stroke-width="2.6"/>
+        <text x="1260" y="114" font-family="Oswald" font-weight="700" font-size="21" fill="#E84A38" text-anchor="middle">ЦФО</text>
+        <rect x="1243" y="126" width="34" height="26" fill="#F8F5ED" stroke="#1A1714" stroke-width="1.4"/>
+        <line x1="1249" y1="133" x2="1271" y2="133" stroke="#1A1714" stroke-width="1"/>
+        <text x="1260" y="148" font-family="JetBrains Mono" font-size="9" fill="#1A1714" text-anchor="middle">P&amp;L</text>
+        <line x1="1260" y1="166" x2="1260" y2="168" stroke="#E84A38" stroke-width="1.6"/>
+        <rect x="930" y="442" width="510" height="34" fill="#F8F5ED" stroke="#1A1714" stroke-width="1.6"/>
+        <text x="1185" y="464" font-family="Oswald" font-weight="600" font-size="15" fill="#1A1714" text-anchor="middle" letter-spacing="0.5">ОБЩИЕ СЕРВИСЫ И ПЛАТФОРМЫ</text>
+        <line x1="20" y1="534" x2="1460" y2="534" stroke="#1A1714" stroke-width="1.2"/><path d="M32 562 A 18 18 0 0 1 68 562" fill="none" stroke="#1A1714" stroke-width="2.4"/><line x1="50" y1="562" x2="62" y2="553" stroke="#1A1714" stroke-width="2.4"/><circle cx="50" cy="562" r="2.6" fill="#1A1714"/><text x="92" y="556" font-family="Oswald" font-weight="700" font-size="17" fill="#1A1714">СКОРОСТЬ РЕШЕНИЙ И РОСТ ОБОРОТА</text><text x="470" y="568" font-family="Oswald" font-weight="600" font-size="15" fill="#1A1714" text-anchor="end">НИЖЕ</text><line x1="500" y1="563" x2="1300" y2="563" stroke="#1A1714" stroke-width="1.6"/><polygon points="500,563 514,556 514,570" fill="#1A1714"/><polygon points="1300,563 1286,556 1286,570" fill="#1A1714"/><rect x="790" y="548" width="220" height="22" fill="#F8F5ED"/><text x="900" y="564" font-family="Oswald" font-weight="700" font-size="15" fill="#E84A38" text-anchor="middle" letter-spacing="0.5">РОСТ ДЕЦЕНТРАЛИЗАЦИИ</text><text x="1330" y="568" font-family="Oswald" font-weight="600" font-size="15" fill="#1A1714">ВЫШЕ</text><path d="M1402 562 A 28 28 0 0 1 1458 562" fill="none" stroke="#E84A38" stroke-width="2.4"/><line x1="1430" y1="562" x2="1450" y2="548" stroke="#E84A38" stroke-width="2.4"/><circle cx="1430" cy="562" r="2.6" fill="#E84A38"/>
+        <line x1="20" y1="636" x2="1460" y2="636" stroke="#1A1714" stroke-width="1.2"/><ellipse cx="50" cy="672" rx="16" ry="5.5" fill="none" stroke="#1A1714" stroke-width="2.2"/><ellipse cx="50" cy="664" rx="16" ry="5.5" fill="none" stroke="#1A1714" stroke-width="2.2"/><text x="92" y="658" font-family="Oswald" font-weight="700" font-size="17" fill="#1A1714">ЗАТРАТЫ И КООРДИНАЦИОННОЕ ТРЕНИЕ</text><text x="470" y="670" font-family="Oswald" font-weight="600" font-size="15" fill="#1A1714" text-anchor="end">НИЖЕ</text><line x1="500" y1="665" x2="1300" y2="665" stroke="#1A1714" stroke-width="1.6"/><polygon points="500,665 514,658 514,672" fill="#1A1714"/><polygon points="1300,665 1286,658 1286,672" fill="#1A1714"/><rect x="790" y="650" width="220" height="22" fill="#F8F5ED"/><text x="900" y="666" font-family="Oswald" font-weight="700" font-size="15" fill="#E84A38" text-anchor="middle" letter-spacing="0.5">РОСТ ДЕЦЕНТРАЛИЗАЦИИ</text><text x="1330" y="670" font-family="Oswald" font-weight="600" font-size="15" fill="#1A1714">ВЫШЕ</text><ellipse cx="1430" cy="676" rx="16" ry="5.5" fill="none" stroke="#E84A38" stroke-width="2.2"/><ellipse cx="1430" cy="668" rx="16" ry="5.5" fill="none" stroke="#E84A38" stroke-width="2.2"/><ellipse cx="1430" cy="660" rx="16" ry="5.5" fill="none" stroke="#E84A38" stroke-width="2.2"/><ellipse cx="1430" cy="652" rx="16" ry="5.5" fill="none" stroke="#E84A38" stroke-width="2.2"/>
+      </svg>
+    </div>
+  </div>
+</div>
+<script>document.fonts.ready.then(() => { document.body.dataset.fontsReady = "1"; });</script>
+</body>
+</html>

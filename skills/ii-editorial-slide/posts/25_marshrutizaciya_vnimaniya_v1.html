@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Фокус внимания — editorial v1</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#EFEBE7; --ink:#1A1714; --red:#D62219; --muted:#B8B3AD; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body { background: var(--paper); font-family: 'Inter Tight', system-ui, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  .slide { width: 1600px; height: 1200px; position: relative; overflow: hidden; background: var(--paper); }
+  .bg { position: absolute; inset: 0; z-index: 0; }
+  .bg .marks { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; }
+  .layer { position: absolute; inset: 0; z-index: 2; padding: 58px 80px 0 80px; display: grid; grid-template-rows: auto 1fr auto; row-gap: 16px; }
+  .header { display: block; margin-bottom: 2px; }
+  .title-block { position: relative; padding-left: 26px; }
+  .title-block::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 12px; width: 6px; background: var(--red); }
+  .topline { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--red); margin-bottom: 10px; }
+  h1 { font-family: 'Unbounded', sans-serif; font-weight: 900; font-size: 84px; line-height: 1.0; letter-spacing: -0.02em; text-transform: uppercase; color: var(--ink); }
+  h1 .dot { color: var(--red); }
+  .scheme { position: relative; display: flex; align-items: center; justify-content: center; }
+  .scheme svg { width: 100%; max-width: 1440px; height: auto; }
+  .rule { margin: 0 0 80px 0; border: 1.5px solid var(--ink); padding: 22px 28px; display: grid; grid-template-columns: 60px auto 1fr; gap: 28px; align-items: center; background: var(--paper); box-shadow: 0 1px 0 rgba(0,0,0,0.06); }
+  .rule .mark { width: 56px; height: 56px; border: 2px solid var(--red); border-radius: 50%; display: grid; place-items: center; font-family: 'Unbounded', sans-serif; font-weight: 800; font-size: 32px; color: var(--red); }
+  .rule .label { font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; position: relative; padding-left: 16px; white-space: nowrap; }
+  .rule .label::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background: var(--red); }
+  .rule .body { font-size: 17px; line-height: 1.5; }
+  .rule .body strong { font-weight: 700; color: var(--red); }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="bg">
+    <img class="marks" src="../backgrounds/10_radar_red.png" alt="">
+  </div>
+
+  <div class="layer">
+
+    <div class="header">
+      <div class="title-block">
+        <div class="topline">PP.MEDIA · И_И_ · модель ротации</div>
+        <h1>Фокус<br>внимания<span class="dot">.</span></h1>
+      </div>
+    </div>
+
+    <div class="scheme">
+      <svg viewBox="0 0 1440 580" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- ============ ЛЕВО: ВЕСЬ ПОРТФЕЛЬ (~100 проектов) ============ -->
+        <text x="20" y="14" font-family="Unbounded" font-weight="700" font-size="14" fill="#1A1714" letter-spacing="1">ВЕСЬ ПОРТФЕЛЬ · ~100 ПРОЕКТОВ</text>
+        <rect x="20" y="24" width="470" height="356" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.4"/>
+        <g fill="#9A958E">
+          <circle cx="58" cy="62" r="5"/><circle cx="104" cy="62" r="5"/><circle cx="150" cy="62" r="5"/><circle cx="196" cy="62" r="5"/><circle cx="242" cy="62" r="5"/><circle cx="288" cy="62" r="5"/><circle cx="334" cy="62" r="5"/><circle cx="380" cy="62" r="5"/><circle cx="426" cy="62" r="5"/><circle cx="462" cy="62" r="5"/>
+          <circle cx="58" cy="94" r="5"/><circle cx="104" cy="94" r="5"/><circle cx="150" cy="94" r="5"/><circle cx="196" cy="94" r="5"/><circle cx="242" cy="94" r="5"/><circle cx="288" cy="94" r="5"/><circle cx="334" cy="94" r="5"/><circle cx="380" cy="94" r="5"/><circle cx="426" cy="94" r="5"/><circle cx="462" cy="94" r="5"/>
+          <circle cx="58" cy="126" r="5"/><circle cx="104" cy="126" r="5"/><circle cx="150" cy="126" r="5"/><circle cx="196" cy="126" r="5"/><circle cx="242" cy="126" r="5"/><circle cx="288" cy="126" r="5"/><circle cx="334" cy="126" r="5"/><circle cx="380" cy="126" r="5"/><circle cx="426" cy="126" r="5"/><circle cx="462" cy="126" r="5"/>
+          <circle cx="58" cy="158" r="5"/><circle cx="104" cy="158" r="5"/><circle cx="150" cy="158" r="5"/><circle cx="196" cy="158" r="5"/><circle cx="242" cy="158" r="5"/><circle cx="288" cy="158" r="5"/><circle cx="334" cy="158" r="5"/><circle cx="380" cy="158" r="5"/><circle cx="426" cy="158" r="5"/><circle cx="462" cy="158" r="5"/>
+          <circle cx="58" cy="190" r="5"/><circle cx="104" cy="190" r="5"/><circle cx="150" cy="190" r="5"/><circle cx="196" cy="190" r="5"/><circle cx="242" cy="190" r="5"/><circle cx="288" cy="190" r="5"/><circle cx="334" cy="190" r="5"/><circle cx="380" cy="190" r="5"/><circle cx="426" cy="190" r="5"/><circle cx="462" cy="190" r="5"/>
+          <circle cx="58" cy="222" r="5"/><circle cx="104" cy="222" r="5"/><circle cx="150" cy="222" r="5"/><circle cx="196" cy="222" r="5"/><circle cx="242" cy="222" r="5"/><circle cx="288" cy="222" r="5"/><circle cx="334" cy="222" r="5"/><circle cx="380" cy="222" r="5"/><circle cx="426" cy="222" r="5"/><circle cx="462" cy="222" r="5"/>
+          <circle cx="58" cy="254" r="5"/><circle cx="104" cy="254" r="5"/><circle cx="150" cy="254" r="5"/><circle cx="196" cy="254" r="5"/><circle cx="242" cy="254" r="5"/><circle cx="288" cy="254" r="5"/><circle cx="334" cy="254" r="5"/><circle cx="380" cy="254" r="5"/><circle cx="426" cy="254" r="5"/><circle cx="462" cy="254" r="5"/>
+          <circle cx="58" cy="286" r="5"/><circle cx="104" cy="286" r="5"/><circle cx="150" cy="286" r="5"/><circle cx="196" cy="286" r="5"/><circle cx="242" cy="286" r="5"/><circle cx="288" cy="286" r="5"/><circle cx="334" cy="286" r="5"/><circle cx="380" cy="286" r="5"/><circle cx="426" cy="286" r="5"/><circle cx="462" cy="286" r="5"/>
+          <circle cx="58" cy="318" r="5"/><circle cx="104" cy="318" r="5"/><circle cx="150" cy="318" r="5"/><circle cx="196" cy="318" r="5"/><circle cx="242" cy="318" r="5"/><circle cx="288" cy="318" r="5"/><circle cx="334" cy="318" r="5"/><circle cx="380" cy="318" r="5"/><circle cx="426" cy="318" r="5"/><circle cx="462" cy="318" r="5"/>
+          <circle cx="58" cy="350" r="5"/><circle cx="104" cy="350" r="5"/><circle cx="150" cy="350" r="5"/><circle cx="196" cy="350" r="5"/><circle cx="242" cy="350" r="5"/><circle cx="288" cy="350" r="5"/><circle cx="334" cy="350" r="5"/><circle cx="380" cy="350" r="5"/><circle cx="426" cy="350" r="5"/><circle cx="462" cy="350" r="5"/>
+        </g>
+
+        <!-- ============ ФИЛЬТР ТРИАЖА ============ -->
+        <g transform="translate(520,150)">
+          <rect x="0" y="0" width="120" height="120" fill="#EFEBE7" stroke="#D62219" stroke-width="2.4"/>
+          <text x="60" y="48" font-family="Unbounded" font-weight="800" font-size="15" fill="#D62219" text-anchor="middle">ТРИАЖ</text>
+          <text x="60" y="74" font-family="JetBrains Mono" font-size="11" fill="#1A1714" text-anchor="middle">раз в день</text>
+          <text x="60" y="92" font-family="JetBrains Mono" font-size="11" fill="#1A1714" text-anchor="middle">по сигналам</text>
+        </g>
+        <g stroke="#1A1714" stroke-width="2" fill="#1A1714">
+          <line x1="490" y1="210" x2="518" y2="210"/><polygon points="518,205 526,210 518,215"/>
+        </g>
+        <g stroke="#D62219" stroke-width="2.6" fill="#D62219">
+          <line x1="642" y1="210" x2="690" y2="210"/><polygon points="690,203 704,210 690,217"/>
+        </g>
+
+        <!-- ============ ПРАВО: ФОКУС СЕГОДНЯ (четверть) ============ -->
+        <text x="720" y="14" font-family="Unbounded" font-weight="700" font-size="14" fill="#D62219" letter-spacing="1">ФОКУС СЕГОДНЯ · ~ЧЕТВЕРТЬ</text>
+        <rect x="720" y="24" width="700" height="356" fill="#EFEBE7" stroke="#1A1714" stroke-width="2"/>
+
+        <g font-family="Inter Tight">
+          <g transform="translate(744,48)">
+            <rect width="652" height="58" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <circle cx="30" cy="29" r="9" fill="#D62219"/>
+            <text x="58" y="26" font-size="15" font-weight="600" fill="#1A1714">Проект А</text>
+            <text x="58" y="46" font-family="JetBrains Mono" font-size="12" fill="#6E6963">подошёл срок гейта</text>
+          </g>
+          <g transform="translate(744,116)">
+            <rect width="652" height="58" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <circle cx="30" cy="29" r="9" fill="#D62219"/>
+            <text x="58" y="26" font-size="15" font-weight="600" fill="#1A1714">Проект Б</text>
+            <text x="58" y="46" font-family="JetBrains Mono" font-size="12" fill="#6E6963">отклонение от плана</text>
+          </g>
+          <g transform="translate(744,184)">
+            <rect width="652" height="58" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <circle cx="30" cy="29" r="9" fill="#D62219"/>
+            <text x="58" y="26" font-size="15" font-weight="600" fill="#1A1714">Проект В</text>
+            <text x="58" y="46" font-family="JetBrains Mono" font-size="12" fill="#6E6963">давно не открывали, копит риск</text>
+          </g>
+          <g transform="translate(744,256)" opacity="0.5">
+            <rect width="652" height="44" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.3" stroke-dasharray="4 3"/>
+            <circle cx="30" cy="22" r="8" fill="none" stroke="#B8B3AD" stroke-width="1.5"/>
+            <text x="58" y="27" font-size="14" fill="#9A958E">остальные ~75 проектов в фоне до своего срока</text>
+          </g>
+        </g>
+
+        <text x="1070" y="360" font-family="Unbounded" font-weight="800" font-size="13" fill="#D62219" text-anchor="middle" letter-spacing="0.5">ФОКУС ВНИМАНИЯ</text>
+
+        <!-- ============ НИЗ: КАК ВЫБИРАЮТСЯ ПРОЕКТЫ В ФОКУС ============ -->
+        <text x="0" y="416" font-family="Unbounded" font-weight="700" font-size="11" fill="#D62219" letter-spacing="1.5">КАК ВЫБИРАЮТСЯ ПРОЕКТЫ В ФОКУС</text>
+
+        <g transform="translate(0, 426)" font-family="Inter Tight">
+          <g transform="translate(0,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">01</text>
+            <text x="60" y="34" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.3">СРОК ГЕЙТА</text>
+            <text x="60" y="62" font-size="13" fill="#1A1714">подошла дата</text>
+            <text x="60" y="82" font-size="13" fill="#1A1714">контрольной точки,</text>
+            <text x="60" y="102" font-size="13" fill="#1A1714">нужно решение</text>
+          </g>
+          <g transform="translate(365,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">02</text>
+            <text x="60" y="34" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.3">ОТКЛОНЕНИЕ</text>
+            <text x="60" y="62" font-size="13" fill="#1A1714">пошло не по плану,</text>
+            <text x="60" y="82" font-size="13" fill="#1A1714">расхождение надо</text>
+            <text x="60" y="102" font-size="13" fill="#1A1714">разобрать</text>
+          </g>
+          <g transform="translate(730,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">03</text>
+            <text x="60" y="34" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.3">РИСК ПРОСТОЯ</text>
+            <text x="60" y="62" font-size="13" fill="#1A1714">давно не трогали,</text>
+            <text x="60" y="82" font-size="13" fill="#1A1714">копит риск</text>
+            <text x="60" y="102" font-size="13" fill="#1A1714">и проблемы</text>
+          </g>
+          <g transform="translate(1095,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">04</text>
+            <text x="60" y="34" font-family="Unbounded" font-weight="800" font-size="12" fill="#D62219" letter-spacing="0.3">СЛОЖНОСТЬ LEGACY</text>
+            <text x="60" y="62" font-size="13" fill="#1A1714">чем дольше забыт,</text>
+            <text x="60" y="82" font-size="13" fill="#1A1714">тем дороже потом</text>
+            <text x="60" y="102" font-size="13" fill="#1A1714">в него вернуться</text>
+          </g>
+        </g>
+
+      </svg>
+    </div>
+
+    <!-- RULE: финал -->
+    <div class="rule">
+      <div class="mark">!</div>
+      <div class="label">Итог</div>
+      <div class="body">
+        Контролировать сто проектов разом нельзя: внимание не масштабируется.
+        <strong>ИИ не расширяет внимание. Он каждый день наводит его на проекты, что важны именно сегодня.</strong>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  document.fonts.ready.then(() => { document.body.dataset.fontsReady = "1"; });
+</script>
+</body>
+</html>

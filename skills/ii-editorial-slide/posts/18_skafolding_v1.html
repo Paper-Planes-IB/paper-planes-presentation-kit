@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Скафолдинг без когнитивной стратегии — editorial v1</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EFEBE7;
+    --ink: #1A1714;
+    --red: #D62219;
+    --muted: #B8B3AD;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body {
+    background: var(--paper);
+    font-family: 'Inter Tight', system-ui, sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  .slide {
+    width: 1600px; height: 1200px;
+    position: relative; overflow: hidden;
+    background: var(--paper);
+  }
+  .bg { position: absolute; inset: 0; z-index: 0; }
+  .bg .marks { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; }
+  .layer {
+    position: absolute; inset: 0; z-index: 2;
+    padding: 56px 80px 0 80px;
+    display: grid; grid-template-rows: auto 1fr auto; row-gap: 16px;
+  }
+  .header { display: block; margin-bottom: 2px; }
+  .title-block { position: relative; padding-left: 26px; }
+  .title-block::before {
+    content: ""; position: absolute; left: 0; top: 10px; bottom: 14px;
+    width: 6px; background: var(--red);
+  }
+  .topline {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    text-transform: uppercase; letter-spacing: 1.5px; color: var(--red);
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-family: 'Unbounded', sans-serif; font-weight: 900;
+    font-size: 58px; line-height: 1.03; letter-spacing: -0.02em;
+    text-transform: uppercase; color: var(--ink);
+  }
+  h1 .dot { color: var(--red); }
+  .scheme { position: relative; display: flex; align-items: center; justify-content: center; }
+  .scheme svg { width: 100%; max-width: 1440px; height: auto; }
+  .rule {
+    margin: 0 0 112px 0; border: 1.5px solid var(--ink);
+    padding: 22px 28px; display: grid; grid-template-columns: 60px auto 1fr;
+    gap: 28px; align-items: center; background: var(--paper);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+  }
+  .rule .mark {
+    width: 56px; height: 56px; border: 2px solid var(--red); border-radius: 50%;
+    display: grid; place-items: center; font-family: 'Unbounded', sans-serif;
+    font-weight: 800; font-size: 32px; color: var(--red);
+  }
+  .rule .label {
+    font-family: 'Unbounded', sans-serif; font-weight: 700; font-size: 14px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    position: relative; padding-left: 16px; white-space: nowrap;
+  }
+  .rule .label::before {
+    content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+    width: 6px; height: 6px; background: var(--red);
+  }
+  .rule .body { font-size: 17px; line-height: 1.5; }
+  .rule .body strong { font-weight: 700; color: var(--red); }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="bg">
+    <img class="marks" src="../backgrounds/05_corner_grids.png" alt="">
+  </div>
+
+  <div class="layer">
+
+    <div class="header">
+      <div class="title-block">
+        <div class="topline">PP.MEDIA · И_И_ · когнитивная стратегия</div>
+        <h1>Скафолдинг&nbsp;без<br>когнитивной<br>стратегии<span class="dot">.</span></h1>
+      </div>
+    </div>
+
+    <!-- СХЕМА: крупные пирамиды — схлопывается без стратегии / стоит со стратегией + 4 шага -->
+    <div class="scheme">
+      <svg viewBox="0 0 1440 560" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- ===================== ЛЕВО: БЕЗ СТРАТЕГИИ ===================== -->
+        <text x="20" y="14" font-family="Unbounded" font-weight="700" font-size="14" fill="#D62219" letter-spacing="1">СКАФОЛД БЕЗ СТРАТЕГИИ</text>
+        <rect x="20" y="24" width="660" height="364" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2" stroke-dasharray="5 4"/>
+
+        <!-- леса вокруг основания (скафолд) -->
+        <g stroke="#B8B3AD" stroke-width="1.4">
+          <line x1="132" y1="280" x2="132" y2="352"/>
+          <line x1="568" y1="280" x2="568" y2="352"/>
+          <line x1="132" y1="304" x2="568" y2="304"/>
+          <line x1="132" y1="330" x2="568" y2="330"/>
+          <line x1="170" y1="280" x2="170" y2="352" stroke-dasharray="3 3"/>
+          <line x1="530" y1="280" x2="530" y2="352" stroke-dasharray="3 3"/>
+        </g>
+        <!-- подпись лесов -->
+        <text x="30" y="304" font-family="JetBrains Mono" font-size="11" fill="#9A958E">скафолд</text>
+        <line x1="92" y1="300" x2="130" y2="300" stroke="#9A958E" stroke-width="1"/>
+        <!-- осыпание: пирамида крошится -->
+        <g fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1.2">
+          <rect x="560" y="338" width="20" height="13" transform="rotate(-20 570 344)"/>
+          <rect x="586" y="352" width="16" height="11" transform="rotate(16 594 357)"/>
+          <rect x="556" y="360" width="18" height="12" transform="rotate(26 565 366)"/>
+        </g>
+
+        <!-- пирамида seniority (крупная) -->
+        <path d="M350 58 L550 352 L150 352 Z" fill="#EFEBE7" stroke="#1A1714" stroke-width="2.2"/>
+        <g stroke="#1A1714" stroke-width="1.6">
+          <line x1="300" y1="131" x2="400" y2="131"/>
+          <line x1="251" y1="204" x2="449" y2="204"/>
+          <line x1="200" y1="278" x2="500" y2="278"/>
+        </g>
+        <!-- подписи тиров вынесены в конец, поверх всех слоёв -->>
+
+        <!-- красная трещина: пирамида рушится -->
+        <path d="M350 70 L332 132 L364 200 L336 268 L356 344" stroke="#D62219" stroke-width="2.2" stroke-dasharray="6 4" fill="none"/>
+
+        <!-- красная стрелка: все сползают вниз в QA -->
+        <path d="M620 120 L620 326" stroke="#D62219" stroke-width="2.4" fill="none"/>
+        <polygon points="614,326 626,326 620,340" fill="#D62219"/>
+        <text x="636" y="160" font-family="JetBrains Mono" font-size="12" fill="#D62219">все</text>
+        <text x="636" y="178" font-family="JetBrains Mono" font-size="12" fill="#D62219">в QA</text>
+
+        <text x="350" y="380" font-family="Unbounded" font-weight="800" font-size="13" fill="#D62219" text-anchor="middle" letter-spacing="0.6">ПИРАМИДА СХЛОПЫВАЕТСЯ</text>
+
+        <!-- ===================== РАЗДЕЛИТЕЛЬ ===================== -->
+        <g>
+          <line x1="710" y1="24" x2="710" y2="388" stroke="#1A1714" stroke-width="1" stroke-dasharray="4 4"/>
+          <rect x="688" y="196" width="44" height="22" fill="#EFEBE7"/>
+          <text x="710" y="212" font-family="Unbounded" font-weight="800" font-size="14" fill="#D62219" text-anchor="middle">→</text>
+        </g>
+
+        <!-- ===================== ПРАВО: СО СТРАТЕГИЕЙ ===================== -->
+        <text x="740" y="14" font-family="Unbounded" font-weight="700" font-size="14" fill="#D62219" letter-spacing="1">СКАФОЛД + КОГНИТИВНАЯ СТРАТЕГИЯ</text>
+        <rect x="740" y="24" width="680" height="364" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+
+        <!-- твёрдое основание -->
+        <line x1="868" y1="358" x2="1292" y2="358" stroke="#1A1714" stroke-width="3"/>
+
+        <!-- пирамида стоит (крупная) -->
+        <path d="M1080 58 L1280 352 L880 352 Z" fill="#EFEBE7" stroke="#1A1714" stroke-width="2.2"/>
+        <g stroke="#1A1714" stroke-width="1.6">
+          <line x1="1030" y1="131" x2="1130" y2="131"/>
+          <line x1="981" y1="204" x2="1179" y2="204"/>
+          <line x1="930" y1="278" x2="1230" y2="278"/>
+        </g>
+        <!-- подписи тиров вынесены в конец, поверх всех слоёв -->>
+
+        <!-- стратегия течёт сверху вниз как алгоритм -->
+        <path d="M838 124 L838 330" stroke="#D62219" stroke-width="2.4" fill="none"/>
+        <polygon points="832,330 844,330 838,344" fill="#D62219"/>
+        <text x="822" y="164" font-family="JetBrains Mono" font-size="12" fill="#D62219" text-anchor="end">стратегия</text>
+        <text x="822" y="182" font-family="JetBrains Mono" font-size="12" fill="#D62219" text-anchor="end">→ алгоритм</text>
+
+        <!-- semantic ownership у младших -->
+        <g>
+          <rect x="1286" y="300" width="120" height="42" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.4"/>
+          <text x="1346" y="319" font-family="JetBrains Mono" font-size="11" fill="#1A1714" text-anchor="middle">semantic</text>
+          <text x="1346" y="334" font-family="JetBrains Mono" font-size="11" fill="#1A1714" text-anchor="middle">ownership</text>
+          <line x1="1255" y1="321" x2="1286" y2="321" stroke="#1A1714" stroke-width="1.3"/>
+        </g>
+
+        <text x="1080" y="380" font-family="Unbounded" font-weight="800" font-size="13" fill="#D62219" text-anchor="middle" letter-spacing="0.6">ПИРАМИДА СТОИТ · КАЖДЫЙ УСИЛЕН</text>
+
+        <!-- ===================== НИЗ: КАК РУШИТСЯ ПИРАМИДА ===================== -->
+        <text x="0" y="418" font-family="Unbounded" font-weight="700" font-size="11" fill="#D62219" letter-spacing="1.5">КАК РУШИТСЯ ПИРАМИДА</text>
+
+        <g transform="translate(0, 428)" font-family="Inter Tight">
+          <g transform="translate(0,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">01</text>
+            <text x="60" y="30" font-family="Unbounded" font-weight="800" font-size="12" fill="#1A1714" letter-spacing="0.3">МЛАДШИЕ БЕЗДУМНО</text>
+            <text x="60" y="60" font-size="13" fill="#1A1714">впихивают в ИИ ворох</text>
+            <text x="60" y="80" font-size="13" fill="#1A1714">сырых данных,</text>
+            <text x="60" y="100" font-size="13" fill="#1A1714">стратегия не растёт</text>
+          </g>
+          <g transform="translate(365,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">02</text>
+            <text x="60" y="30" font-family="Unbounded" font-weight="800" font-size="12" fill="#1A1714" letter-spacing="0.3">ВЫХОД НЕ ПРОЧИТАТЬ</text>
+            <text x="60" y="60" font-size="13" fill="#1A1714">не строил цепочку,</text>
+            <text x="60" y="80" font-size="13" fill="#1A1714">не видит, где</text>
+            <text x="60" y="100" font-size="13" fill="#1A1714">она поехала</text>
+          </g>
+          <g transform="translate(730,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">03</text>
+            <text x="60" y="30" font-family="Unbounded" font-weight="800" font-size="12" fill="#D62219" letter-spacing="0.3">СРЕДНИЕ В QA</text>
+            <text x="60" y="60" font-size="13" fill="#1A1714">вскрывают ломом</text>
+            <text x="60" y="80" font-size="13" fill="#1A1714">парсоновский</text>
+            <text x="60" y="100" font-size="13" fill="#1A1714">чёрный ящик</text>
+          </g>
+          <g transform="translate(1095,0)">
+            <rect x="0" y="0" width="345" height="120" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.5"/>
+            <rect x="0" y="0" width="44" height="120" fill="#1A1714"/>
+            <text x="22" y="68" font-family="Unbounded" font-weight="900" font-size="19" fill="#EFEBE7" text-anchor="middle">04</text>
+            <text x="60" y="30" font-family="Unbounded" font-weight="800" font-size="12" fill="#1A1714" letter-spacing="0.3">ПАРТНЁРЫ ВНИЗ</text>
+            <text x="60" y="60" font-size="13" fill="#1A1714">старшие тоже в QA,</text>
+            <text x="60" y="80" font-size="13" fill="#1A1714">пирамида seniority</text>
+            <text x="60" y="100" font-size="13" fill="#1A1714">схлопывается</text>
+          </g>
+        </g>
+
+        <!-- ПОДПИСИ ТИРОВ — поверх всех слоёв, с paper-подложкой -->
+        <g fill="#EFEBE7">
+          <rect x="302" y="91" width="96" height="20"/>
+          <rect x="306" y="161" width="88" height="20"/>
+          <rect x="306" y="233" width="88" height="20"/>
+          <rect x="306" y="307" width="88" height="20"/>
+          <rect x="1032" y="91" width="96" height="20"/>
+          <rect x="1036" y="161" width="88" height="20"/>
+          <rect x="1036" y="233" width="88" height="20"/>
+          <rect x="1036" y="307" width="88" height="20"/>
+        </g>
+        <g font-family="Inter Tight" font-weight="600" font-size="16" fill="#1A1714" text-anchor="middle">
+          <text x="350" y="106">партнёры</text>
+          <text x="350" y="176">старшие</text>
+          <text x="350" y="248">средние</text>
+          <text x="350" y="322">младшие</text>
+          <text x="1080" y="106">партнёры</text>
+          <text x="1080" y="176">старшие</text>
+          <text x="1080" y="248">средние</text>
+          <text x="1080" y="322">младшие</text>
+        </g>
+
+      </svg>
+    </div>
+
+    <!-- RULE: финал -->
+    <div class="rule">
+      <div class="mark">!</div>
+      <div class="label">Итог</div>
+      <div class="body">
+        Скафолд усиливает того, у кого когнитивная стратегия есть.
+        <strong>У кого её нет — отнимает и остатки.</strong>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  document.fonts.ready.then(() => { document.body.dataset.fontsReady = "1"; });
+</script>
+</body>
+</html>

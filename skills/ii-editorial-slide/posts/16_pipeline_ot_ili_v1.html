@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>От Ильи до канала — pipeline editorial</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EFEBE7;
+    --ink: #1A1714;
+    --red: #D62219;
+    --muted: #B8B3AD;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body {
+    background: var(--paper);
+    font-family: 'Inter Tight', system-ui, sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .slide {
+    width: 1600px;
+    height: 1200px;
+    position: relative;
+    overflow: hidden;
+    background: var(--paper);
+  }
+
+  .bg { position: absolute; inset: 0; z-index: 0; }
+  .bg .marks {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: fill;
+  }
+
+  .layer {
+    position: absolute; inset: 0;
+    z-index: 2;
+    padding: 72px 80px 0 80px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    row-gap: 28px;
+  }
+
+  .header { display: block; margin-bottom: 8px; }
+  .title-block { position: relative; padding-left: 26px; }
+  .title-block::before {
+    content: "";
+    position: absolute; left: 0; top: 16px; bottom: 28px;
+    width: 6px; background: var(--red);
+  }
+  .topline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--red);
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: 64px;
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  h1 .dot { color: var(--red); }
+  h1 .accent { color: var(--red); }
+
+  .scheme {
+    position: relative; margin: 0; padding: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .scheme svg { width: 100%; max-width: 1440px; height: auto; }
+
+  .rule {
+    margin: 0 0 64px 0;
+    border: 1.5px solid var(--ink);
+    padding: 22px 28px;
+    display: grid;
+    grid-template-columns: 60px auto 1fr;
+    gap: 28px;
+    align-items: center;
+    background: var(--paper);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+  }
+  .rule .mark {
+    width: 56px; height: 56px;
+    border: 2px solid var(--red); border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800; font-size: 32px; color: var(--red);
+  }
+  .rule .label {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700; font-size: 14px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    position: relative; padding-left: 16px;
+    white-space: nowrap;
+  }
+  .rule .label::before {
+    content: ""; position: absolute;
+    left: 0; top: 50%; transform: translateY(-50%);
+    width: 6px; height: 6px; background: var(--red);
+  }
+  .rule .body { font-size: 15px; line-height: 1.5; }
+  .rule .body strong {
+    font-weight: 700; color: var(--red);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    font-family: 'Unbounded', sans-serif; font-size: 12.5px;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="bg">
+    <img class="marks" src="../backgrounds/08_thin_lines_right.png" alt="">
+  </div>
+
+  <div class="layer">
+
+    <div class="header">
+      <div class="title-block">
+        <div class="topline">PP.MEDIA · И_И_ · выпуск 16</div>
+        <h1>От Ильи<br>до канала <span class="accent">через четыре</span><br>фильтра<span class="dot">.</span></h1>
+      </div>
+    </div>
+
+    <!-- СХЕМА: ось пайплайна сверху + 2 карточки (Watcher / Лили) + полоса 5 шагов алгоритма Лили -->
+    <div class="scheme">
+      <svg viewBox="0 0 1440 580" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- ===== ВЕРХ: ось PIPELINE с 5 узлами ===== -->
+        <g>
+          <text x="0" y="-2" font-family="Unbounded" font-weight="700" font-size="11" fill="#D62219" letter-spacing="1.5">PIPELINE · ОТ DRIVE ИЛЬИ ДО КАНАЛА</text>
+
+          <!-- ось -->
+          <line x1="0" y1="40" x2="1440" y2="40" stroke="#1A1714" stroke-width="1.5"/>
+
+          <!-- 5 узлов на оси -->
+          <g font-family="JetBrains Mono" font-size="11" fill="#1A1714">
+            <!-- 01 ИЛЬЯ -->
+            <circle cx="0" cy="40" r="7" fill="#1A1714"/>
+            <text x="0" y="22" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" text-anchor="start">ИЛЬЯ</text>
+            <text x="0" y="62" text-anchor="start">drive · raw-packs</text>
+
+            <!-- 02 WATCHER -->
+            <circle cx="360" cy="40" r="7" fill="#1A1714"/>
+            <text x="360" y="22" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" text-anchor="middle">WATCHER</text>
+            <text x="360" y="62" text-anchor="middle">3×/день · digest</text>
+
+            <!-- 03 ЛИЛИ (выделена красным, центральный узел) -->
+            <line x1="720" y1="20" x2="720" y2="60" stroke="#D62219" stroke-width="2"/>
+            <circle cx="720" cy="40" r="11" fill="#D62219"/>
+            <text x="720" y="14" font-family="Unbounded" font-weight="800" font-size="12" fill="#D62219" text-anchor="middle">УЗЕЛ</text>
+            <text x="720" y="78" font-family="Unbounded" font-weight="900" font-size="14" fill="#D62219" text-anchor="middle">ЛИЛИ · 4 ФИЛЬТРА</text>
+
+            <!-- 04 НАТАЛЬЯ -->
+            <circle cx="1080" cy="40" r="7" fill="#1A1714"/>
+            <text x="1080" y="22" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" text-anchor="middle">НАТАЛЬЯ</text>
+            <text x="1080" y="62" text-anchor="middle">правки · публикация</text>
+
+            <!-- 05 КАНАЛ -->
+            <circle cx="1440" cy="40" r="7" fill="#1A1714"/>
+            <text x="1440" y="22" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" text-anchor="end">КАНАЛ</text>
+            <text x="1440" y="62" text-anchor="end">TG · И_И_ · mooove</text>
+          </g>
+
+          <!-- закраска оси: до Лили чёрная, после Лили красная -->
+          <rect x="0" y="32" width="720" height="2" fill="#1A1714"/>
+          <rect x="720" y="32" width="720" height="2" fill="#D62219"/>
+        </g>
+
+        <!-- ===== ДВЕ ЗОНЫ: что делает Watcher / что делает Лили ===== -->
+
+        <!-- LEFT: WATCHER -->
+        <g transform="translate(0, 110)">
+          <rect x="0" y="0" width="700" height="170" fill="#EFEBE7" stroke="#1A1714" stroke-width="2"/>
+          <rect x="0" y="0" width="700" height="38" fill="#1A1714"/>
+          <text x="20" y="25" font-family="Unbounded" font-weight="800" font-size="16" fill="#EFEBE7" letter-spacing="1">WATCHER · АВТОМАТ</text>
+          <text x="680" y="25" font-family="Inter Tight" font-size="12" fill="#EFEBE7" text-anchor="end">launchd · 3×/день</text>
+
+          <text x="20" y="60" font-family="Inter Tight" font-size="13" fill="#1A1714" font-weight="500">Что делает между Ильёй и Лили:</text>
+
+          <g font-family="Inter Tight" font-size="13" fill="#1A1714" transform="translate(20, 78)">
+            <rect x="0" y="0" width="3" height="3" fill="#D62219"/>
+            <text x="12" y="6">опрашивает папку Ильи в Drive PP</text>
+            <rect x="0" y="20" width="3" height="3" fill="#D62219"/>
+            <text x="12" y="26">скачивает дельту в drive_pull/</text>
+            <rect x="0" y="40" width="3" height="3" fill="#D62219"/>
+            <text x="12" y="46">запускает headless Claude</text>
+            <rect x="0" y="60" width="3" height="3" fill="#D62219"/>
+            <text x="12" y="66">обновляет дайджест в ilya_digest.md</text>
+          </g>
+        </g>
+
+        <!-- RIGHT: ЛИЛИ -->
+        <g transform="translate(740, 110)">
+          <rect x="0" y="0" width="700" height="170" fill="#EFEBE7" stroke="#D62219" stroke-width="2"/>
+          <rect x="0" y="0" width="700" height="38" fill="#D62219"/>
+          <text x="20" y="25" font-family="Unbounded" font-weight="800" font-size="16" fill="#EFEBE7" letter-spacing="1">ЛИЛИ · УЗЕЛ ФИЛЬТРАЦИИ</text>
+
+          <text x="20" y="60" font-family="Inter Tight" font-size="13" fill="#1A1714" font-weight="500">Что делает между Watcher и Натальей:</text>
+
+          <g font-family="Inter Tight" font-size="13" fill="#1A1714" transform="translate(20, 78)">
+            <rect x="0" y="0" width="3" height="3" fill="#D62219"/>
+            <text x="12" y="6" font-weight="600">читает дайджест и кандидатов 🟢/🟡</text>
+            <rect x="0" y="20" width="3" height="3" fill="#D62219"/>
+            <text x="12" y="26">прогоняет тему через 4 фильтра</text>
+            <rect x="0" y="40" width="3" height="3" fill="#D62219"/>
+            <text x="12" y="46">сжимает в плотный формат поста-14</text>
+            <rect x="0" y="60" width="3" height="3" fill="#D62219"/>
+            <text x="12" y="66">собирает визуал в палитре канала</text>
+          </g>
+        </g>
+
+        <!-- ===== НИЖНЯЯ ПОЛОСА: 4 ФИЛЬТРА + ОТДАЧА ===== -->
+
+        <g transform="translate(0, 312)">
+          <text x="0" y="0" font-family="Unbounded" font-weight="700" font-size="11" fill="#D62219" letter-spacing="1.5">ЧЕТЫРЕ ФИЛЬТРА ВНУТРИ УЗЛА ЛИЛИ</text>
+        </g>
+
+        <!-- 5 нумерованных карточек -->
+        <g transform="translate(0, 332)">
+          <!-- 01 РАМКА -->
+          <g transform="translate(0, 0)">
+            <rect x="0" y="0" width="272" height="156" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.8"/>
+            <rect x="0" y="0" width="44" height="156" fill="#1A1714"/>
+            <text x="22" y="86" font-family="Unbounded" font-weight="900" font-size="20" fill="#EFEBE7" text-anchor="middle">01</text>
+            <text x="56" y="30" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.5">РАМКА</text>
+            <text x="56" y="48" font-family="Inter Tight" font-size="11" fill="#6E6963">PP 2026–2029</text>
+            <g font-family="Inter Tight" font-size="12" fill="#1A1714" transform="translate(56, 68)">
+              <text x="0" y="0">6 маршрутов</text>
+              <text x="0" y="18">объект управления</text>
+              <text x="0" y="36">запрещённые слова</text>
+              <text x="0" y="54">whitespaces</text>
+            </g>
+          </g>
+          <!-- 02 ПРИНЦИПЫ ИЛЬИ -->
+          <g transform="translate(292, 0)">
+            <rect x="0" y="0" width="272" height="156" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.8"/>
+            <rect x="0" y="0" width="44" height="156" fill="#1A1714"/>
+            <text x="22" y="86" font-family="Unbounded" font-weight="900" font-size="20" fill="#EFEBE7" text-anchor="middle">02</text>
+            <text x="56" y="30" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.5">ПРИНЦИПЫ</text>
+            <text x="56" y="48" font-family="Inter Tight" font-size="11" fill="#6E6963">Ильи · 13 правил</text>
+            <g font-family="Inter Tight" font-size="12" fill="#1A1714" transform="translate(56, 68)">
+              <text x="0" y="0">связь с витриной</text>
+              <text x="0" y="18">база-не-тема</text>
+              <text x="0" y="36">антизацикливание</text>
+              <text x="0" y="54">50/50 rail refresh</text>
+            </g>
+          </g>
+          <!-- 03 АНТИ-AI -->
+          <g transform="translate(584, 0)">
+            <rect x="0" y="0" width="272" height="156" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.8"/>
+            <rect x="0" y="0" width="44" height="156" fill="#1A1714"/>
+            <text x="22" y="86" font-family="Unbounded" font-weight="900" font-size="20" fill="#EFEBE7" text-anchor="middle">03</text>
+            <text x="56" y="30" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.5">АНТИ-AI</text>
+            <text x="56" y="48" font-family="Inter Tight" font-size="11" fill="#6E6963">24 паттерна</text>
+            <g font-family="Inter Tight" font-size="12" fill="#1A1714" transform="translate(56, 68)">
+              <text x="0" y="0">не X а Y</text>
+              <text x="0" y="18">одушевления</text>
+              <text x="0" y="36">точка-X · параллелизм</text>
+              <text x="0" y="54">англицизмы</text>
+            </g>
+          </g>
+          <!-- 04 ГОЛОС -->
+          <g transform="translate(876, 0)">
+            <rect x="0" y="0" width="272" height="156" fill="#EFEBE7" stroke="#1A1714" stroke-width="1.8"/>
+            <rect x="0" y="0" width="44" height="156" fill="#1A1714"/>
+            <text x="22" y="86" font-family="Unbounded" font-weight="900" font-size="20" fill="#EFEBE7" text-anchor="middle">04</text>
+            <text x="56" y="30" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.5">ГОЛОС</text>
+            <text x="56" y="48" font-family="Inter Tight" font-size="11" fill="#6E6963">Voice Profile</text>
+            <g font-family="Inter Tight" font-size="12" fill="#1A1714" transform="translate(56, 68)">
+              <text x="0" y="0">регистр PP</text>
+              <text x="0" y="18">или Балахнин личный</text>
+              <text x="0" y="36">язык собственника</text>
+              <text x="0" y="54">без агентских клише</text>
+            </g>
+          </g>
+          <!-- 05 ОТДАТЬ (красная плашка) -->
+          <g transform="translate(1168, 0)">
+            <rect x="0" y="0" width="272" height="156" fill="#EFEBE7" stroke="#D62219" stroke-width="2"/>
+            <rect x="0" y="0" width="44" height="156" fill="#D62219"/>
+            <text x="22" y="86" font-family="Unbounded" font-weight="900" font-size="20" fill="#EFEBE7" text-anchor="middle">05</text>
+            <text x="56" y="30" font-family="Unbounded" font-weight="800" font-size="13" fill="#1A1714" letter-spacing="0.5">ОТДАТЬ</text>
+            <text x="56" y="44" font-family="Unbounded" font-weight="800" font-size="13" fill="#D62219" letter-spacing="0.5">НАТАЛЬЕ</text>
+            <g font-family="Inter Tight" font-size="12" fill="#1A1714" transform="translate(56, 68)">
+              <text x="0" y="0" font-weight="600">только чистый</text>
+              <text x="0" y="18">финальный текст;</text>
+              <text x="0" y="36">никакого</text>
+              <text x="0" y="54" font-weight="600">полуготового</text>
+            </g>
+          </g>
+
+          <!-- Соединительные стрелки между шагами -->
+          <g stroke="#1A1714" stroke-width="1.4" fill="#1A1714">
+            <line x1="272" y1="78" x2="288" y2="78"/>
+            <polygon points="288,74 294,78 288,82"/>
+            <line x1="564" y1="78" x2="580" y2="78"/>
+            <polygon points="580,74 586,78 580,82"/>
+            <line x1="856" y1="78" x2="872" y2="78"/>
+            <polygon points="872,74 878,78 872,82"/>
+            <line x1="1148" y1="78" x2="1164" y2="78"/>
+            <polygon points="1164,74 1170,78 1164,82"/>
+          </g>
+        </g>
+
+      </svg>
+    </div>
+
+    <!-- RULE: контрастная пара -->
+    <div class="rule">
+      <div class="mark">!</div>
+      <div class="label">Итог</div>
+      <div class="body">
+        Watcher собирает Drive Ильи в дайджест.
+        <strong>Лили прогоняет тему через четыре фильтра. Полуготовое до Натальи не доходит.</strong>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  document.fonts.ready.then(() => { document.body.dataset.fontsReady = "1"; });
+</script>
+</body>
+</html>

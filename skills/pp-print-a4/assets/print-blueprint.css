@@ -1,0 +1,151 @@
+/* =========================================================================
+   Печатный слой для гайдбука Paper Planes (blueprint) → A4 PDF.
+   Вставить целиком внутрь <style> HTML-методички, в самый конец,
+   но ДО мобильного @media (max-width). Отлажено на «Админ_роль_методичка».
+
+   Что решает (грабли, на которые мы напоролись):
+   - background-attachment: fixed координатная сетка косит PDF → background-image:none
+   - grid в 4/5 колонок обрезается по ширине A4 → 2 колонки
+   - таймлайн дня (18 слотов) разливается на 2 страницы → column-count:2 + border-left
+   - глоссарий (30+ терминов) рвётся → column-count:2, термин+определение break-inside:avoid
+   - карточки/строки рвутся посередине → page-break-inside:avoid
+   - фоны карточек/плашек не печатаются → print-color-adjust:exact
+   - вкладки наслаиваются друг на друга → section.tab display:block + page-break
+   - «1 вкладка = 1 страница» → page-break-before/after:always на section.tab
+
+   Базовый кегль 8pt / line-height 1.25 → ~12 страниц на 9 вкладок (плотные
+   вкладки-таблицы берут по 2). Дожимать до строго 1:1 кеглем ~6.5pt НЕ нужно —
+   на бумаге нечитаемо. Спроси пользователя, прежде чем уменьшать ниже 8pt.
+   ========================================================================= */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 9mm 9mm;
+  }
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  html, body {
+    background: #fff !important;
+    background-image: none !important;
+    font-size: 8pt;
+    line-height: 1.25;
+  }
+  .page { max-width: 100%; padding: 0; margin: 0; }
+
+  /* Декор и навигация скрыты */
+  header.h .corner { display: none; }
+  header.h::before { display: none; }
+  nav.tabs { display: none; }
+  header.h { padding: 10px 14px; margin-bottom: 0; }
+
+  /* КАЖДАЯ вкладка = ровно одна страница */
+  section.tab {
+    display: block !important;
+    page-break-before: always;
+    page-break-after: always;
+    animation: none !important;
+  }
+  section.tab:first-of-type { page-break-before: avoid; }
+  footer.f { display: none; }
+
+  /* Заголовки компактные */
+  h1 { font-size: 22pt; margin-bottom: 6px; }
+  h2 { font-size: 15pt; margin-bottom: 4px; padding-bottom: 4px; }
+  h2 .sub { font-size: 8pt; }
+  h3 { font-size: 11pt; margin: 10px 0 5px; }
+  h4 { font-size: 9pt; margin: 8px 0 3px; }
+  p { margin-bottom: 6px; }
+  p.lead { font-size: 9pt; margin: 8px 0 10px; }
+  ul, ol { margin-bottom: 7px; padding-left: 18px; }
+  li { margin-bottom: 2px; }
+
+  /* Сетки карточек — 2 колонки (компактно, влезает по ширине A4) */
+  .grid, .grid.cols-2, .grid.cols-4, .grid.cols-5 {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6px !important;
+  }
+  .card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    padding: 8px 10px;
+    margin-bottom: 0;
+  }
+  .card .title { font-size: 12pt; margin-bottom: 4px; }
+  .card .label { font-size: 7pt; margin-bottom: 3px; }
+  .card ul { font-size: 8pt; }
+
+  /* Таймлайн дня — 2 колонки, компактные слоты, чтобы все 18 влезли на страницу */
+  .timeline {
+    margin: 8px 0;
+    padding-left: 0;
+    border-left: none;
+    column-count: 2;
+    column-gap: 14px;
+  }
+  .timeline .slot {
+    margin-bottom: 7px;
+    padding-left: 14px;
+    border-left: 2px solid var(--ink);
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .timeline .slot::before { display: none; }
+  .timeline .time { font-size: 8pt; margin-bottom: 1px; }
+  .timeline .what { font-size: 8.5pt; margin-bottom: 1px; }
+  .timeline .body { font-size: 7.5pt; }
+  .timeline .source { font-size: 7pt; margin-top: 1px; }
+
+  /* Дни недели — компактно */
+  .day { margin-bottom: 8px; page-break-inside: avoid; break-inside: avoid; }
+  .day .dh { padding: 6px 12px; }
+  .day .dh .name { font-size: 12pt; }
+  .day .db { padding: 8px 12px; }
+
+  /* Таблицы */
+  table { font-size: 8pt; width: 100%; table-layout: fixed; margin: 8px 0; }
+  th, td { padding: 4px 7px; word-wrap: break-word; overflow-wrap: break-word; }
+  th { font-size: 7.5pt; }
+  tr { page-break-inside: avoid; break-inside: avoid; }
+
+  /* Глоссарий — 2 колонки, термин + определение вместе */
+  .gloss {
+    column-count: 2;
+    column-gap: 10px;
+    border: none;
+    display: block;
+  }
+  .gloss dt {
+    font-size: 8pt;
+    padding: 3px 6px;
+    border: none;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+  .gloss dd {
+    font-size: 7.5pt;
+    line-height: 1.2;
+    padding: 4px 6px 6px;
+    border: 1px solid var(--ink);
+    border-top: none;
+    margin-bottom: 4px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  /* h3-подзаголовки внутри глоссария не разрывают колонки */
+  #glossary h3 { column-span: all; }
+
+  .pull { padding: 8px 12px; margin: 10px 0; font-size: 8.5pt; }
+  .pull::before { font-size: 16px; }
+
+  /* Термины-ссылки как обычный текст */
+  a.term, abbr[title] {
+    text-decoration: none;
+    background: none !important;
+    color: inherit;
+  }
+}

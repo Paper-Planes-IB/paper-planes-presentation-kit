@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>«Хотим ИИ» это ещё не потребность — editorial v3</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EFEBE7;
+    --ink: #1A1714;
+    --red: #D62219;
+    --muted: #B8B3AD;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body {
+    background: var(--paper);
+    font-family: 'Inter Tight', system-ui, sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .slide {
+    width: 1600px;
+    height: 1200px;
+    position: relative;
+    overflow: hidden;
+    background: var(--paper);
+  }
+
+  .bg { position: absolute; inset: 0; z-index: 0; }
+  .bg .marks {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  /* paper-вуаль: приглушаем фото-арт, чтобы чёрная схема читалась поверх */
+  .bg::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: rgba(239, 235, 231, 0.80);
+  }
+
+  .layer {
+    position: absolute; inset: 0;
+    z-index: 2;
+    padding: 72px 80px 0 80px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    row-gap: 24px;
+  }
+
+  .header { display: block; margin-bottom: 4px; }
+  .title-block { position: relative; padding-left: 26px; }
+  .title-block::before {
+    content: "";
+    position: absolute; left: 0; top: 14px; bottom: 24px;
+    width: 6px; background: var(--red);
+  }
+  .topline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--red);
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 900;
+    font-size: 84px;
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  h1 .q { color: var(--red); }
+  h1 .small { font-size: 60px; }
+
+  .scheme {
+    position: relative; margin: 0; padding: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .scheme svg { width: 100%; max-width: 1440px; height: auto; }
+
+  .rule {
+    margin: 0 0 70px 0;
+    border: 1.5px solid var(--ink);
+    padding: 24px 28px;
+    display: grid;
+    grid-template-columns: 60px auto 1fr;
+    gap: 28px;
+    align-items: center;
+    background: var(--paper);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+  }
+  .rule .mark {
+    width: 56px; height: 56px;
+    border: 2px solid var(--red); border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800; font-size: 32px; color: var(--red);
+  }
+  .rule .label {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700; font-size: 14px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    position: relative; padding-left: 16px;
+    white-space: nowrap;
+  }
+  .rule .label::before {
+    content: ""; position: absolute;
+    left: 0; top: 50%; transform: translateY(-50%);
+    width: 6px; height: 6px; background: var(--red);
+  }
+  .rule .body { font-size: 16px; line-height: 1.5; }
+  .rule .body strong {
+    font-weight: 700; color: var(--red);
+    text-transform: uppercase; letter-spacing: 0.5px;
+    font-family: 'Unbounded', sans-serif; font-size: 13px;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="bg">
+    <img class="marks" src="../backgrounds/06_concrete_steps_sun.png" alt="">
+  </div>
+
+  <div class="layer">
+
+    <div class="header">
+      <div class="title-block">
+        <div class="topline">PP.MEDIA · И_И_ · стратсессия по применению ИИ</div>
+        <h1><span class="q">«</span>Хотим ИИ<span class="q">»</span><br><span class="small">это ещё не потребность.</span></h1>
+      </div>
+    </div>
+
+    <!-- СХЕМА: лестница восхождения через сессию vs прыжок в проблемы -->
+    <div class="scheme">
+      <svg viewBox="0 0 1440 680" preserveAspectRatio="xMidYMid meet" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- ===== СТАРТ: «хотим ИИ» ===== -->
+        <g transform="translate(0, 300)">
+          <rect x="0" y="0" width="220" height="150" fill="#EFEBE7" stroke="#1A1714" stroke-width="2" stroke-dasharray="6 4"/>
+          <text x="110" y="58" font-family="Unbounded" font-weight="800" font-size="24" fill="#1A1714" text-anchor="middle">«ХОТИМ</text>
+          <text x="110" y="88" font-family="Unbounded" font-weight="800" font-size="24" fill="#1A1714" text-anchor="middle">ИИ»</text>
+          <text x="110" y="122" font-family="Inter Tight" font-size="14" fill="#6E6963" text-anchor="middle">запрос с рынка</text>
+        </g>
+
+        <!-- ===== ЛОВУШКА: сразу делать, минуя проработку (низ) ===== -->
+        <g>
+          <path d="M130 460 C 320 600, 620 615, 980 615" stroke="#D62219" stroke-width="1.8" stroke-dasharray="7 5" fill="none"/>
+          <polygon points="980,609 998,615 980,621" fill="#D62219"/>
+          <rect x="180" y="588" width="588" height="24" fill="#EFEBE7"/>
+          <text x="474" y="605" font-family="Unbounded" font-weight="700" font-size="13" fill="#D62219" text-anchor="middle" letter-spacing="1">СРАЗУ ВНЕДРЯТЬ, МИНУЯ АНАЛИЗ, ОЦЕНКУ И ПРОРАБОТКУ</text>
+        </g>
+        <g transform="translate(1000, 568)">
+          <rect x="0" y="0" width="440" height="96" fill="#EFEBE7" stroke="#D62219" stroke-width="1.8"/>
+          <text x="18" y="30" font-family="Unbounded" font-weight="700" font-size="13" fill="#D62219" letter-spacing="0.5">ЧЕРЕЗ НЕДЕЛЮ</text>
+          <text x="18" y="56" font-family="Inter Tight" font-size="14" fill="#1A1714">дашборд поверх хаоса, пилот на</text>
+          <text x="18" y="78" font-family="Inter Tight" font-size="14" fill="#1A1714">неготовых данных, бот, про которого забыли</text>
+        </g>
+
+        <!-- ===== ФИНИШ-подпись: на выходе (вершина) ===== -->
+        <g transform="translate(1085, 8)">
+          <rect x="0" y="0" width="355" height="86" fill="#1A1714"/>
+          <text x="18" y="30" font-family="Unbounded" font-weight="800" font-size="15" fill="#EFEBE7" letter-spacing="0.5">НА ВЫХОДЕ</text>
+          <text x="18" y="54" font-family="Inter Tight" font-size="13" fill="#EFEBE7">прототип на готовом процессе, карта</text>
+          <text x="18" y="74" font-family="Inter Tight" font-size="13" fill="#EFEBE7">зрелости, <tspan fill="#D62219" font-weight="600">дорожная карта 90 дней</tspan></text>
+        </g>
+
+        <!-- ===== ЛЕСТНИЦА: 4 ступени сессии (восхождение) ===== -->
+
+        <!-- Ступень 1 -->
+        <g transform="translate(245, 360)">
+          <rect x="0" y="0" width="330" height="165" fill="#EFEBE7" stroke="#1A1714" stroke-width="2"/>
+          <rect x="0" y="0" width="48" height="165" fill="#1A1714"/>
+          <text x="24" y="95" font-family="Unbounded" font-weight="900" font-size="26" fill="#EFEBE7" text-anchor="middle">1</text>
+          <text x="66" y="40" font-family="Unbounded" font-weight="800" font-size="17" fill="#1A1714" letter-spacing="0.3">ГДЕ ИМЕННО</text>
+          <text x="66" y="72" font-family="Inter Tight" font-size="15" fill="#1A1714">цепочка ценности,</text>
+          <text x="66" y="94" font-family="Inter Tight" font-size="15" fill="#1A1714">11 категорий процессов</text>
+          <text x="66" y="136" font-family="Inter Tight" font-size="13" fill="#6E6963">ИИ живёт в процессе,</text>
+          <text x="66" y="154" font-family="Inter Tight" font-size="13" fill="#6E6963">не «в компании вообще»</text>
+        </g>
+
+        <!-- Ступень 2 -->
+        <g transform="translate(530, 275)">
+          <rect x="0" y="0" width="330" height="165" fill="#EFEBE7" stroke="#1A1714" stroke-width="2"/>
+          <rect x="0" y="0" width="48" height="165" fill="#1A1714"/>
+          <text x="24" y="95" font-family="Unbounded" font-weight="900" font-size="26" fill="#EFEBE7" text-anchor="middle">2</text>
+          <text x="66" y="40" font-family="Unbounded" font-weight="800" font-size="17" fill="#1A1714" letter-spacing="0.3">ПРИГОДНОСТЬ</text>
+          <text x="66" y="72" font-family="Inter Tight" font-size="15" fill="#1A1714">AI-ready = эффект ×</text>
+          <text x="66" y="94" font-family="Inter Tight" font-size="15" fill="#1A1714">готовность × внедряемость</text>
+          <text x="66" y="136" font-family="Inter Tight" font-size="13" fill="#6E6963">деньги · данные · владелец ·</text>
+          <text x="66" y="154" font-family="Inter Tight" font-size="13" fill="#6E6963">пилот без расползания в хаос</text>
+        </g>
+
+        <!-- Ступень 3 (с врезкой L1-L5) -->
+        <g transform="translate(815, 190)">
+          <rect x="0" y="0" width="330" height="165" fill="#EFEBE7" stroke="#1A1714" stroke-width="2"/>
+          <rect x="0" y="0" width="48" height="165" fill="#1A1714"/>
+          <text x="24" y="95" font-family="Unbounded" font-weight="900" font-size="26" fill="#EFEBE7" text-anchor="middle">3</text>
+          <text x="66" y="36" font-family="Unbounded" font-weight="800" font-size="17" fill="#1A1714" letter-spacing="0.3">ЗРЕЛОСТЬ L1–L5</text>
+          <!-- мини-шкала L1-L5 -->
+          <g transform="translate(66, 50)">
+            <rect x="0" y="0" width="40" height="22" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1"/>
+            <text x="20" y="16" font-family="JetBrains Mono" font-size="11" fill="#6E6963" text-anchor="middle">L1</text>
+            <rect x="44" y="0" width="40" height="22" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1"/>
+            <text x="64" y="16" font-family="JetBrains Mono" font-size="11" fill="#6E6963" text-anchor="middle">L2</text>
+            <rect x="88" y="0" width="40" height="22" fill="#EFEBE7" stroke="#B8B3AD" stroke-width="1"/>
+            <text x="108" y="16" font-family="JetBrains Mono" font-size="11" fill="#6E6963" text-anchor="middle">L3</text>
+            <rect x="132" y="0" width="40" height="22" fill="#D62219"/>
+            <text x="152" y="16" font-family="JetBrains Mono" font-size="11" fill="#EFEBE7" text-anchor="middle" font-weight="600">L4</text>
+            <rect x="176" y="0" width="40" height="22" fill="#EFEBE7" stroke="#1A1714" stroke-width="1"/>
+            <text x="196" y="16" font-family="JetBrains Mono" font-size="11" fill="#1A1714" text-anchor="middle">L5</text>
+          </g>
+          <text x="66" y="106" font-family="Inter Tight" font-size="14" fill="#D62219" font-weight="600">ИИ подключается с L4</text>
+          <text x="66" y="140" font-family="Inter Tight" font-size="13" fill="#6E6963">на L1–L2 модель учит на шуме,</text>
+          <text x="66" y="158" font-family="Inter Tight" font-size="13" fill="#6E6963">перепрыгнуть ступени нельзя</text>
+        </g>
+
+        <!-- Ступень 4 -->
+        <g transform="translate(1100, 105)">
+          <rect x="0" y="0" width="330" height="165" fill="#EFEBE7" stroke="#1A1714" stroke-width="2"/>
+          <rect x="0" y="0" width="48" height="165" fill="#1A1714"/>
+          <text x="24" y="95" font-family="Unbounded" font-weight="900" font-size="26" fill="#EFEBE7" text-anchor="middle">4</text>
+          <text x="66" y="40" font-family="Unbounded" font-weight="800" font-size="17" fill="#1A1714" letter-spacing="0.3">КЛАСС РЕШЕНИЯ</text>
+          <text x="66" y="72" font-family="Inter Tight" font-size="15" fill="#1A1714">5 классов: правила, прогноз,</text>
+          <text x="66" y="94" font-family="Inter Tight" font-size="15" fill="#1A1714">распознавание, генерация,</text>
+          <text x="66" y="116" font-family="Inter Tight" font-size="15" fill="#1A1714">поддержка решений</text>
+          <text x="66" y="154" font-family="Inter Tight" font-size="13" fill="#6E6963">часто хватает low-code, модель лишняя</text>
+        </g>
+
+        <!-- соединители-ступеньки между блоками (подъём) -->
+        <g stroke="#1A1714" stroke-width="2.5" fill="#1A1714">
+          <line x1="220" y1="390" x2="243" y2="390"/>
+          <polygon points="243,384 257,390 243,396"/>
+          <line x1="575" y1="400" x2="528" y2="358"/>
+          <polygon points="525,372 522,356 538,361"/>
+          <line x1="860" y1="315" x2="813" y2="273"/>
+          <polygon points="810,287 807,271 823,276"/>
+          <line x1="1145" y1="230" x2="1098" y2="188"/>
+          <polygon points="1095,202 1092,186 1108,191"/>
+        </g>
+        <!-- ст4 → финиш (вверх) -->
+        <g stroke="#1A1714" stroke-width="2.5" fill="#1A1714">
+          <line x1="1265" y1="105" x2="1265" y2="98"/>
+          <polygon points="1259,98 1265,84 1271,98"/>
+        </g>
+
+      </svg>
+    </div>
+
+    <!-- RULE: финал -->
+    <div class="rule">
+      <div class="mark">!</div>
+      <div class="label">Итог</div>
+      <div class="body">
+        «Хотим ИИ» закрывается за неделю красивым внедрением, которое создаст проблемы.
+        <strong>Нормальные работающие прототипы собираются за две, но с предварительной проработкой.</strong>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  document.fonts.ready.then(() => { document.body.dataset.fontsReady = "1"; });
+</script>
+</body>
+</html>
