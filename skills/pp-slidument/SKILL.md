@@ -402,12 +402,54 @@ Tech-минимализм с высокой плотностью информа�
 
 > Этот раздел используется только при генерации PPTX через python-pptx в Claude Code.
 > Manus и другие HTML-генераторы могут пропустить этот раздел.
+> Для production-сборки редактируемого `.pptx` дополнительно использовать `reference/native-pptx-production-guide.md`.
 
 ### Slide Format
 - 13.333" × 7.5" (widescreen)
 - Margins: 0.45-0.5" all sides
 - Title: 18-24pt bold, left-aligned at top
 - Sources: 10pt GRAY_MED at bottom
+
+### Editable PPTX production mode
+
+Use this mode when the output must be a real PowerPoint file with editable text, tables, cards and diagrams.
+
+Mandatory sequence:
+
+```text
+content.md
+validation
+slide intents
+native-pptx builder
+visual QA
+pp-text-critic
+pp-slide-critic
+handoff
+```
+
+Do not start from a decorative blank template. Start from the approved slide content and build native objects through helper functions.
+
+Minimum helper layer:
+
+- `add_title()` for action titles;
+- `add_footer()` for sources, logo and page number;
+- `add_card()` for reusable cards with optional accent bar;
+- `add_table()` for styled tables;
+- `add_matrix()`, `add_timeline()`, `add_bar_chart()` for recurring visual patterns;
+- `apply_text_fit()` for text overflow protection;
+- `remove_all_shadows()` before save;
+- `clear_slide()` when reusing slides.
+
+Native PPTX readiness checklist:
+
+- text is editable;
+- tables are native PowerPoint tables or aligned native shapes;
+- text is not clipped;
+- no font is smaller than 10 pt;
+- sources are present;
+- logo and footer come from one shared helper;
+- all shadows and decorative effects are removed;
+- file opens in PowerPoint without warnings.
 
 ### Two-Layer Adaptive Sizing
 

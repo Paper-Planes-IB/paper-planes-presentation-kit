@@ -1,5 +1,12 @@
 # История версий
 
+## 2026-07-21
+
+- Добавлен production-гайд `reference/native-pptx-production-guide.md` для редактируемых PowerPoint-файлов.
+- Уточнён нативный PPTX-путь: `content.md`, проверка, slide intents, builder, визуальная приёмка, `pp-text-critic`, `pp-slide-critic`, handoff.
+- В `pp-slidument` добавлен блок `Editable PPTX production mode`: helper-слой, требования к редактируемым объектам, проверка шрифтов, источников, лого, теней и открытия файла в PowerPoint.
+- README дополнен ссылкой на production-правила для редактируемого PPTX.
+
 ## 2026-07-17
 
 - Добавлена пошаговая инструкция `quick-start-html.md` для новичков.

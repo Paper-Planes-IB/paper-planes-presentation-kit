@@ -98,6 +98,8 @@
 - растровый — PNG каждого слайда во весь кадр; быстро и визуально идентично HTML;
 - редактируемый — нативные элементы PowerPoint; используется, когда файл должен редактироваться.
 
+Для production-сборки редактируемого PowerPoint используйте [`reference/native-pptx-production-guide.md`](reference/native-pptx-production-guide.md). Там зафиксированы режим выбора, helper-слой, правила нативных объектов и проверка файла после сборки.
+
 PP Pages служит рабочей витриной HTML до экспорта или параллельно с PPTX. После публикации проверьте публичную страницу целиком.
 
 ## Критерии готовности
@@ -124,6 +126,7 @@ PP Pages служит рабочей витриной HTML до экспорта
 - `skills/pp-print-a4/` — печатные материалы;
 - `reference/visual-style-guide.md` — каноническая палитра и визуальные правила;
 - `reference/pp_pptx_builder_rule.md` — HTML и PPTX;
+- `reference/native-pptx-production-guide.md` — production-правила для редактируемого PPTX;
 - `CHANGELOG.md` — история релизов.
 
 ## Чего набор не делает
