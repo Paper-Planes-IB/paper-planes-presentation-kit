@@ -2,7 +2,7 @@
 
 Набор правил, шаблонов и проверок для подготовки презентаций Paper Planes.
 
-Версия: 2026-07-12.
+Сведенная версия: 2026-08-16.
 
 ## Главное правило
 
@@ -128,6 +128,7 @@ PP Pages служит рабочей витриной HTML до экспорта
 - `reference/pp_pptx_builder_rule.md` — HTML и PPTX;
 - `reference/native-pptx-production-guide.md` — production-правила для редактируемого PPTX;
 - `CHANGELOG.md` — история релизов.
+- `skills/paper-planes-presentation-kit/` — устанавливаемый скилл с маршрутом, приемкой и проверочными сценариями.
 
 ## Чего набор не делает
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Paper Planes Presentation Kit"
+  short_description: "Собирает материалы в стандарте Paper Planes"
+  default_prompt: "Используй $paper-planes-presentation-kit, чтобы собрать материал по стандарту Paper Planes из доступных источников."

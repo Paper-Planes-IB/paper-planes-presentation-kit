@@ -6,7 +6,7 @@
 
 ## 1. Откройте репозиторий
 
-Репозиторий: https://github.com/ntokaeva/paper-planes-presentation-kit
+Репозиторий: https://github.com/Paper-Planes-IB/paper-planes-presentation-kit
 
 Внутри важны четыре места:
 
@@ -220,4 +220,3 @@ HTML собирается из готового `.md`.
 - [ ] HTML открыт и проверен целиком.
 - [ ] Слайды прошли `pp-slide-critic`.
 - [ ] Итоговая версия собрана из актуального `.md`.
-
